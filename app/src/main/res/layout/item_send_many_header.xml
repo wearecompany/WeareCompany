@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sharing_radius">
+
+
+        <TextView
+            android:id="@+id/many_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="0dp"
+            android:text="다수요청"
+            android:textColor="#0f0f0f"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:text="("
+            android:textColor="#0f0f0f"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/many_header"
+            app:layout_constraintStart_toEndOf="@+id/many_header"
+            app:layout_constraintTop_toTopOf="@+id/many_header" />
+
+
+        <TextView
+            android:id="@+id/many_header_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:includeFontPadding="false"
+            android:text="0"
+            android:textColor="#0f0f0f"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            android:lineSpacingExtra="0dp"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:text=")"
+            android:textColor="#0f0f0f"
+            android:textSize="11dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/many_header_count"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

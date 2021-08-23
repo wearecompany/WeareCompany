@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+
+        <ImageView
+            android:id="@+id/home_event_image"
+            android:layout_width="142dp"
+            android:layout_height="101dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/home_event_info_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center|start"
+            android:layout_marginStart="21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/home_event_image"
+            app:layout_constraintTop_toTopOf="@id/home_event_image"
+            app:layout_constraintBottom_toBottomOf="@id/home_event_image">
+
+            <TextView
+                android:id="@+id/home_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#0f0f0f"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+
+            <TextView
+                android:id="@+id/home_event_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#787878"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/event_time"/>
+
+                <TextView
+                    android:id="@+id/home_event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#cbcbcb"
+                    android:layout_marginStart="5dp"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_event_goods_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/event_present"/>
+
+                <TextView
+                    android:id="@+id/home_event_goods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#cbcbcb"
+                    android:layout_marginStart="5dp"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="7dp"
+                    android:background="#cbcbcb"/>
+
+
+                <TextView
+                    android:id="@+id/home_event_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#cbcbcb"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+
+                <TextView
+                    android:id="@+id/home_event_person_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#cbcbcb"
+                    android:textSize="10dp"
+                    android:text="명"
+                    app:layout_constraintStart_toEndOf="@+id/home_event_image" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

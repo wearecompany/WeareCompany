@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sharing_radius">
+
+
+        <TextView
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="일대일 견적 요청"
+            android:textColor="#484848"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="원하는 전문가 서비스를 선택해보세요!"
+            android:textColor="#c9c9c9"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="41dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView21">
+
+            <LinearLayout
+                android:id="@+id/model_cardView"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/main_bottom_request_background"
+                app:layout_constraintBottom_toBottomOf="@+id/photo_cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                <LinearLayout
+                    android:id="@+id/model_Reserve"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="모델"
+                        android:textColor="#484848"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/trip_cardView"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/main_bottom_request_background"
+                app:layout_constraintBottom_toBottomOf="@+id/model_cardView"
+                app:layout_constraintStart_toEndOf="@+id/model_cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                <LinearLayout
+                    android:id="@+id/trip_Reserve"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="뷰티\n전문가"
+                        android:textColor="#484848"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/photo_cardView"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/main_bottom_request_background"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                app:layout_constraintEnd_toStartOf="@+id/model_cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                <LinearLayout
+                    android:id="@+id/photo_Reserve"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="포토\n그래퍼"
+                        android:textColor="#484848"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardView2"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/main_bottom_request_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/photo_cardView"
+                app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+                <LinearLayout
+                    android:id="@+id/studio_Reserve"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="스튜디오"
+                        android:textColor="#484848"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

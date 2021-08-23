@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="vertical"
+                android:rowCount="7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_0"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="프로필"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="뷰티/패션/쥬얼리"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_2"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="패션화보"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_3"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="출장/행사"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_4"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="제품"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_5"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="쇼핑몰"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_6"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="푸드"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_7"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="아기"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_8"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="커플/우정"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_9"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="가족"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_10"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="임신기념"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_11"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="아마추어"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_12"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="감성"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_photo_ca_text_13"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="영상(광고/유튜브)"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+
+
+            </GridLayout>
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

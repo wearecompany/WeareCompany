@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간 선택"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="시작"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/start_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_marginBottom="14.8dp"
+                    android:layout_marginStart="22dp"
+                    app:tabIndicatorColor="#6d34f3"
+                    app:tabSelectedTextColor="#6d34f3"
+                    app:tabMode="scrollable"
+                    app:tabTextAppearance="@style/tab_text">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_1" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_2" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_3" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_4" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_5" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_6" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_7" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_8" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_9" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_10" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_11" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_12" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_13" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_14" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_15" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_16" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_17" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_18" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_19" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_20" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_21" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_22" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_23" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/start_time_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_24" />
+                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginBottom="23dp"
+                    android:text="마감"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/end_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_marginBottom="14.8dp"
+                    android:layout_marginStart="22dp"
+                    app:tabIndicatorColor="#6d34f3"
+                    app:tabSelectedTextColor="#6d34f3"
+                    app:tabMode="scrollable"
+                    app:tabTextAppearance="@style/tab_text">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_1" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_2" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_3" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_4" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_5" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_6" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_7" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_8" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_9" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_10" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_11" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_12" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_13" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_14" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_15" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_16" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_17" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_18" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_19" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_20" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_21" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_22" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_23" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/end_time_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_24" />
+
+
+                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/time_di_request"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#fff"
+                android:text="확인"
+                android:textStyle="bold"
+                android:textSize="11.5dp"
+                android:backgroundTint="#6d34f3"
+                android:textColorHint="#cbcbcb"/>
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

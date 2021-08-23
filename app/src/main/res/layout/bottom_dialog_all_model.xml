@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필터"
+                    android:textSize="15dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/model_all_max_click_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최대 3개까지 선택 가능 합니다."
+                    android:layout_marginStart="7dp"
+                    android:textSize="11dp"
+                    android:textColor="#6d34f3" />
+            </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/model_all_tab"
+            android:layout_width="260dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="24dp"
+            app:tabIndicatorColor="#6d34f3"
+            app:tabIndicatorFullWidth="false"
+            app:tabSelectedTextColor="#6d34f3"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="#cecece">
+
+            <com.google.android.material.tabs.TabItem
+                style="@style/Widget.MaterialComponents.TabLayout.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리" />
+
+            <com.google.android.material.tabs.TabItem
+                style="@style/Widget.MaterialComponents.TabLayout.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치" />
+
+            <com.google.android.material.tabs.TabItem
+                style="@style/Widget.MaterialComponents.TabLayout.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="금액대" />
+
+            <com.google.android.material.tabs.TabItem
+                style="@style/Widget.MaterialComponents.TabLayout.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정렬" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <View
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="#cecece"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_tab" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/model_all_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintTop_toBottomOf="@id/list_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="#ededed"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/model_all_reset"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.5"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:layout_marginEnd="11dp"
+                    android:text="초기화"
+                    android:textSize="11dp"
+                    android:textColor="#cbcbcb"
+                    android:gravity="center"
+                    android:background="@drawable/estimate_btn_background_2"/>
+
+                <TextView
+                    android:id="@+id/model_all_ok"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:text="적용하기"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:textSize="11dp"
+                    android:textColor="#fff"
+                    android:background="@drawable/estimate_btn_background"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

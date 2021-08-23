@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상위 카테고리"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                android:orientation="vertical"
+                android:rowCount="7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/top_text_0"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="포토그래퍼"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/top_text_1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="모델"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/top_text_2"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="뷰티전문가"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </GridLayout>
+            <TextView
+                android:id="@+id/top_di_request"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/estimate_btn_background"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="확인"
+                android:textColor="#fff"
+                android:textSize="11dp" />
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/photo_list_mostion"
+        tools:showPaths="true">
+
+        <LinearLayout
+            android:id="@+id/new_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="13dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/new_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/event_background"
+                android:paddingStart="9dp"
+                android:paddingEnd="9dp"
+                android:text="NEW"
+                android:textColor="#fff"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_photo_new_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="9dp"
+            app:layout_constraintStart_toStartOf="@id/new_title_layout"
+            app:layout_constraintTop_toBottomOf="@id/new_title_layout" />
+
+
+        <LinearLayout
+            android:id="@+id/header_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_photo_new_recyclerview">
+
+            <LinearLayout
+                android:id="@+id/list_photo_category_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/list_photo_category"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/list_sub_background_off"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/photor_category_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="카테고리"
+                        android:textColor="#545454"
+                        android:textSize="10dp" />
+
+                    <ImageView
+                        android:id="@+id/photor_category_image"
+                        android:layout_width="9dp"
+                        android:layout_height="7dp"
+                        android:src="@drawable/list_category_down_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/list_photo_location"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="6dp"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/list_sub_background_off"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/photor_location_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="위치"
+                        android:textColor="#545454"
+                        android:textSize="10dp" />
+
+                    <ImageView
+                        android:id="@+id/photor_location_image"
+                        android:layout_width="9dp"
+                        android:layout_height="7dp"
+                        android:src="@drawable/list_category_down_gray" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/list_photo_money"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="6dp"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/list_sub_background_off"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/photo_money_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="금액대"
+                        android:textColor="#545454"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/photo_money_image"
+                        android:layout_width="9dp"
+                        android:layout_height="7dp"
+                        android:src="@drawable/list_category_down_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/list_photo_sort"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/list_sub_background_off"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/photo_sort_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="추천순"
+                        android:textColor="#545454"
+                        android:textSize="10dp" />
+
+                    <ImageView
+                        android:id="@+id/photo_sort_image"
+                        android:layout_width="9dp"
+                        android:layout_height="7dp"
+                        android:src="@drawable/list_category_down_gray" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_photo_clip_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="13dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photo_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_view" />
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

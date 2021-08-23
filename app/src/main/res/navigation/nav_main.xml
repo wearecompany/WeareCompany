@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main">
+    <fragment
+        android:id="@+id/main"
+        android:name="com.weare.wearecompany.ui.bottommenu.main.mainFangment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+    </fragment>
+
+    <fragment
+        android:id="@+id/expter"
+        android:name="com.weare.wearecompany.ui.bottommenu.estimate.expetrFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_expter">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chat"
+        android:name="com.weare.wearecompany.ui.bottommenu.chatting.ChattingFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_chat">
+    </fragment>
+
+    <fragment
+        android:id="@+id/mypage"
+        android:name="com.weare.wearecompany.ui.bottommenu.mypage.mypageFagment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_mypage">
+    </fragment>
+
+</navigation>

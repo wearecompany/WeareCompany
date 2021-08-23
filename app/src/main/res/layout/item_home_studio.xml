@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+
+        <ImageView
+            android:id="@+id/home_studio_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/model_list_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/home_studio_image"
+            app:layout_constraintTop_toBottomOf="@+id/home_studio_image">
+
+            <TextView
+                android:id="@+id/home_studio_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/home_studio_expert_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#6c6c6c"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/home_studio_image"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/home_studio_image"
+            app:layout_constraintTop_toBottomOf="@+id/model_list_title_layout" />
+
+        <LinearLayout
+            android:id="@+id/home_studio_expert_place_layout"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center|start"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/home_studio_image"
+            app:layout_constraintStart_toStartOf="@+id/home_studio_image"
+            app:layout_constraintTop_toBottomOf="@+id/home_studio_expert_title">
+
+            <ImageView
+                android:layout_width="6dp"
+                android:layout_height="10dp"
+                android:src="@drawable/location_min_pin"/>
+
+            <TextView
+                android:id="@+id/home_studio_expert_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#6c6c6c"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_studio_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/home_studio_image"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/home_studio_image"
+            app:layout_constraintTop_toBottomOf="@+id/home_studio_expert_place_layout"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                app:layout_collapseMode="pin"
+                android:background="#fff"
+                android:theme="?attr/actionBarTheme">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이벤트"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginEnd="20dp"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/event_title"
+                       android:layout_width="wrap_content"
+                       android:layout_marginTop="39dp"
+                       android:textSize="10dp"
+                       android:textColor="#0f0f0f"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/event_sub_title"
+                       android:textSize="9dp"
+                       android:textColor="#9dabe6"
+                       android:layout_marginTop="6dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="6dp"
+                       android:gravity="center|start"
+                       android:orientation="horizontal">
+
+                       <ImageView
+                           android:layout_width="15dp"
+                           android:layout_height="15dp"
+                           android:src="@drawable/event_time"/>
+
+                       <TextView
+                           android:id="@+id/event_datetime"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="9dp"
+                           android:textColor="#a6a6a6"
+                           android:layout_marginStart="5dp"/>
+                   </LinearLayout>
+
+                   <View
+                       android:layout_width="match_parent"
+                       android:layout_height="0.3dp"
+                       android:layout_marginTop="10dp"
+                       android:layout_marginBottom="10dp"
+                       android:background="#d2d2d2"/>
+
+                   <TextView
+                       android:id="@+id/event_contents"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textSize="10dp"
+                       android:textColor="#0f0f0f"
+                       android:layout_marginBottom="15dp"/>
+
+                   <ImageView
+                       android:id="@+id/event_image"
+                       android:layout_width="match_parent"
+                       android:layout_height="200dp"/>
+
+               </LinearLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

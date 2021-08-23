@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_viewpage_mag_top">5dp</dimen>
+    <dimen name="main_viewpage_width">427.5dp</dimen>
+    <dimen name="main_viewpage_height">110dp</dimen>
+    <dimen name="marginStart2">16.5dp</dimen>
+    <dimen name="marginTop">34.5dp</dimen>
+    <dimen name="testheight">176.5dp</dimen>
+</resources>

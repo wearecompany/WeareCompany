@@ -1,0 +1,144 @@
+<resources>
+    <string name="app_name">위픽</string>
+    <string name="kakao_app_key">200572520b62c59132c108d7eb1d0613</string>
+    <string name="kakao_scheme">kakao200572520b62c59132c108d7eb1d0613</string>
+    <string name="kakaolink_host">kakaolink</string>
+    <string name="title_activity_login_to">login_to</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">
+        com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior
+    </string>
+
+    <!-- Transition -->
+    <string name="transitionDatailImage">transitionDatailImage</string>
+
+    <!-- studio_list -->
+    <string name="item_0">자연광</string>
+    <string name="item_1">호리존</string>
+    <string name="item_2">웨딩</string>
+    <string name="item_3">파티</string>
+    <string name="item_4">루프탑</string>
+    <string name="item_5">키친</string>
+    <string name="item_6">엔틱</string>
+    <string name="item_7">컬러배경</string>
+    <string name="item_8">빈티지</string>
+    <string name="item_9">감성</string>
+    <string name="item_10">컨셉별</string>
+    <string name="item_11">셀프인물</string>
+    <string name="item_12">야외 촬영</string>
+    <string name="item_13">일반스튜디오</string>
+
+    <!-- location_list -->
+    <string name="seoul_0">서울권</string>
+    <string name="gyeonggi_1">경기권</string>
+    <string name="incheon_2">인천권</string>
+    <string name="gangwon_3">강원권</string>
+    <string name="jeju_4">제주권</string>
+    <string name="daejeon_5">대전권</string>
+    <string name="chungbuk_6">충북</string>
+    <string name="chungnam_7">충남/세종권</string>
+    <string name="busan_8">부산권</string>
+    <string name="ulsan_9">울산권</string>
+    <string name="gyeongnam_10">경남권</string>
+    <string name="daegu_11">대구권</string>
+    <string name="kyonbuk_12">경북권</string>
+    <string name="gwangju_13">광주권</string>
+    <string name="jeonnam_14">전남권</string>
+    <string name="jeonbuk_15">전주/전북권</string>
+
+    <!-- photographer_list -->
+    <string name="photographer_0">프로필</string>
+    <string name="photographer_1">뷰티/패션/쥬얼</string>
+    <string name="photographer_2">패션화보</string>
+    <string name="photographer_3">출장/행사</string>
+    <string name="photographer_4">제품</string>
+    <string name="photographer_5">쇼핑몰</string>
+    <string name="photographer_6">푸드</string>
+    <string name="photographer_7">아기</string>
+    <string name="photographer_8">커플/우정</string>
+    <string name="photographer_9">가족</string>
+    <string name="photographer_10">임신기념</string>
+    <string name="photographer_11">아마추어</string>
+    <string name="photographer_12">감성</string>
+    <string name="photographer_13">영상(광고/유튜브)</string>
+
+    <!-- model_list -->
+    <string name="model_0">뷰티</string>
+    <string name="model_1">쇼핑몰</string>
+    <string name="model_2">패션</string>
+    <string name="model_3">부분</string>
+    <string name="model_4">영상</string>
+    <string name="model_5">주부</string>
+    <string name="model_6">일반인</string>
+    <string name="model_7">남자</string>
+    <string name="model_8">성형</string>
+    <string name="model_9">빅사이즈</string>
+    <string name="model_10">시니어</string>
+    <string name="model_11">주니어</string>
+    <string name="model_12">수영복</string>
+    <string name="model_13">인스타인기</string>
+    <string name="model_14">유튜버</string>
+    <string name="model_15">아나운서</string>
+    <string name="model_16">레이싱</string>
+    <string name="model_17">외국인</string>
+    <string name="model_18">연기배우</string>
+    <string name="model_19">mc/행사</string>
+
+    <!-- rent_list -->
+    <string name="rent_0">가전/가구</string>
+    <string name="rent_1">백일상</string>
+    <string name="rent_2">웨딩</string>
+    <string name="rent_3">의상(교복/한복)</string>
+    <string name="rent_4">주방용품</string>
+    <string name="rent_5">생활/인테리어</string>
+    <string name="rent_6">식품</string>
+    <string name="rent_7">외 소품</string>
+
+    <!-- beauty -->
+    <string name="beauty_0">헤어</string>
+    <string name="beauty_1">메이크업</string>
+    <string name="beauty_2">외 뷰티</string>
+
+    <!-- bottom_dialog_time -->
+    <string name="time_1">01:00</string>
+    <string name="time_2">02:00</string>
+    <string name="time_3">03:00</string>
+    <string name="time_4">04:00</string>
+    <string name="time_5">05:00</string>
+    <string name="time_6">06:00</string>
+    <string name="time_7">07:00</string>
+    <string name="time_8">08:00</string>
+    <string name="time_9">09:00</string>
+    <string name="time_10">10:00</string>
+    <string name="time_11">11:00</string>
+    <string name="time_12">12:00</string>
+    <string name="time_13">13:00</string>
+    <string name="time_14">14:00</string>
+    <string name="time_15">15:00</string>
+    <string name="time_16">16:00</string>
+    <string name="time_17">17:00</string>
+    <string name="time_18">18:00</string>
+    <string name="time_19">19:00</string>
+    <string name="time_20">20:00</string>
+    <string name="time_21">21:00</string>
+    <string name="time_22">22:00</string>
+    <string name="time_23">23:00</string>
+    <string name="time_24">24:00</string>
+
+    <string name="default_notification_channel_id">Channel ID</string>
+    <string name="default_notification_channel_name" translatable="true">Test</string>
+
+    <string name="transitionImage">transitionImage</string>
+
+
+
+
+</resources>

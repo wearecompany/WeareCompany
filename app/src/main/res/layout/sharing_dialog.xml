@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sharing_radius">
+
+
+        <TextView
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="17dp"
+            android:text="공유"
+            android:textColor="#484848"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sharing_cancel"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="28dp"
+            android:clickable="true"
+            android:text="카카오톡"
+            app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/relativeLayout2"
+            app:srcCompat="@drawable/sharing_cancel" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llcButtonsAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+            <ImageView
+                android:id="@+id/sharing_kakao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:srcCompat="@drawable/sharing_kakao_talk" />
+
+            <ImageView
+                android:id="@+id/sharing_instar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#D94078"
+                android:clickable="true"
+                android:text="인스타"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                app:cornerRadius="64dp"
+                app:srcCompat="@drawable/sharing_instagram" />
+
+            <ImageView
+                android:id="@+id/sharing_facebook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#D94078"
+                android:clickable="true"
+                android:text="인스타"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                app:cornerRadius="64dp"
+                app:srcCompat="@drawable/sharing_facebook"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/sharing_that"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#D94078"
+                android:clickable="true"
+                android:text="인스타"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                app:cornerRadius="64dp"
+                app:srcCompat="@drawable/sharing_share" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

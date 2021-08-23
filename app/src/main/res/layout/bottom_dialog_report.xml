@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="신고사유"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_gravity="center|top"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:behavior_hideable="false"
+                    app:behavior_peekHeight="50dp"
+                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="거래/환불 분쟁 신고"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="외부 거래 요구"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="비매너 사용자"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="음란성/선정성"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="욕설/인신공격"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="불필요한 채팅 도배"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="개인정보 요구"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/bottom_report_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/bottom_report_text_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="기타 다른문제"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <ImageView
+                            android:id="@+id/bottom_report_image_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+            <Button
+                android:id="@+id/report_ok"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:backgroundTint="#6d34f3"
+                android:text="확인"
+                android:textColor="#fff"
+                android:textColorHint="#cbcbcb"
+                android:textSize="11.5dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

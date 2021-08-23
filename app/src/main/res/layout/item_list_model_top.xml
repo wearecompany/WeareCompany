@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main">
+
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/list_model_category"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/list_sub_background_off"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/model_category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="카테고리"
+                    android:textColor="#545454"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/model_category_image"
+                    android:layout_width="9dp"
+                    android:layout_height="7dp"
+                    android:src="@drawable/list_category_down_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_model_location"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:layout_weight="0.8"
+                android:background="@drawable/list_sub_background_off"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/model_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="위치"
+                    android:textColor="#545454"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/model_location_image"
+                    android:layout_width="9dp"
+                    android:layout_height="7dp"
+                    android:src="@drawable/list_category_down_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_model_datatime"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/list_sub_background_off"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/model_datatime_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="가능날짜"
+                    android:textColor="#545454"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/model_datatime_image"
+                    android:layout_width="9dp"
+                    android:layout_height="7dp"
+                    android:src="@drawable/list_category_down_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_model_money"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="6dp"
+                android:layout_weight="0.9"
+                android:background="@drawable/list_sub_background_off"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/model_money_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="금액대"
+                    android:textColor="#545454"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/model_money_image"
+                    android:layout_width="9dp"
+                    android:layout_height="7dp"
+                    android:src="@drawable/list_category_down_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_model_sort"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.9"
+                android:background="@drawable/list_sub_background_off"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:id="@+id/model_sory_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="추천순"
+                    android:textColor="#545454"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:id="@+id/model_sory_image"
+                    android:layout_width="9dp"
+                    android:layout_height="7dp"
+                    android:src="@drawable/list_category_down_gray" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

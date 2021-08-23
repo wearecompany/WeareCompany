@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="vertical"
+                android:rowCount="7">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_0"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="뷰티"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="쇼핑몰"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_2"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="패션"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_3"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="부분"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_4"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="영상"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_5"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="주부"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_6"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="일반인"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_7"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="남자"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_8"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="성형"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_9"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="빅사이즈"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_10"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="시니어"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_11"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="주니어"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_12"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="수영복"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_13"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="인스타인기"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_14"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="유튜버"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_15"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="아나운서"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_16"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="레이싱"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_17"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="외국인"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_18"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="연기"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/btn_all_model_ca_text_19"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="MC/행사"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="9dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/all_ca_background_off"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:textColor="#cbcbcb"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+            </GridLayout>
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

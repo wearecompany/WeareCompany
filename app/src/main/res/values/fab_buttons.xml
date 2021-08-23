@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="bottom_bar_icons">
+        <item>@drawable/notification_refund</item>
+        <item>@drawable/notification_review</item>
+        <item>@drawable/notification_many</item>
+        <item>@drawable/notification_individual</item>
+    </array>
+
+    <array name="bottom_bar_colors">
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+    </array>
+
+</resources>

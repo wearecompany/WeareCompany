@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/chat_user_profile_layout"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/chat_user_profile"
+            android:layout_width="55dp"
+            android:layout_height="55dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/chat_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="12dp"
+        android:textColor="#484848"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/chat_user_profile_layout"
+        app:layout_constraintTop_toTopOf="@+id/chat_user_profile_layout" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="님"
+        android:textColor="#484848"
+        android:textSize="11dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/chat_user_name"
+        app:layout_constraintTop_toTopOf="@+id/chat_user_name" />
+
+    <TextView
+        android:id="@+id/chat_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:textColor="#6c6c6c"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/chat_sub_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#6d34f3"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="@+id/chat_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/chat_user_name" />
+
+    <TextView
+        android:id="@+id/chat_msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:layout_marginEnd="20dp"
+        android:maxLines="2"
+        android:textColor="#cbcbcb"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/chat_sub_category"
+        app:layout_constraintTop_toBottomOf="@+id/chat_sub_category" />
+
+    <TextView
+        android:id="@+id/chat_status"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:background="@drawable/user_request_send"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/chat_user_profile_layout"
+        app:layout_constraintStart_toStartOf="@+id/chat_user_profile_layout"
+        app:layout_constraintTop_toBottomOf="@+id/chat_user_profile_layout" />
+
+    <LinearLayout
+        android:id="@+id/chat_price_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_status"
+        app:layout_constraintStart_toStartOf="@+id/chat_msg"
+        app:layout_constraintTop_toTopOf="@+id/chat_status">
+
+        <TextView
+            android:id="@+id/chat_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0f0f0f"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="원"
+            android:textColor="#0f0f0f"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="15dp"
+        android:background="#f5f5f5"
+        app:layout_constraintTop_toBottomOf="@+id/chat_status" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="금액대"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#6d34f3"
+                        app:endIconMode="clear_text"
+                        app:helperText="최소금액"
+                        app:helperTextEnabled="true"
+                        app:suffixText="원"
+                        app:suffixTextColor="#cbcbcb">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/money_min"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:inputType="number"
+                            android:maxLength="30"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0.5dp"
+                        android:layout_weight="0.1"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginEnd="7dp"
+                        android:background="#ededed" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#6d34f3"
+                        app:endIconMode="clear_text"
+                        app:helperText="최대금액"
+                        app:helperTextEnabled="true"
+                        app:suffixText="원"
+                        app:suffixTextColor="#cbcbcb">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/money_max"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:inputType="number"
+                            android:maxLength="30"
+                            android:textColor="#000"
+                            android:textSize="14dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/list_money_ok"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:backgroundTint="#6d34f3"
+                android:text="확인"
+                android:textColor="#fff"
+                android:textColorHint="#cbcbcb"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

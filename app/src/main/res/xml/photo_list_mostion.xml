@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:motionInterpolator="easeInOut">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@+id/photo_list_recycler"
+            app:touchAnchorSide="top" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/list_photo_new_recyclerview">
+        </Constraint>
+        <Constraint android:id="@+id/new_title_layout">
+            <PropertySet android:alpha="1"/>
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:alpha="0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toBottomOf="@id/parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:id="@+id/new_title_layout" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/parent"
+            app:layout_constraintStart_toStartOf="@id/parent"
+            android:layout_marginStart="20dp"
+            android:id="@+id/list_photo_new_recyclerview" />
+    </ConstraintSet>
+
+</MotionScene>

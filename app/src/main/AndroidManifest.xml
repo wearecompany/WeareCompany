@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.weare.wearecompany">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--카메라 권한-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--전화 권한-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--진동 권한-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <application
+        android:name="com.weare.wearecompany.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon1_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/icon1_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.login.login" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCtZM5X4xjx28us-cwTjNEalqzN3BnbxjA" />
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao200572520b62c59132c108d7eb1d0613" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.weare.wearecompany.ui.join.JoinActivity" />
+
+        <activity android:name="com.weare.wearecompany.ui.container.ContainerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="wearecompany.page.link"
+                    android:path="/weare"
+                    android:scheme="https" />
+            </intent-filter>
+
+        </activity>
+
+
+        <activity android:name=".ui.hotpick.list.HotpickListActivity" />
+        <activity android:name=".ui.detail.DatailActivity" />
+        <activity android:name="com.weare.wearecompany.ui.listcontainer.ListContainerActivity" />
+        <activity android:name="com.weare.wearecompany.ui.detail.model.ModelActivity" />
+        <activity android:name="com.weare.wearecompany.ui.detail.photo.PhotoActivity" />
+        <activity android:name="com.weare.wearecompany.ui.detail.rent.RentActivity" />
+        <activity android:name="com.weare.wearecompany.ui.detail.trip.TripActivity" />
+        <!-- Guide -->
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.main.guide.GuideActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.main.guide.GuideListActivity" />
+        <!-- Mypage -->
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.informationchange.InformationChangeActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.information.InformationActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.information.InformationDetailActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.notice.NoticeActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.notice.NoticeDetailActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.setting.SettingActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.setting.SettingPushActivity" />
+        <activity android:name="com.weare.wearecompany.ui.bottommenu.estimate.estimateDatail.EstimateDatailActivity" />
+        <activity android:name=".ui.detail.studio.reservation.ReservationStudioActivity" />
+        <activity android:name=".ui.detail.rent.reservation.ReservationRentActivity" />
+        <activity android:name=".ui.bottommenu.mypage.bookmark.BookMarkActivity" />
+        <activity android:name=".ui.ReportActivity" />
+        <activity android:name=".ui.bottommenu.estimate.send.SendRequestActivity" />
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.detail.photo.reservation.ReservationPhotoActivity" />
+        <activity android:name=".ui.detail.model.reservation.ReservationModelActivity" />
+        <activity android:name=".ui.detail.trip.reservation.ReservationTripActivity" />
+        <activity android:name=".ui.bottommenu.estimate.send.SendStudioActivity" />
+        <activity android:name=".ui.bottommenu.estimate.send.SendExpertActivity" />
+        <activity android:name=".ui.chat.ChatPinchActivity" />
+
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressStudioActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressExpertActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressShopActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressManyActivity" />
+
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundStudioActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundExpertActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundShopActivity" />
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundManyActivity" />
+
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.review.ReviewActivity" />
+        <activity android:name=".ui.bottommenu.estimate.receive.ReceiveRequestActivity" />
+
+        <activity android:name=".ui.bottommenu.main.alarm.AlarmActivity" />
+
+        <activity android:name=".ui.detail.PinchActivity" />
+        <activity android:name=".ui.bottommenu.mypage.review.MyReviewActivity"/>
+
+        <!-- 보낸 요청서 -->
+        <activity android:name=".ui.bottommenu.estimate.send.experthodel.SendTripActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.send.experthodel.SendPhotoActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.send.experthodel.SendModelActivity"/>
+
+        <!-- 받은 견적서 -->
+        <activity android:name=".ui.bottommenu.estimate.receive.experthodel.ReceiveStudioActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.receive.experthodel.ReceiveModelActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.receive.experthodel.ReceiveTripActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.receive.experthodel.ReceivePhotoActivity"/>
+
+        <!-- 진행 현황 -->
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressPhotoActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressModelActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressTripActivity"/>
+
+        <!-- 취소 현황 -->
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundPhotoActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundModelActivity"/>
+        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundTripActivity"/>
+
+        <activity android:name=".ui.bottommenu.main.event.EventDetailActivity"/>
+        <activity
+            android:name=".ui.bottommenu.estimate.receive.payment.paymentActivity"
+            android:configChanges="orientation"
+            android:label="NicePay Smart"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data android:scheme="payment" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <service android:name=".utils.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".utils.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths" />
+
+        <activity android:name=".ui.bottommenu.estimate.send.SendShopActivity" />
+        <activity android:name=".ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.weare.wearecompany.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

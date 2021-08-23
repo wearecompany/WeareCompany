@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="10dp"
+                android:text="위치"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="10dp"
+                android:text="* 최대 3개 중복 선택 가능"
+                android:textColor="#6d34f3"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:behavior_hideable="false"
+                    app:behavior_peekHeight="50dp"
+                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                    <RelativeLayout
+                        android:id="@+id/location_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="서울"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+
+                        <ImageView
+                            android:id="@+id/location_image_0"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="경기"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+
+                        <ImageView
+                            android:id="@+id/location_image_1"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="인천"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_2"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="강원"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_3"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="제주"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_4"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="대전"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_5"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="충북"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_6"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="충남/세종"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_7"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_8"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="부산"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_8"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_9"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="울산"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_9"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_10"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="경남"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_10"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_11"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="대구"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_11"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_12"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="경북"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_12"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_13"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="광주"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_13"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="전남"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_14"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="#f5f5f5" />
+
+                    <RelativeLayout
+                        android:id="@+id/location_15"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:id="@+id/location_text_15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="26dp"
+                            android:text="전주/전북"
+                            android:textColor="#000"
+                            android:textSize="11dp" />
+
+                        <ImageView
+                            android:id="@+id/location_image_15"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="13dp"
+                            android:visibility="gone"
+                            android:src="@drawable/filter_check"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <Button
+                android:id="@+id/top_di_request"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:backgroundTint="#6d34f3"
+                android:text="확인"
+                android:textColor="#fff"
+                android:textColorHint="#cbcbcb"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

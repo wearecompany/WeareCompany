@@ -1,0 +1,268 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id "androidx.navigation.safeargs.kotlin"
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
+}
+
+android {
+    signingConfigs{
+        release {
+            storeFile file('Rweare.jks')
+            keyAlias = 'Rwearekey'
+            storePassword '12351235!!'
+            keyPassword '12351235!!'
+        }
+    }
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        applicationId "com.weare.wearecompany"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 19
+        versionName "2.1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary true
+    }
+    lintOptions { checkReleaseBuilds false
+        abortOnError false}
+    buildTypes {
+
+        release {
+            debuggable false
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "SERVER_URL", "\"https://wearecompany.co.kr/A00/\"")
+            buildConfigField("String", "CHAT_URL", "\"https://wearecompany.co.kr:443\"")
+            buildConfigField("String", "PAYMENT_RES_URL", "\"https://wearecompany.co.kr/A00/reserve/bill/1\"")
+            buildConfigField("String", "PAYMENT_REQ_URL", "\"https://wearecompany.co.kr/A00/request/bill\"")
+            buildConfigField("String", "PHONE_CERT", "\"https://wearecompany.co.kr/C02/cert/main\"")
+            signingConfig signingConfigs.release
+        }
+        debug {
+            buildConfigField("String", "SERVER_URL", "\"https://dev.wearecompany.co.kr/A00/\"")
+            buildConfigField("String", "CHAT_URL", "\"https://dev.wearecompany.co.kr:443\"")
+            buildConfigField("String", "PAYMENT_RES_URL", "\"https://dev.wearecompany.co.kr/A00/reserve/bill/1\"")
+            buildConfigField("String", "PAYMENT_REQ_URL", "\"https://dev.wearecompany.co.kr/A00/request/bill\"")
+            buildConfigField("String", "BUCKET_NAME", "\"devwearecompany\"")
+            buildConfigField("String", "PHONE_CERT", "\"https://dev.wearecompany.co.kr/C02/cert/main\"")
+            firebaseCrashlytics { mappingFileUploadEnabled false}
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += [
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
+        ]
+    }
+
+    buildFeatures{
+        dataBinding true
+        viewBinding true
+    }
+    kapt {
+        generateStubs = true
+    }
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+
+    implementation deps.kotlin.stdlib
+
+    // Jetpack
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.lifecycle.runtime_ktx
+    implementation deps.androidx.lifecycle.extensions
+    implementation deps.androidx.lifecycle.viewmodel_ktx
+    implementation deps.androidx.lifecycle.livedata_ktx
+    implementation deps.androidx.navigation.fragment_ktx
+    implementation deps.androidx.navigation.ui_ktx
+    implementation deps.androidx.material.material
+    implementation deps.androidx.material.core
+    implementation deps.androidx.material.bottomsheets
+    implementation deps.androidx.swiperefresh
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.cordview
+    implementation deps.androidx.legacy
+
+    // firebase
+    implementation deps.firebase.firebase.analytics
+    implementation deps.firebase.firebase.messaging
+    implementation deps.firebase.firebase.core
+    implementation deps.firebase.firebase.database
+    implementation deps.firebase.firebase.crashltytics
+    implementation deps.firebase.firebase.perf
+    implementation deps.firebase.firebase.dynamic
+
+    // coroutine
+    implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.coroutines.android
+
+    // retrofit2
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.adapter_rxjava2
+    implementation deps.retrofit.converter_scalars
+
+    //rxjava2
+    implementation deps.rxjava2.rxjava2
+    implementation deps.rxjava2.rxandroid
+
+    // koin
+    implementation deps.koin.core
+    implementation deps.koin.viewModel
+    implementation deps.koin.fragment
+
+    // okhttp
+    implementation deps.okhttp.core
+    implementation deps.okhttp.logging_interceptor
+
+    // debugging
+    implementation deps.debugging.timber
+
+    //permission
+    implementation deps.permission.tedpermission
+
+    //glide
+    implementation deps.glide.glide
+
+    //multidex
+    implementation deps.multidex.multidex
+
+    //달력
+    implementation deps.applikeysolutions.cosmocalendar
+
+    //업데이트
+    implementation deps.inappupdate.paly_core
+    implementation deps.inappupdate.paly_core_ktx
+
+    // test
+    testImplementation deps.atsl.junit
+    androidTestImplementation deps.atsl.ext_junit
+    androidTestImplementation deps.atsl.espresso_core
+    testImplementation deps.kotlin.coroutines.test
+
+    // android support librariesx
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //implementation 'androidx.core:core-ktx:1.3.2'
+    //implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+    //implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    //implementation 'androidx.cardview:cardview:1.0.0'
+    //implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //testImplementation 'junit:junit:4.+'
+    //androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //implementation 'com.google.android.material:material:1.3.0'
+    //implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
+
+    // Import the firerbase BoM
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    //implementation 'com.google.firebase:firebase-analytics-ktx'
+    //implementation 'com.google.firebase:firebase-messaging-ktx'
+    //implementation 'com.google.firebase:firebase-core:18.0.2'
+    //implementation 'com.google.firebase:firebase-database:19.6.0'
+
+    // navigation
+    //implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
+    //implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+
+    // For BottomNavigationView from Material Components
+    //implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    //implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
+
+    //implementation "io.reactivex.rxjava2:rxjava2.2.0"
+    //implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
+
+    // Koin AndroidX Scope feature
+    //implementation "org.koin:koin-androidx-scope:1.0.2"
+    // Koin AndroidX ViewModel feature
+    //implementation "org.koin:koin-androidx-viewmodel:2.1.0-alpha-3"
+    // Koin AndroidX Fragment Factory (unstable version)
+    //implementation "org.koin:koin-androidx-fragment:2.1.5"
+
+    //implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'
+
+    // Retrofit
+    //implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    //implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    //implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+    //implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+
+    // Kakao
+    //implementation group: 'com.kakao.sdk', name: 'usermgmt', version:project.KAKAO_SDK_VERSION
+    implementation "com.kakao.sdk:v2-user:2.4.2"    //로그인
+    implementation "com.kakao.sdk:v2-talk:2.4.2"
+    implementation "com.kakao.sdk:v2-link:2.4.2"
+
+
+    //implementation "androidx.multidex:multidex:2.0.1"
+
+    // 글라이드 이미지 라이브러리
+    //implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //해상도
+    implementation 'com.ssomai:android.scalablelayout:2.1.6'
+
+    kapt "com.android.databinding:compiler:3.5.0"
+
+    //파미션 체크
+    //implementation 'gun0912.ted:tedpermission:2.2.3'
+
+    //달력
+    //implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
+
+    //화면 당겨서 목록 갱신
+    //implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.8'
+
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    dependencies {
+        implementation 'com.github.amarjain07:StickyScrollView:1.0.2'
+    }
+
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+}

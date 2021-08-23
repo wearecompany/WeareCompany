@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:background="#fff"
+                android:theme="?attr/actionBarTheme"
+                app:layout_collapseMode="pin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="요청서"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="요청 정보를 작성해주세요"
+                    android:textColor="#0f0f0f"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="해당 요청서는 대여업체에게 다이렉트로 발송됩니다."
+                    android:textColor="#656565"
+                    android:textSize="13dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="요청 이후에는 수정이 불가하오니 신중히 작성해주세요"
+                    android:textColor="#656565"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="희망날짜"
+                    android:textColor="#0f0f0f"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="대여 시작일과 대여 마감일을 선택해주세요"
+                    android:textColor="#656565"
+                    android:textSize="13dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/dayOrtime_ok"
+                        android:layout_width="25dp"
+                        android:layout_height="18dp"
+                        android:layout_marginRight="9dp"
+                        android:buttonTint="#eaeaea"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="날짜 협의가능"
+                        android:textColor="#0f0f0f"
+                        android:textSize="13dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="5dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="대여 "
+                                        android:textSize="15dp"
+                                        android:textColor="#484848"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="시작일"
+                                        android:textSize="15dp"
+                                        android:textColor="#6d34f3"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/start_day"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="42dp"
+                                    android:layout_marginTop="5dp"
+                                    android:hint="선택"
+                                    android:textColor="#000"
+                                    android:textSize="13dp"
+                                    android:gravity="center"
+                                    android:background="@drawable/join_background"/>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_weight="0.1"
+                                android:layout_height="1dp"
+                                android:layout_gravity="bottom"
+                                android:layout_marginBottom="21dp"
+                                android:layout_marginStart="7dp"
+                                android:layout_marginEnd="7dp"
+                                android:background="#eaeaea" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginBottom="5dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="대여 "
+                                        android:textSize="15dp"
+                                        android:textColor="#484848"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="종료일"
+                                        android:textSize="15dp"
+                                        android:textColor="#f96565"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/end_day"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="42dp"
+                                    android:layout_marginTop="5dp"
+                                    android:hint="선택"
+                                    android:textColor="#000"
+                                    android:textSize="13dp"
+                                    android:gravity="center"
+                                    android:background="@drawable/join_background"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerInParent="true"
+                                android:text="대여기간"
+                                android:textColor="#0f0f0f"
+                                android:textStyle="bold"
+                                android:textSize="15dp" />
+
+                            <LinearLayout
+                                android:layout_width="123dp"
+                                android:layout_height="46dp"
+                                android:layout_alignParentEnd="true"
+                                android:gravity="center|right"
+                                android:orientation="horizontal"
+                                android:background="@drawable/join_background">
+
+                                <TextView
+                                    android:id="@+id/rent_day"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#6d34f3"
+                                    android:layout_marginEnd="3dp"
+                                    android:textSize="13dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="일"
+                                    android:layout_marginEnd="10dp"
+                                    android:textColor="#eaeaea"
+                                    android:textSize="13dp"/>
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/not_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#bcffffff"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/splash_icon1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="협의가능"
+                            android:textColor="#000"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="문의 사항"
+                    android:textColor="#0f0f0f"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:singleLine="false"
+                    app:boxStrokeColor="#6d34f3"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="2000"
+                    app:endIconMode="clear_text"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#c9c9c9">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rent_reserve_contents"
+                        android:layout_width="match_parent"
+                        android:layout_height="143dp"
+                        android:gravity="top|left"
+                        android:maxLength="2000"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:singleLine="false"
+                        android:textColor="#787878"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/rent_reservation_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:backgroundTint="#6d34f3"
+                    android:layout_marginBottom="40dp"
+                    android:text="요청서 보기"
+                    android:textColor="#fff"
+                    android:textColorHint="#cbcbcb"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

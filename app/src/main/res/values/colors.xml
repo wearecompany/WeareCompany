@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#6d34f3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="bluishPurple">#6d34f3</color>
+
+
+    <color name="login_text">#0f0f0f</color>
+    <color name="login_edittext_background">#eaeaea</color>
+
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#6d34f3</color>
+    <color name="background">#282a2d</color>
+    <color name="colorAccent">#F9AA33</color>
+    <color name="tab_not_check_text">#cbcbcb</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color">#eaeaea</color>
+</resources>
