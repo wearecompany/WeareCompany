@@ -1,0 +1,171 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+
+ext.deps = [:]
+
+// version
+def versions = [:]
+versions.kotlin = "1.4.31"
+versions.lifecycle = "2.2.0"
+versions.retrofit = "2.7.1"
+versions.timber = "4.7.1"
+versions.koin = "2.1.0-alpha-3"
+versions.navigation = "2.3.4"
+versions.okhttp = "4.4.0"
+deps.versions = versions
+
+// dependency
+def deps = [:]
+
+// androidx
+def androidx = [:]
+androidx.appcompat = "androidx.appcompat:appcompat:1.2.0-alpha02"
+androidx.core_ktx = "androidx.core:core-ktx:1.3.2"
+androidx.constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:1.2.0-alpha05"
+androidx.cordview = "androidx.cardview:cardview:1.0.0"
+androidx.legacy = "androidx.legacy:legacy-support-v4:1.0.0"
+androidx.lifecycle = [
+        runtime_ktx  : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle",
+        extensions   : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle",
+        viewmodel_ktx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle",
+        livedata_ktx : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+]
+androidx.navigation = [
+        fragment_ktx: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+        ui_ktx      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+        safe        : ""
+]
+androidx.material = [
+        material    : "com.google.android.material:material:1.3.0-alpha03",
+        core        : "com.afollestad.material-dialogs:core:3.3.0",
+        bottomsheets: "com.afollestad.material-dialogs:bottomsheets:3.3.0"
+]
+
+androidx.swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+deps.androidx = androidx
+
+def firebase = [:]
+firebase.firebase = [
+        analytics: "com.google.firebase:firebase-analytics-ktx",
+        messaging: "com.google.firebase:firebase-messaging-ktx",
+        core     : "com.google.firebase:firebase-core:18.0.3",
+        database : "com.google.firebase:firebase-database:19.7.0",
+        crashltytics: "com.google.firebase:firebase-crashlytics-ktx",
+        perf: "com.google.firebase:firebase-perf-ktx",
+        dynamic: "com.google.firebase:firebase-dynamic-links-ktx"
+]
+deps.firebase = firebase
+
+//kakao
+def kakao = [:]
+kakao.sdk = [
+        user: "com.kakao.sdk:v2-user:2.0.5",
+        talk: "com.kakao.sdk:v2-talk:2.0.5"
+]
+deps.kakao = kakao
+
+// kotlin
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.coroutines = [
+        core         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutine",
+        android      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutine",
+        play_services: "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$versions.coroutine",
+        test         : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutine"
+]
+deps.kotlin = kotlin
+
+// koin
+deps.koin = [
+        core     : "org.koin:koin-androidx-scope:$versions.koin",
+        viewModel: "org.koin:koin-androidx-viewmodel:$versions.koin",
+        fragment: "org.koin:koin-androidx-fragment:2.1.5"
+]
+
+// okhttp
+deps.okhttp = [
+        core               : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        logging_interceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+]
+
+// retrofit
+deps.retrofit = [
+        core             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        converter_gson   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        adapter_rxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
+        converter_scalars: "com.squareup.retrofit2:converter-scalars:2.9.0"
+
+]
+
+//rxjava2
+deps.rxjava2 = [
+        rxjava2: "io.reactivex.rxjava2:rxjava:2.2.0",
+        rxandroid: "io.reactivex.rxjava2:rxandroid:2.1.0"
+]
+
+deps.google = [
+        gson: 'com.google.code.gson:gson:2.8.6'
+]
+
+// debugging
+deps.debugging = [
+        timber: "com.jakewharton.timber:timber:$versions.timber"
+]
+
+//permission
+deps.permission = [
+        tedpermission: "gun0912.ted:tedpermission:2.2.3"
+]
+
+//glide
+deps.glide = [
+        glide: "com.github.bumptech.glide:glide:4.11.0"
+]
+
+//multidex
+deps.multidex = [
+        multidex: "androidx.multidex:multidex:2.0.1"
+]
+
+deps.inappupdate = [
+        paly_core:"com.google.android.play:core:1.8.0",
+        paly_core_ktx:"com.google.android.play:core-ktx:1.8.1"
+]
+
+//달력
+deps.applikeysolutions = [
+        cosmocalendar: "com.github.applikeysolutions:cosmocalendar:1.0.4"
+]
+
+// test
+deps.atsl = [
+        junit        : "junit:junit:4.13.2",
+        ext_junit    : "androidx.test.ext:junit:1.1.2",
+
+        espresso_core: "androidx.test.espresso:espresso-core:3.3.0"
+]
+
+ext.deps = deps
+
+// build gradle plugin
+def gradlePlugin = [
+        android             : "com.android.tools.build:gradle:4.1.3",
+        kotlin              : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+        play_services       : "com.google.gms:google-services:4.3.5",
+        navigation_safe_args: "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation",
+        crashltytics: "com.google.firebase:firebase-crashlytics-gradle:2.5.1",
+        perf: "com.google.firebase:perf-plugin:1.3.5",
+        safe: "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.1"
+]
+ext.gradlePlugin = gradlePlugin
+
+// build_versions
+ext.build_versions = [
+        compile_sdk: 30,
+        build_tools: "30.0.3",
+        min_sdk    : 26,
+        target_sdk : 30
+]
