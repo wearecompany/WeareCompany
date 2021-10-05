@@ -92,42 +92,10 @@ class mypageFagment: BaseFragment<FragmentMypageBinding> (
         mViewDataBinding.notice.setOnClickListener(this)
         mViewDataBinding.informationChange.setOnClickListener(this)
         mViewDataBinding.setting.setOnClickListener(this)
-        mViewDataBinding.weareTel.setOnClickListener(this)
-        mViewDataBinding.adviceKakao.setOnClickListener(this)
-        mViewDataBinding.userLogingBtn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id) {
-            R.id.bookmark -> {
-                var newIntent = Intent(mContext, BookMarkActivity::class.java)
-                startActivity(newIntent)
-            }
-            R.id.my_review_list -> {
-                var newIntent = Intent(mContext, MyReviewActivity::class.java)
-                startActivity(newIntent)
-            }
-            R.id.information -> {
-                var newIntent = Intent(mContext, InformationActivity::class.java)
-                startActivity(newIntent)
-            }
-            R.id.notice -> {
-                var newIntent = Intent(mContext, NoticeActivity::class.java)
-                startActivity(newIntent)
-            }
-            R.id.information_change -> {
-                var newIntent = Intent(mContext, InformationChangeActivity::class.java)
-                newIntent.putExtra("image",userImage)
-                newIntent.putExtra("nicname", mViewDataBinding.userName.text.toString())
-                startActivityForResult(newIntent, 999)
-                //startActivity(newIntent)
-
-            }
-            R.id.setting -> {
-                var newIntent = Intent(mContext, SettingActivity::class.java)
-                startActivity(newIntent)
-
-            }
             R.id.weare_tel -> {
                 /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                     //안드로이드 M 이상일 경우
@@ -160,27 +128,41 @@ class mypageFagment: BaseFragment<FragmentMypageBinding> (
                 startActivity(newIntent)
             }
 
-            R.id.advice_kakao -> {
-                //val url = TalkApiClient.instance.channelChatUrl("https://pf.kakao.com/_xlbDxjK/chat")
-               // KakaoCustomTabsClient.openWithDefault(mContext,url)
-
-                var urll = "https://pf.kakao.com/_xlbDxjK/chat"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(urll)
-                startActivity(intent)
-            }
-
 
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 999) {
+        /*if (requestCode == 999) {
             getFragmentManager()?.let {
                 refreshFragment(this, it)
             }
+        }*/
+        if (resultCode == 998) {
+            infocheang()
         }
+    }
+
+    fun infocheang() {
+        mypageManager.instance.data(MyApplication.prefs.getString("user_idx",""),completion ={responseStatus,response ->
+
+            when(responseStatus) {
+                RESPONSE_STATUS.OKAY -> {
+                    mViewDataBinding.notUserLayout.visibility = View.GONE
+                    userImage = response[0].profile_image
+                    var multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
+                    Glide.with(this)
+                        .load(response[0].profile_image)
+                        .placeholder(R.drawable.not_load_image)
+                        .fallback(R.drawable.not_load_image)
+                        .apply(RequestOptions.bitmapTransform(multiTransformation))
+                        .into(mViewDataBinding.userImage)
+
+                    mViewDataBinding.userName.setText(response[0].nickname)
+                }
+            }
+        })
     }
 
     // Fragment 새로고침

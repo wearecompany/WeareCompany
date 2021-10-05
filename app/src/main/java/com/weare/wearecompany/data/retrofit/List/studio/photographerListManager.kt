@@ -29,6 +29,7 @@ class photographerListManager {
         datatime: JsonArray,
         lowmoney: String,
         maxmoney: String,
+        nickname: String,
         sort: Int,
         page: Int
         , completion:(RESPONSE_STATUS, ArrayList<newlist>,ArrayList<photo>) -> Unit) {
@@ -47,6 +48,7 @@ class photographerListManager {
         } else {
             `object`.addProperty("maxmoney",maxmoney)
         }
+        `object`.addProperty("nickname",nickname)
         `object`.addProperty("sort",sort)
         `object`.addProperty("page",page)
 

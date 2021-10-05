@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progress
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -56,7 +57,7 @@ class ProgressTripActivity:BaseActivity<ActivityProgressTripBinding>(
         ActionBar.setDisplayShowTitleEnabled(false)
 
         reserve_idx = intent.getStringExtra("reserve_idx").toString()
-        //type = intent.getIntExtra("type", 0)
+        type = intent.getIntExtra("type", 0)
         chatcheck = intent.getIntExtra("chatbool", 0)
         reviewcheck = intent.getIntExtra("review_check", 0)
 
@@ -76,55 +77,161 @@ class ProgressTripActivity:BaseActivity<ActivityProgressTripBinding>(
             mViewDataBinding.progressTripTopMenu.visibility = View.GONE
         }
 
-        progressManager.instance.expertPage(
-            reserve_idx,
-            completion = { responseStatus, data ->
-                when (responseStatus) {
-                    ESTIMATE.OKAY -> {
-                        type = data[0].expert_type
-                        expert_idx = data[0].expert_idx
+        when(type) {
+            2 -> {
+                progressManager.instance.expertPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressTripExpertName.text = data[0].expert_name
-                        mViewDataBinding.progressTripExpertPlace.text = data[0].expert_place
-                        mViewDataBinding.progressTripExpertPrice.text = data[0].expert_price
+                                mViewDataBinding.progressTripExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressTripExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressTripExpertPrice.text = data[0].expert_price
 
-                        var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
 
-                        Glide.with(MyApplication.instance)
-                            .load(data[0].expert_image)
-                            .apply(RequestOptions.bitmapTransform(multiTransformation))
-                            .into(mViewDataBinding.progressTripExpertImage)
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressTripExpertImage)
 
-                        taglist = ArrayList<String>()
-                        val tag = data[0].expert_category.split(",")
-                        for (i in tag) {
-                            taglist.add(i)
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressTripTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressTripBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressTripBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressTripDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressTripTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressTripTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressTripHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressTripContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressTripAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressTripAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressTripFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
-                        tagAdapter = SendTagRecyclerViewAdapter(taglist)
-                        mViewDataBinding.progressTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL, false
-                        )
-                        mViewDataBinding.progressTripExpertCategoryRecyclerview.adapter = tagAdapter
+                    })
+            }
+            3 -> {
+                progressManager.instance.expertProgressOkPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressTripTid.text = data[0].reserve_tid
-                        mViewDataBinding.progressTripBillMethod.text = data[0].bill_method
-                        mViewDataBinding.progressTripBillDate.text = data[0].bill_date
-                        mViewDataBinding.progressTripDt.text = data[0].reserve_dt
-                        mViewDataBinding.progressTripTime.text = data[0].reserve_time.toString()
-                        mViewDataBinding.progressTripTimeTerm.text = data[0].reserve_time_term
-                        mViewDataBinding.progressTripHeadCount.text = data[0].reserve_headcount.toString()
-                        mViewDataBinding.progressTripContents.text = data[0].reserve_contents
+                                mViewDataBinding.progressTripExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressTripExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressTripExpertPrice.text = data[0].expert_price
 
-                        if (data[0].reserve_add_contents != "") {
-                            mViewDataBinding.progressTripAddContentsLayout.visibility = View.VISIBLE
-                            mViewDataBinding.progressTripAddContents.text = data[0].reserve_add_contents
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressTripExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressTripTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressTripBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressTripBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressTripDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressTripTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressTripTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressTripHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressTripContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressTripAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressTripAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressTripFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
+                    })
+            }
+            4 -> {
+                progressManager.instance.expertProgressReviewPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressTripFinalPrice.text = dec.format(data[0].reserve_price)
-                    }
-                }
-            })
+                                mViewDataBinding.progressTripExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressTripExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressTripExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressTripExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressTripExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressTripTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressTripBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressTripBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressTripDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressTripTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressTripTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressTripHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressTripContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressTripAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressTripAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressTripFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
+                        }
+                    })
+            }
+        }
     }
 
     private fun dateemit() {
@@ -179,22 +286,9 @@ class ProgressTripActivity:BaseActivity<ActivityProgressTripBinding>(
 
                                                 dateemit()
 
-                                                try {
-                                                    //TODO 액티비티 화면 재갱신 시키는 코드
-                                                    val intent = intent
-                                                    finish() //현재 액티비티 종료 실시
-                                                    overridePendingTransition(
-                                                        0,
-                                                        0
-                                                    ) //인텐트 애니메이션 없애기
-                                                    startActivity(intent) //현재 액티비티 재실행 실시
-                                                    overridePendingTransition(
-                                                        0,
-                                                        0
-                                                    ) //인텐트 애니메이션 없애기
-                                                } catch (e: Exception) {
-                                                    e.printStackTrace()
-                                                }
+                                                val intent = Intent()
+                                                setResult(2001, intent)
+                                                finish()
                                             }
                                         }
                                     })
@@ -207,11 +301,10 @@ class ProgressTripActivity:BaseActivity<ActivityProgressTripBinding>(
             }
 
             R.id.progress_trip_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("type",0)
-                newIntent.putExtra("Entrytype",0)
-                newIntent.putExtra("reserve_idx",reserve_idx)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
         }
     }

@@ -9,11 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.weare.wearecompany.R
 import com.weare.wearecompany.ui.bottommenu.MainHomePageAdapter
-import com.weare.wearecompany.ui.listcontainer.AllLocationFragment
-import com.weare.wearecompany.ui.listcontainer.AllMoneyFragment
-import com.weare.wearecompany.ui.listcontainer.AllSortFragment
-import com.weare.wearecompany.ui.listcontainer.trip.TripCategoryFragment
-import com.weare.wearecompany.ui.listcontainer.trip.TripViewModel
 import kotlinx.android.synthetic.main.bottom_dialog_all_model.view.*
 
 class PhotoAllDialog(
@@ -26,7 +21,7 @@ class PhotoAllDialog(
     val itemClick: (Int, ArrayList<Int>, String, String, Int) -> Unit
 ) : BottomSheetDialogFragment() {
 
-    private val viewmodel: TripViewModel by activityViewModels()
+    private val viewmodel: PhotoViewModel by activityViewModels()
     private var clicknum = -1
 
     override fun onCreateView(

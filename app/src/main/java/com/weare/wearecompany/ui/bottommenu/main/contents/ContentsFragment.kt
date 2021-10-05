@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.main.contents
 
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weare.wearecompany.R
@@ -15,7 +16,7 @@ import com.weare.wearecompany.utils.RESPONSE_STATUS
 
 class ContentsFragment: BaseFragment<FragmentHome3Binding>(
     R.layout.fragment_home_3
-) {
+),View.OnClickListener {
 
     private lateinit var Adapter: ContentsRecyclerViewAdapter
 
@@ -24,6 +25,8 @@ class ContentsFragment: BaseFragment<FragmentHome3Binding>(
     }
 
     fun setUp() {
+        mViewDataBinding.youtube.setOnClickListener(this)
+
         MainManager.instance.contentslist(complation = { responseStatus, List ->
             when(responseStatus) {
                 RESPONSE_STATUS.OKAY -> {
@@ -46,5 +49,16 @@ class ContentsFragment: BaseFragment<FragmentHome3Binding>(
                 }
             }
         })
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.youtube -> {
+                val uri: Uri = Uri.parse("https://www.youtube.com/watch?v=n9S4pIEDu4c")
+                val Instagram_Intent = Intent(Intent.ACTION_VIEW, uri)
+                    Instagram_Intent.setPackage("com.google.android.youtube")
+                startActivity(Instagram_Intent)
+            }
+        }
     }
 }

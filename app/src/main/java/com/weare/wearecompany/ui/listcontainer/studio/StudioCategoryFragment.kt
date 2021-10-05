@@ -18,10 +18,6 @@ class StudioCategoryFragment : BaseFragment<BottomDialogStudioBinding>(
     var click_list = ArrayList<Int>()
     private var clicknum = -1
 
-    private var setupCategory = -1
-    var oknum: Int = 0
-
-
     override fun onCreate() {
         click_list = viewmodel.getCategory()
         bindingSetup()

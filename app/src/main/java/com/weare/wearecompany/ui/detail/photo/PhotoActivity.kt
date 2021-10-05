@@ -1,5 +1,6 @@
 package com.weare.wearecompany.ui.detail.photo
 
+import android.animation.Animator
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -17,31 +18,29 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.dynamiclinks.ktx.*
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.link.LinkClient
 import com.kakao.sdk.template.model.*
 import com.weare.wearecompany.BuildConfig
+import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
+import com.weare.wearecompany.data.hotpick.data.review
 import com.weare.wearecompany.data.photo.dateil.list.date.dateilPhoto
+import com.weare.wearecompany.data.retrofit.bottomnav.main.MainManager
+import com.weare.wearecompany.data.retrofit.bottomnav.mypage.mypageManager
 import com.weare.wearecompany.data.retrofit.dateil.photoDateilManager
 import com.weare.wearecompany.databinding.ActivityPhotoBinding
 import com.weare.wearecompany.ui.base.BaseActivity
-import com.weare.wearecompany.utils.RESPONSE_STATUS
-import com.weare.wearecompany.MyApplication
-import com.weare.wearecompany.data.hotpick.data.review
-import com.weare.wearecompany.data.retrofit.bottomnav.main.MainManager
-import com.weare.wearecompany.data.retrofit.bottomnav.mypage.mypageManager
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
-import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelActivity
+import com.weare.wearecompany.ui.chat.detail.DetailChatActivity
 import com.weare.wearecompany.ui.detail.photo.reservation.ReservationPhotoActivity
 import com.weare.wearecompany.ui.detail.studio.DatailSharingDialog
-import com.weare.wearecompany.ui.detail.studio.StudioReviewRecyclerViewAdapter
 import com.weare.wearecompany.utils.BitmapUtils
 import com.weare.wearecompany.utils.Constants
 import com.weare.wearecompany.utils.LIKE
+import com.weare.wearecompany.utils.RESPONSE_STATUS
 import java.io.File
 import java.text.DecimalFormat
 
@@ -142,6 +141,8 @@ class PhotoActivity : BaseActivity<ActivityPhotoBinding>(
         mViewDataBinding.sharing.setOnClickListener(this)
         mViewDataBinding.like.setOnClickListener(this)
         mViewDataBinding.photoReservation.setOnClickListener(this)
+        mViewDataBinding.datailPhotoChat.setOnClickListener(this)
+
         like = date[0].like_status
         if (like) {
             mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
@@ -215,6 +216,7 @@ class PhotoActivity : BaseActivity<ActivityPhotoBinding>(
                             completion = { responseStatus ->
                                 when (responseStatus) {
                                     LIKE.OKAY -> {
+                                        mViewDataBinding.bookLottie.playAnimation()
                                         mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
                                         like = true
                                     }
@@ -337,6 +339,13 @@ class PhotoActivity : BaseActivity<ActivityPhotoBinding>(
                 } else {
                     Toast.makeText(this, "로그인후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
                 }
+            }
+            R.id.datail_photo_chat -> {
+                val newIntent = Intent(this, DetailChatActivity::class.java)
+                newIntent.putExtra("expert_type", "1")
+                newIntent.putExtra("expert_idx", dateList[0].idx)
+                newIntent.putExtra("expert_user_idx", dateList[0].expert_user_idx)
+                startActivityForResult(newIntent,3001)
             }
         }
     }

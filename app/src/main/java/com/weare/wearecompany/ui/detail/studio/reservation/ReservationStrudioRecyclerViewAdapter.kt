@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.hotpick.data.room
 import kotlinx.android.synthetic.main.item_reservation_room.view.*
-import kotlinx.android.synthetic.main.item_studio_datail_room.view.*
 
 
-class ReservationStrudioRecyclerViewAdapter(private val data: ArrayList<room>) : RecyclerView.Adapter<ReservationStrudioViwHodel>() {
+class ReservationStrudioRecyclerViewAdapter(private val data: ArrayList<room>) :
+    RecyclerView.Adapter<ReservationStrudioViwHodel>() {
 
     var postcheck = -1
     var checktype = false
     private val selectedItems = SparseBooleanArray()
+
     //ClickListener
     interface OnItemClickListener {
         fun onClick(v: View, position: Int, Item: room)
@@ -47,10 +48,10 @@ class ReservationStrudioRecyclerViewAdapter(private val data: ArrayList<room>) :
 
 
         holder.apply {
-            bindWith(item, checktype,View.OnClickListener {
+            bindWith(item, checktype, View.OnClickListener {
             })
             holder.itemView.studio_not_list_image.setOnClickListener {
-                itemClickListener.onClick(it,position,item)
+                itemClickListener.onClick(it, position, item)
                 postcheck = position
                 notifyDataSetChanged()
             }

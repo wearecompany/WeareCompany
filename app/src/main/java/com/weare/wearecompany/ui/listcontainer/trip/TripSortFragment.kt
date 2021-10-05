@@ -31,7 +31,7 @@ class TripSortFragment : BaseFragment<BottomDialogAllSortBinding>(
     }
 
     fun dataSetup() {
-        when(setupSort) {
+        when (setupSort) {
             0 -> listOn(mViewDataBinding.btnAllModelSoText0, 0)
             1 -> listOn(mViewDataBinding.btnAllModelSoText1, 1)
             2 -> listOn(mViewDataBinding.btnAllModelSoText2, 2)

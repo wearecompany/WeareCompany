@@ -25,6 +25,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <kr.co.prnd.YouTubePlayerView
+                    android:id="@+id/youtube"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:autoPlay="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:videoId="n9S4pIEDu4c"/>
                 <TextView
                     android:id="@+id/contents_title"
                     android:layout_width="0dp"
@@ -36,7 +46,7 @@
                     android:layout_marginStart="20dp"
                     android:textColor="#0f0f0f"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                   app:layout_constraintTop_toBottomOf="@id/youtube"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/main_contents_RecyclerView"

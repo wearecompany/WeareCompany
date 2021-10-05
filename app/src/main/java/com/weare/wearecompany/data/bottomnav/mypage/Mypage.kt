@@ -1,11 +1,18 @@
 package com.weare.wearecompany.data.bottomnav.mypage
 
-import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Mypage(
-    @SerializedName("profile_image") val profile_image: String,
-    @SerializedName("nickname") val nickname: String,
-    @SerializedName("like_num") val like_num: Int,
-    @SerializedName("review_num") val review_num: Int
+    val profile_image: String,
+    val nickname: String,
+    val like_num: Int,
+    val review_num: Int,
+    val review_status: Int,
+    val request: Int,
+    val response: Int,
+    val progress: Int,
+    val complete: Int,
+    val review: Int,
+    val refund_request: Int,
+    val refund_complete: Int
 ) : Serializable

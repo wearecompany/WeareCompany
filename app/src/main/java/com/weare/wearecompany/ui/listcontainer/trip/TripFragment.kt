@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
+import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -39,6 +43,7 @@ import com.weare.wearecompany.ui.listcontainer.photographer.PhotographerLocation
 import com.weare.wearecompany.utils.RESPONSE_STATUS
 import kotlinx.android.synthetic.main.fragment_list_model.view.*
 import kotlinx.android.synthetic.main.fragment_list_model.view.model_list_recycler
+import kotlinx.android.synthetic.main.fragment_list_photographer.view.*
 import kotlinx.android.synthetic.main.fragment_list_trip.view.*
 
 class TripFragment : Fragment(
@@ -47,6 +52,7 @@ class TripFragment : Fragment(
     private var ca_click = -1
     private var min_money = ""
     private var max_money = ""
+    private var nick_name = ""
     private var la_click = ArrayList<Int>()
     private var page_count = 1
     lateinit var viewe: View
@@ -81,12 +87,63 @@ class TripFragment : Fragment(
     ): View? {
         viewe = inflater!!.inflate(R.layout.fragment_list_trip, container, false)
 
-        datacall(beauty_array, beauty_location,min_money,max_money,BsortCheck, page_count)
+        datacall(
+            beauty_array,
+            beauty_location,
+            min_money,
+            max_money,
+            nick_name,
+            BsortCheck,
+            page_count
+        )
         bindsetup()
 
+        viewe.trip_list_search_edit.setOnEditorActionListener(object :
+            TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        nick_name = viewe.trip_list_search_edit.text.toString()
+                        datacall(
+                            beauty_array,
+                            beauty_location,
+                            min_money,
+                            max_money,
+                            nick_name,
+                            BsortCheck,
+                            page_count
+                        )
+                        return false
+                    }
+                    else -> {
+                        return false
+                    }
+                }
+                return true
+            }
+
+        })
+
+        viewe.trip_list_search_edit.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (viewe.trip_list_search_edit.isFocusable && !s.toString().equals("")) {
+                    viewe.trip_list_search_image_1.visibility = View.VISIBLE
+                    viewe.trip_list_search_image_2.visibility = View.GONE
+                } else if (viewe.trip_list_search_edit.isFocusable && s.toString().equals("")) {
+                    viewe.trip_list_search_image_1.visibility = View.GONE
+                    viewe.trip_list_search_image_2.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
 
         viewe.trip_list_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
@@ -97,6 +154,7 @@ class TripFragment : Fragment(
                         beauty_location,
                         min_money,
                         max_money,
+                        nick_name,
                         BsortCheck,
                         page_count,
                         completion = { responseStatus, responsenewlist, responsestudiokList ->
@@ -111,6 +169,7 @@ class TripFragment : Fragment(
                 }
             }
         })
+
         return viewe
     }
 
@@ -119,12 +178,14 @@ class TripFragment : Fragment(
         viewe.list_trip_location.setOnClickListener(this)
         viewe.list_trip_money.setOnClickListener(this)
         viewe.list_trip_sort.setOnClickListener(this)
+        viewe.trip_list_search_btn.setOnClickListener(this)
+        viewe.trip_list_search_image_1.setOnClickListener(this)
     }
 
 
     fun datacall(
         photorArray: JsonArray, locationArray: JsonArray, min: String,
-        max: String, sort: Int, page: Int
+        max: String, nickname: String, sort: Int, page: Int
     ) {
         clipList = ArrayList()
         if (photorArray.size() != 0) {
@@ -189,6 +250,7 @@ class TripFragment : Fragment(
             locationArray,
             min,
             max,
+            nickname,
             sort,
             page,
             completion = { responseStatus, responsenewlist, responsestudiokList ->
@@ -219,89 +281,112 @@ class TripFragment : Fragment(
                             }
 
                         })
-                        tripDataList = responsestudiokList
-                        tripAdapter = TripRecyclerViewAdapter(tripDataList)
 
-                        viewe.trip_list_recyclerview.layoutManager =
-                            GridLayoutManager(context, 2)
-                        viewe.trip_list_recyclerview.adapter = tripAdapter
+                        if (responsestudiokList.size != 0) {
+                            tripDataList = responsestudiokList
+                            tripAdapter = TripRecyclerViewAdapter(tripDataList)
 
-                        tripAdapter.setItemClickListener(object :
-                            TripRecyclerViewAdapter.OnItemClickListener {
-                            override fun onClick(v: View, position: Int, Item: trip) {
-                                var newIntent = Intent(context, TripActivity::class.java)
+                            viewe.trip_list_recyclerview.layoutManager =
+                                GridLayoutManager(context, 2)
+                            viewe.trip_list_recyclerview.adapter = tripAdapter
 
-                                newIntent.putExtra("expert_idx", Item.idx)
-                                newIntent.putExtra(
-                                    "user_idx", MyApplication.prefs.getString(
-                                        "user_idx",
-                                        ""
+                            tripAdapter.setItemClickListener(object :
+                                TripRecyclerViewAdapter.OnItemClickListener {
+                                override fun onClick(v: View, position: Int, Item: trip) {
+                                    var newIntent = Intent(context, TripActivity::class.java)
+
+                                    newIntent.putExtra("expert_idx", Item.idx)
+                                    newIntent.putExtra(
+                                        "user_idx", MyApplication.prefs.getString(
+                                            "user_idx",
+                                            ""
+                                        )
                                     )
-                                )
-                                startActivity(newIntent)
-                            }
-
-                        })
-
-                        if (clipList.size != 0) {
-                            viewe.list_trip_clip_recyclerview.visibility = View.VISIBLE
-                            clipAdapter = TripClipRecyclerViewAdapter(clipList)
-                            viewe.list_trip_clip_recyclerview.layoutManager =
-                                LinearLayoutManager(
-                                    MyApplication.instance,
-                                    LinearLayoutManager.HORIZONTAL, false
-                                )
-                            viewe.list_trip_clip_recyclerview.adapter = clipAdapter
-
-                            clipAdapter.setItemClickListener(object : TripClipRecyclerViewAdapter.OnItemClickListener{
-                                override fun onClick(v: View, position: Int, item: clip) {
-                                    when(item.main_type) {
-                                        0 -> {
-                                            ca_click = -1
-                                            beauty_array = JsonArray()
-                                            viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.trip_category_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.trip_category_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
-                                        1 -> {
-                                            if (beauty_location.size() != 0) {
-                                                val i1 = 1
-                                                for (i in i1..beauty_location.size()) {
-                                                    if(item.sub_type == beauty_location[i-1].asInt) {
-                                                        beauty_location.remove(i-1)
-                                                        locationList.removeAt(i-1)
-                                                        break
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                        2 -> {
-                                            min_money = ""
-                                            max_money = ""
-                                            viewe.list_trip_money.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.trip_money_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.trip_money_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
-                                        3 -> {
-                                            BsortCheck = 0
-                                            viewe.list_trip_sort.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.trip_sory_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.trip_sory_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
-                                    }
-                                    if (beauty_location.size() == 0) {
-                                        viewe.list_trip_location.setBackgroundResource(R.drawable.list_sub_background_off)
-                                        viewe.trip_location_image.setImageResource(R.drawable.list_category_down_gray)
-                                        viewe.trip_location_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                    }
-                                    datacall(beauty_array, beauty_location, min_money, max_money, BsortCheck, page_count)
+                                    startActivity(newIntent)
                                 }
+
                             })
 
+                            if (clipList.size != 0) {
+                                viewe.list_trip_clip_recyclerview.visibility = View.VISIBLE
+                                clipAdapter = TripClipRecyclerViewAdapter(clipList)
+                                viewe.list_trip_clip_recyclerview.layoutManager =
+                                    LinearLayoutManager(
+                                        MyApplication.instance,
+                                        LinearLayoutManager.HORIZONTAL, false
+                                    )
+                                viewe.list_trip_clip_recyclerview.adapter = clipAdapter
+
+                                clipAdapter.setItemClickListener(object :
+                                    TripClipRecyclerViewAdapter.OnItemClickListener {
+                                    override fun onClick(v: View, position: Int, item: clip) {
+                                        when (item.main_type) {
+                                            0 -> {
+                                                ca_click = -1
+                                                beauty_array = JsonArray()
+                                                viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.trip_category_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.trip_category_text.setTextColor(
+                                                    Color.parseColor(
+                                                        "#7f7f7f"
+                                                    )
+                                                )
+                                            }
+                                            1 -> {
+                                                if (beauty_location.size() != 0) {
+                                                    val i1 = 1
+                                                    for (i in i1..beauty_location.size()) {
+                                                        if (item.sub_type == beauty_location[i - 1].asInt) {
+                                                            beauty_location.remove(i - 1)
+                                                            locationList.removeAt(i - 1)
+                                                            break
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                            2 -> {
+                                                min_money = ""
+                                                max_money = ""
+                                                viewe.list_trip_money.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.trip_money_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.trip_money_text.setTextColor(
+                                                    Color.parseColor(
+                                                        "#7f7f7f"
+                                                    )
+                                                )
+                                            }
+                                            3 -> {
+                                                BsortCheck = 0
+                                                viewe.list_trip_sort.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.trip_sory_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.trip_sory_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                            }
+                                        }
+                                        if (beauty_location.size() == 0) {
+                                            viewe.list_trip_location.setBackgroundResource(R.drawable.list_sub_background_off)
+                                            viewe.trip_location_image.setImageResource(R.drawable.list_category_down_gray)
+                                            viewe.trip_location_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                        }
+                                        datacall(
+                                            beauty_array,
+                                            beauty_location,
+                                            min_money,
+                                            max_money,
+                                            nick_name,
+                                            BsortCheck,
+                                            page_count
+                                        )
+                                    }
+                                })
+
+                            } else {
+                                viewe.list_trip_clip_recyclerview.visibility = View.GONE
+                            }
                         } else {
-                            viewe.list_trip_clip_recyclerview.visibility = View.GONE
+                            Toast.makeText(mContext, "조건에 맞는 전문가가 없습니다.", Toast.LENGTH_SHORT).show()
                         }
+
 
                     }
                 }
@@ -310,7 +395,21 @@ class TripFragment : Fragment(
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
+            R.id.trip_list_search_image_1 -> {
+                viewe.trip_list_search_image_1.visibility = View.GONE
+                viewe.trip_list_search_image_2.visibility = View.VISIBLE
+                viewe.trip_list_search_edit.setText("")
+                nick_name = ""
+                datacall(
+                    beauty_array,
+                    beauty_location,
+                    min_money,
+                    max_money,
+                    nick_name,
+                    BsortCheck,
+                    page_count
+                )
+            }
             R.id.list_trip_category -> {
                 val testiew: TripAllDialog = TripAllDialog(
                     0,
@@ -379,12 +478,27 @@ class TripFragment : Fragment(
                     max_money = max
                     BsortCheck = sort
 
-                    datacall(beauty_array, beauty_location, min_money, max_money, BsortCheck, page_count)
+                    datacall(
+                        beauty_array,
+                        beauty_location,
+                        min_money,
+                        max_money,
+                        nick_name,
+                        BsortCheck,
+                        page_count
+                    )
                 }
                 testiew.show(childFragmentManager, testiew.tag)
             }
             R.id.list_trip_location -> {
-                val testiew: TripAllDialog = TripAllDialog(1,ca_click,locationList,min_money,max_money,BsortCheck) {ca:Int,location:ArrayList<Int>,min:String,max:String,sort:Int ->
+                val testiew: TripAllDialog = TripAllDialog(
+                    1,
+                    ca_click,
+                    locationList,
+                    min_money,
+                    max_money,
+                    BsortCheck
+                ) { ca: Int, location: ArrayList<Int>, min: String, max: String, sort: Int ->
 
                     if (ca != -1) {
                         viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_on)
@@ -443,12 +557,27 @@ class TripFragment : Fragment(
                     min_money = min
                     max_money = max
                     BsortCheck = sort
-                    datacall(beauty_array, beauty_location, min_money, max_money, BsortCheck, page_count)
+                    datacall(
+                        beauty_array,
+                        beauty_location,
+                        min_money,
+                        max_money,
+                        nick_name,
+                        BsortCheck,
+                        page_count
+                    )
                 }
                 testiew.show(childFragmentManager, testiew.tag)
             }
             R.id.list_trip_money -> {
-                val testiew: TripAllDialog = TripAllDialog(2,ca_click,locationList,min_money,max_money,BsortCheck) {ca:Int,location:ArrayList<Int>,min:String,max:String,sort:Int ->
+                val testiew: TripAllDialog = TripAllDialog(
+                    2,
+                    ca_click,
+                    locationList,
+                    min_money,
+                    max_money,
+                    BsortCheck
+                ) { ca: Int, location: ArrayList<Int>, min: String, max: String, sort: Int ->
 
                     if (ca != -1) {
                         viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_on)
@@ -507,12 +636,27 @@ class TripFragment : Fragment(
                     min_money = min
                     max_money = max
                     BsortCheck = sort
-                    datacall(beauty_array, beauty_location, min_money, max_money, BsortCheck, page_count)
+                    datacall(
+                        beauty_array,
+                        beauty_location,
+                        min_money,
+                        max_money,
+                        nick_name,
+                        BsortCheck,
+                        page_count
+                    )
                 }
                 testiew.show(childFragmentManager, testiew.tag)
             }
             R.id.list_trip_sort -> {
-                val testiew: TripAllDialog = TripAllDialog(3,ca_click,locationList,min_money,max_money,BsortCheck) {ca:Int,location:ArrayList<Int>,min:String,max:String,sort:Int ->
+                val testiew: TripAllDialog = TripAllDialog(
+                    3,
+                    ca_click,
+                    locationList,
+                    min_money,
+                    max_money,
+                    BsortCheck
+                ) { ca: Int, location: ArrayList<Int>, min: String, max: String, sort: Int ->
 
                     if (ca != -1) {
                         viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_on)
@@ -571,7 +715,15 @@ class TripFragment : Fragment(
                     min_money = min
                     max_money = max
                     BsortCheck = sort
-                    datacall(beauty_array, beauty_location, min_money, max_money, BsortCheck, page_count)
+                    datacall(
+                        beauty_array,
+                        beauty_location,
+                        min_money,
+                        max_money,
+                        nick_name,
+                        BsortCheck,
+                        page_count
+                    )
                 }
                 testiew.show(childFragmentManager, testiew.tag)
             }

@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_dialog_time.view.*
 
 
-
 class BottomTimeFragment(val startTime:(Int)-> Unit, val endTime: (Int) -> Unit, val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
 
     private var startCheckTime = 0
@@ -81,14 +80,13 @@ class BottomTimeFragment(val startTime:(Int)-> Unit, val endTime: (Int) -> Unit,
             }
 
         })
-
         view.time_di_request.setOnClickListener {
             if (!startOneCheckTime) {
                 startTime(0)
             }
             itemClick(30)
             dialog?.dismiss()
-           /* if (!startOneCheckTime) {
+            /*if (!startOneCheckTime) {
                 startTime(0)
             }
             if (!endOneCheckTime) {

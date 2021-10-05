@@ -386,39 +386,6 @@
                 android:textColor="#cbcbcb"
                 android:textSize="11dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="88dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/weare_tel"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="146dp"
-                    android:layout_height="55dp"
-                    android:layout_marginEnd="17dp"
-                    android:text="02-6396-1448"
-                    android:textColor="#484848"
-                    android:textSize="12dp"
-                    app:iconTint="#181600"
-                    app:rippleColor="#6d34f3" />
-
-                <Button
-                    android:id="@+id/advice_kakao"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="146dp"
-                    android:layout_height="55dp"
-                    android:text="카카오톡 상담톡"
-                    android:textColor="#484848"
-                    android:textSize="12dp"
-                    app:icon="@drawable/login_kakao"
-                    app:iconSize="12dp"
-                    app:iconTint="#181600"
-                    app:rippleColor="#6d34f3" />
-
-            </LinearLayout>
         </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,6 +4,7 @@ import java.io.Serializable
 
 data class ProgressExpertPage (
     val reserve_idx: String,
+    val reserve_status: String,
     val reserve_tid: String,
     val expert_idx: String,
     val expert_name: String,
@@ -11,7 +12,6 @@ data class ProgressExpertPage (
     val expert_image: String,
     val expert_price: String,
     val expert_place: String,
-    val complete: Int,
     val bill_method: String,
     val bill_date: String,
     val refund_money: Int,
@@ -23,8 +23,5 @@ data class ProgressExpertPage (
     val reserve_headcount: Int,
     val reserve_contents: String,
     val reserve_add_contents: String,
-    val reserve_price: Int,
-    val reserve_add_price: Int,
-    val reserve_add_price_contents: String,
-    val reserve_final_price: Int
+    val reserve_price: Int
 ): Serializable

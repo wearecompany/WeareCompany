@@ -22,6 +22,7 @@ import io.socket.client.IO
 import io.socket.client.Socket
 import org.json.JSONObject
 import java.io.UnsupportedEncodingException
+import java.lang.reflect.InvocationTargetException
 import java.net.URISyntaxException
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -106,6 +107,8 @@ class PhotoPaymentActivity:BaseActivity<ActivityPhotoPaymentBinding>(
                             // 앱이 설치되어 있지 않을 경우 구글마켓 이동
                             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
                         }
+                    } catch (e: InvocationTargetException) {
+
                     }
                     //return  값을 반드시 true로 해야 합니다.
                     return true;

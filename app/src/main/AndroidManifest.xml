@@ -29,7 +29,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +47,12 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="na5oguags7" />
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -61,7 +67,8 @@
         </activity>
         <activity android:name="com.weare.wearecompany.ui.join.JoinActivity" />
 
-        <activity android:name="com.weare.wearecompany.ui.container.ContainerActivity">
+        <activity android:name="com.weare.wearecompany.ui.container.ContainerActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -92,7 +99,6 @@
         <activity android:name="com.weare.wearecompany.ui.listcontainer.ListContainerActivity" />
         <activity android:name="com.weare.wearecompany.ui.detail.model.ModelActivity" />
         <activity android:name="com.weare.wearecompany.ui.detail.photo.PhotoActivity" />
-        <activity android:name="com.weare.wearecompany.ui.detail.rent.RentActivity" />
         <activity android:name="com.weare.wearecompany.ui.detail.trip.TripActivity" />
         <!-- Guide -->
         <activity android:name="com.weare.wearecompany.ui.bottommenu.main.guide.GuideActivity" />
@@ -107,13 +113,14 @@
         <activity android:name="com.weare.wearecompany.ui.bottommenu.mypage.setting.SettingPushActivity" />
         <activity android:name="com.weare.wearecompany.ui.bottommenu.estimate.estimateDatail.EstimateDatailActivity" />
         <activity android:name=".ui.detail.studio.reservation.ReservationStudioActivity" />
-        <activity android:name=".ui.detail.rent.reservation.ReservationRentActivity" />
         <activity android:name=".ui.bottommenu.mypage.bookmark.BookMarkActivity" />
         <activity android:name=".ui.ReportActivity" />
         <activity android:name=".ui.bottommenu.estimate.send.SendRequestActivity" />
         <activity
             android:name=".ui.chat.ChatActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.chat.detail.DetailChatActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.detail.photo.reservation.ReservationPhotoActivity" />
         <activity android:name=".ui.detail.model.reservation.ReservationModelActivity" />
         <activity android:name=".ui.detail.trip.reservation.ReservationTripActivity" />
@@ -123,12 +130,10 @@
 
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressStudioActivity" />
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressExpertActivity" />
-        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressShopActivity" />
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressManyActivity" />
 
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundStudioActivity" />
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundExpertActivity" />
-        <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundShopActivity" />
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundManyActivity" />
 
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.review.ReviewActivity" />
@@ -154,18 +159,24 @@
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressPhotoActivity"/>
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressModelActivity"/>
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.progress.ProgressTripActivity"/>
+        <activity android:name=".ui.bottommenu.mypage.request.progress.ProgressOneClickActivity"/>
 
         <!-- 취소 현황 -->
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundPhotoActivity"/>
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundModelActivity"/>
         <activity android:name=".ui.bottommenu.estimate.progress.experthodel.refund.RefundTripActivity"/>
+        <activity android:name=".ui.bottommenu.main.home.affiliation.AffiliationActivity"/>
+        <activity android:name=".ui.join.PersonaActivity"/>
+
+        <activity android:name=".ui.listcontainer.studio.StudioMapSearchActivity"/>
 
         <activity android:name=".ui.bottommenu.main.event.EventDetailActivity"/>
         <activity
             android:name=".ui.bottommenu.estimate.receive.payment.paymentActivity"
             android:configChanges="orientation"
             android:label="NicePay Smart"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -181,13 +192,15 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <service android:name=".utils.MyFirebaseMessagingService">
+        <service android:name=".utils.MyFirebaseMessagingService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".utils.MyFirebaseInstanceIdService">
+        <service android:name=".utils.MyFirebaseInstanceIdService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -197,8 +210,14 @@
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/provider_paths" />
 
-        <activity android:name=".ui.bottommenu.estimate.send.SendShopActivity" />
         <activity android:name=".ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity" />
+        <activity android:name=".ui.bottommenu.main.home.affiliation.detail.AffiliationDetailActivity"/>
+
+        <activity android:name=".ui.bottommenu.main.home.oneclick.OneClickActivity"/>
+        <activity android:name=".ui.bottommenu.mypage.request.RequestListActivity"/>
+        <activity android:name=".ui.bottommenu.mypage.request.send.SendOneClickActivity"/>
+        <activity android:name=".ui.bottommenu.mypage.request.receive.ReceiveOneClickActivity"/>
+        <activity android:name=".ui.bottommenu.mypage.request.progress.RefundOneClickActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

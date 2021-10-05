@@ -15,14 +15,14 @@ val retrofitModule = module {
             .build()
     }
 
-    single {
+   /* single {
         Interceptor { chain: Interceptor.Chain ->
             val original = chain.request()
             chain.proceed(original.newBuilder().apply {
                 addHeader("Authorizaion_Header", "access_token")
             }.build())
         }
-    }
+    } */
 
     single {
         HttpLoggingInterceptor().apply {

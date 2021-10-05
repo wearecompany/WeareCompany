@@ -408,94 +408,6 @@
                         android:layout_height="0.7dp"
                         android:background="#eaeaea" />
 
-                    <RelativeLayout
-                        android:id="@+id/estimate_expert_reserve_price_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="17dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/estimate_expert_reserve_price_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:text="결제 금액"
-                            android:textColor="#484848"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/estimate_expert_reserve_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#484848"
-                                android:textSize="14dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="원"
-                                android:textColor="#484848"
-                                android:textSize="14dp" />
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/estimate_expert_reserve_add_price_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/estimate_expert_reserve_add_price_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:text="추가 금액 요청"
-                            android:textColor="#484848"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/estimate_expert_reserve_add_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#484848"
-                                android:textSize="14dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="원"
-                                android:textColor="#484848"
-                                android:textSize="14dp" />
-
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/estimate_expert_reserve_add_price_contents"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="#787878"
-                        android:textSize="13dp"
-                        android:visibility="gone" />
-
                     <View
                         android:id="@+id/estimate_expert_reserve_final_price_title_bottom_view"
                         android:layout_width="match_parent"
@@ -557,7 +469,7 @@
                     android:layout_marginBottom="25dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/reservation_expert_chat"

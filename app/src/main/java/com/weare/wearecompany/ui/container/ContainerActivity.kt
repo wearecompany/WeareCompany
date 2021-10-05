@@ -2,8 +2,7 @@ package com.weare.wearecompany.ui.container
 
 import android.content.Intent
 import android.content.IntentSender
-import android.graphics.Point
-import android.graphics.drawable.Drawable
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -16,10 +15,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -38,11 +34,10 @@ import com.weare.wearecompany.databinding.ActivityContainerBinding
 import com.weare.wearecompany.ui.base.BaseActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.estimateDatail.EstimateDatailActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity
+import com.weare.wearecompany.ui.bottommenu.main.home.oneclick.OneClickActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
 import com.weare.wearecompany.ui.detail.DatailActivity
 import com.weare.wearecompany.ui.detail.model.ModelActivity
-import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelActivity
-import com.weare.wearecompany.ui.detail.photo.reservation.ReservationPhotoActivity
 import com.weare.wearecompany.ui.listcontainer.ListContainerActivity
 import com.weare.wearecompany.utils.RESPONSE_STATUS
 import timber.log.Timber
@@ -63,6 +58,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
     var min = 0
     var temp = 0
     var gcd = 0
+
+    lateinit var host : NavHostFragment
+
 
     lateinit var fadeInAnim: Animation
     lateinit var fadeoutAnim: Animation
@@ -98,6 +96,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         mViewDataBinding.bottomNavigation.menu.getItem(2).isEnabled = false
         mViewDataBinding.mainRequest.setOnClickListener(this)
 
+        host = supportFragmentManager.findFragmentById(R.id.navHostfragment) as NavHostFragment
+
         fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fadin)
         fadeoutAnim = AnimationUtils.loadAnimation(this, R.anim.fadeout)
 
@@ -125,23 +125,15 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
 
         gcd = min
 
-
-        val widt = gcd/width
-        val heigh = gcd/height
-
-
-
         var bundle =  intent.extras
         if (bundle != null) {
             type_1 = bundle["type_1"].toString()
             type_2 = bundle["type_2"].toString()
-            //Toast.makeText(this, type, Toast.LENGTH_SHORT).show()
         }
         checkForAppUpdate()
         kakaolink()
         dunamLink()
 
-        val host = supportFragmentManager.findFragmentById(R.id.navHostfragment) as NavHostFragment
         val bundlee = bundleOf("type_1" to type_1, "type_2" to type_2)
         NavigationUI.setupWithNavController(mViewDataBinding.bottomNavigation, host.navController)
 
@@ -153,16 +145,18 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_expter -> {
-                    if (MyApplication.prefs.getString("user_idx", "") != "") {
+                    Toast.makeText(this, "업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
+                    /*if (MyApplication.prefs.getString("user_idx", "") != "") {
                         host.navController.navigate(R.id.expter)
                         return@setOnNavigationItemSelectedListener true
                     } else {
                         Toast.makeText(this, "로그인후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
-                    }
+                    }*/
                 }
                 R.id.menu_estimate -> {
-                    host.navController.navigate(R.id.chat)
-                    return@setOnNavigationItemSelectedListener true
+                    Toast.makeText(this, "업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
+                    //host.navController.navigate(R.id.chat)
+                    //return@setOnNavigationItemSelectedListener true
                     /*var newIntent = Intent(this, ListContainerActivity::class.java)
                     newIntent.putExtra("num", 8)
                     startActivity(newIntent)*/
@@ -170,8 +164,14 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     //return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_mypage -> {
-                    host.navController.navigate(R.id.mypage)
-                    return@setOnNavigationItemSelectedListener true
+                    if (MyApplication.prefs.getString("user_idx", "") != "") {
+                        host.navController.navigate(R.id.test_mypage)
+                        return@setOnNavigationItemSelectedListener true
+                    } else {
+                        host.navController.navigate(R.id.not_mypage)
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
                 }
             }
             false
@@ -187,8 +187,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         }
 
         if (reservation == 1) {
-            host.navController.navigate(R.id.expter)
-            mViewDataBinding.bottomNavigation.selectedItemId = R.id.menu_expter
+            Toast.makeText(this,"요청 완료", Toast.LENGTH_SHORT).show()
+            host.navController.navigate(R.id.test_mypage)
+            mViewDataBinding.bottomNavigation.selectedItemId = R.id.menu_mypage
         }
 
         if (payment == 1) {
@@ -208,7 +209,29 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     deeplink = pendingDynamicLinkData.link
                 }
                 if (deeplink != null) {
+                    val key2 = deeplink.getQueryParameter("item_idx")
+                    val key3 = deeplink.getQueryParameter("item_type")
                     Toast.makeText(this, deeplink.toString(), Toast.LENGTH_SHORT).show()
+                    when (key3) {
+                        "0" -> {
+                            var newIntent = Intent(this@ContainerActivity, DatailActivity::class.java)
+                            newIntent.putExtra("idx", key2)
+                            startActivity(newIntent)
+                        }
+                        "1" -> {
+
+                        }
+                        "2" -> {
+                            var newIntent = Intent(this@ContainerActivity, ModelActivity::class.java)
+                            newIntent.putExtra("expert_idx", key2)
+                            startActivity(newIntent)
+                        }
+                        "2" -> {
+                            var newIntent = Intent(this@ContainerActivity, DatailActivity::class.java)
+                            newIntent.putExtra("idx", key2)
+                            startActivity(newIntent)
+                        }
+                    }
                 } else {
                 }
             }
@@ -246,7 +269,6 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                         MY_REQUEST_CODE
                     )
                 } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
                 }
             }
         }
@@ -256,7 +278,6 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
 
         if (intent.action === Intent.ACTION_VIEW) {
             val data = intent.dataString
-            //Toast.makeText(this, "링크통신",Toast.LENGTH_SHORT).show()
 
             // setAndroidExecutionParams에서 전달했던 키값
             val key1 = intent.data!!.getQueryParameter("user_idx")
@@ -294,6 +315,13 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     }
                     .setMessage("업데이트를 진행해야 사용하실수 있습니다.")
                     .show()
+            }
+        }
+        when(resultCode){
+            3001 -> {
+                //host = supportFragmentManager.findFragmentById(R.id.navHostfragment) as NavHostFragment
+                host.navController.navigate(R.id.expter)
+                //mViewDataBinding.bottomNavigation.selectedItemId = R.id.menu_mypage
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -336,7 +364,6 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                         )
                     }
                 } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
                 }
             }
 
@@ -345,6 +372,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
 
         Log.i( "사이즈","display width" + metrics.widthPixels + ", heifht :" + metrics.heightPixels +", densityDpi : "+ metrics.densityDpi)
     }
+
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         moveTaskToBack(true)
@@ -357,35 +385,37 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         when (v?.id) {
             R.id.main_request -> {
                 if (MyApplication.prefs.getString("user_idx", "") != "") {
-                    val requestFragment: UploadStepOnFragment = UploadStepOnFragment {
-                        when (it) {
-                            0 -> {
-                                MainManager.instance.certcheck(MyApplication.prefs.getString("user_idx", ""),complation = { responseStatus, check ->
-                                    when(responseStatus) {
-                                        RESPONSE_STATUS.OKAY -> {
-                                            when(check) {
+                    MainManager.instance.certcheck(MyApplication.prefs.getString("user_idx", ""),complation = { responseStatus, check ->
+                        when(responseStatus) {
+                            RESPONSE_STATUS.OKAY -> {
+                                when(check) {
+                                    0 -> {
+                                        val testdi: tesdialog = tesdialog {
+                                            when(it) {
                                                 0 -> {
-                                                    val testdi: tesdialog = tesdialog {
-                                                        when(it) {
-                                                            0 -> {
 
-                                                            }
-                                                            1 -> {
-                                                                var newIntent = Intent(this, PhotoPaymentActivity::class.java)
-                                                                startActivityForResult(newIntent, 9999)
-                                                            }
-                                                        }
-                                                    }
-                                                    testdi.show(supportFragmentManager, testdi.tag)
                                                 }
                                                 1 -> {
-                                                    val newIntent = Intent(this, EstimateDatailActivity::class.java)
-                                                    startActivityForResult(newIntent, 3000)
+                                                    var newIntent = Intent(this, PhotoPaymentActivity::class.java)
+                                                    startActivityForResult(newIntent, 9999)
                                                 }
                                             }
                                         }
+                                        testdi.show(supportFragmentManager, testdi.tag)
                                     }
-                                })
+                                    1 -> {
+                                        val newIntent = Intent(this, OneClickActivity::class.java)
+                                        startActivityForResult(newIntent, 3000)
+                                    }
+                                }
+                            }
+                        }
+                    })
+
+                    /*val requestFragment: UploadStepOnFragment = UploadStepOnFragment {
+                        when (it) {
+                            0 -> {
+
                             }
                             1 -> {
                                 val one_requestFragment: UploadStepTwoFragment = UploadStepTwoFragment {
@@ -409,7 +439,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                             }
                         }
                     }
-                    requestFragment.show(supportFragmentManager, requestFragment.tag)
+                    requestFragment.show(supportFragmentManager, requestFragment.tag)*/
                 } else {
                     Toast.makeText(this,"로그인후 이용가능합니다.",Toast.LENGTH_SHORT).show()
                 }

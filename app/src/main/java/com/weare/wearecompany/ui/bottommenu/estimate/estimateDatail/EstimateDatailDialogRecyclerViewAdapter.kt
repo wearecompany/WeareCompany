@@ -2,11 +2,9 @@ package com.weare.wearecompany.ui.bottommenu.estimate.estimateDatail
 
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
-import kotlinx.android.synthetic.main.item_estimatephoto.view.*
 
 class EstimateDatailDialogRecyclerViewAdapter(private val dataList: ArrayList<Uri>): RecyclerView.Adapter<EstimateDatailDialogViewHodel>() {
     override fun onCreateViewHolder(

@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.weare.wearecompany.R
-import kotlinx.android.synthetic.main.bottom_dialog_cancellation.view.*
-import kotlinx.android.synthetic.main.bottom_dialog_chat.view.*
 
 class ChatDialogFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
 
@@ -19,7 +17,7 @@ class ChatDialogFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.chat_out.setOnClickListener {
+      /*  view.chat_out.setOnClickListener {
             dialog?.dismiss()
             itemClick(0)
         }
@@ -31,7 +29,7 @@ class ChatDialogFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragme
 
         view.chat_manu_no.setOnClickListener {
             dialog?.dismiss()
-        }
+        } */
 
 
     }

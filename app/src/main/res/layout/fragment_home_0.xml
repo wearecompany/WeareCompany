@@ -6,10 +6,12 @@
 
     <data></data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff">
+        android:background="#fff"
+        app:layoutDescription="@xml/home_0_bottom_mostion"
+        tools:showPaths="true">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/main_scrollview"
@@ -21,6 +23,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_Top_constraaintlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -51,16 +54,51 @@
                     app:layout_constraintTop_toBottomOf="@id/main_Top_viewPager" />
 
                 <LinearLayout
-                    android:id="@+id/main_category"
+                    android:id="@+id/oneclick_layout"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/worm_dots_indicator">
 
+                    <ImageButton
+                        android:id="@+id/oneclick_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:layout_marginEnd="19dp"
+                        android:background="@drawable/home_oneclick"
+                        android:includeFontPadding="false" />
+
+                    <ImageButton
+                        android:id="@+id/wepickstudio_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:background="@drawable/home_wepickstudio"
+                        android:includeFontPadding="false" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/oneclick_layout">
+
                     <LinearLayout
+                        android:id="@+id/main_layout_1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -86,6 +124,7 @@
                                 android:src="@drawable/main_model_test_0" />
 
                             <TextView
+                                android:id="@+id/main_category_text_0"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
@@ -95,6 +134,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/main_studio_list_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -112,6 +152,7 @@
                                 android:src="@drawable/main_trip_test_0" />
 
                             <TextView
+                                android:id="@+id/main_category_text_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -121,6 +162,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/main_studio_list_3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -138,6 +180,7 @@
                                 android:src="@drawable/main_photo_test_0" />
 
                             <TextView
+                                android:id="@+id/main_category_text_2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -147,6 +190,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/main_studio_list_4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -164,6 +208,7 @@
                                 android:src="@drawable/main_studio_test_0" />
 
                             <TextView
+                                android:id="@+id/main_category_text_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -188,6 +233,7 @@
                     app:layout_constraintTop_toBottomOf="@id/main_category">
 
                     <TextView
+                        android:id="@+id/relativeLayouttext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="오늘의 촬영 스토리"
@@ -196,6 +242,7 @@
                         android:textStyle="bold" />
 
                     <ImageView
+                        android:id="@+id/relativeLayoutimage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -227,6 +274,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/main_Story_RecyclerView">
 
                     <LinearLayout
+                        android:id="@+id/home_list_title_layout_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -240,6 +288,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/home_list_title_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -259,6 +308,7 @@
                         android:clickable="true">
 
                         <ImageView
+                            android:id="@+id/home_list_title_image_1"
                             android:layout_width="10dp"
                             android:layout_height="15dp"
                             android:layout_centerInParent="true"
@@ -308,137 +358,193 @@
 
                 <LinearLayout
                     android:id="@+id/main_bottom_menu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="349dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"
-                    android:orientation="horizontal"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/one_click_layout_bac"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/main_bottom_viewPager">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/one_click_image"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#f7f7f7"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/one_click" />
+
+                    <TextView
+                        android:id="@+id/one_click_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="혹시 전문가이신가요?"
+                        android:textColor="#484848"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/move_wepic_expert"
+                        android:layout_width="162dp"
+                        android:layout_height="33dp"
+                        android:clickable="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/progress_tab_on"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:text="전문가 등록 하러 가기"
+                        android:textColor="#fff"
+                        android:textSize="14dp" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="11dp"
-                            android:src="@drawable/main_bottom_invitation" />
+                    <LinearLayout
+                        android:id="@+id/one_click_bottom_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/one_click_bottom_layout_1"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="친구초대"
-                            android:textColor="@color/black"
-                            android:textSize="11dp"
-                            android:textStyle="bold" />
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <FrameLayout
+                                android:id="@+id/one_click_bottom_layout_1_frame"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/one_click_bac">
+
+                                <ImageView
+                                    android:id="@+id/one_click_bottom_layout_1_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/one_click_list_1" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/one_click_bottom_layout_1_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="홈페이지"
+                                android:textColor="#484848"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/one_click_bottom_layout_2"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="적립금 10,000원 쿠폰!"
-                            android:textColor="@color/black"
-                            android:textSize="11dp" />
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:id="@+id/one_click_bottom_layout_2_frame"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/one_click_bac"
+                                android:clickable="true">
+
+                                <ImageView
+                                    android:id="@+id/one_click_bottom_layout_2_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/one_click_list_2" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/one_click_bottom_layout_2_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="고객센터"
+                                android:textColor="#484848"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/one_click_bottom_layout_3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:id="@+id/one_click_bottom_layout_3_frame"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/one_click_bac"
+                                android:clickable="true">
+
+                                <ImageView
+                                    android:id="@+id/one_click_bottom_layout_3_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/one_click_list_3" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/one_click_bottom_layout_3_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="유튜브"
+                                android:textColor="#484848"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/one_click_bottom_layout_4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:id="@+id/one_click_bottom_layout_4_frame"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/one_click_bac"
+                                android:clickable="true">
+
+                                <ImageView
+                                    android:id="@+id/one_click_bottom_layout_4_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/one_click_list_4" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:id="@+id/one_click_bottom_layout_4_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="인스타그램"
+                                android:textColor="#484848"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="159dp"
-                        android:layout_weight="1"
-                        android:background="#f7f7f7">
-
-                        <LinearLayout
-                            android:id="@+id/mian_menu_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerInParent="true"
-                            android:layout_marginTop="25dp"
-                            android:clickable="true"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="41dp"
-                                android:layout_height="42dp"
-                                android:layout_marginBottom="11dp"
-                                android:src="@drawable/main_bottom_curiosity" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="위픽"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="위아찍사가 궁금해요!"
-                                android:textColor="@color/black"
-                                android:textSize="11dp" />
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="0.7dp"
-                        android:layout_height="125dp"
-                        android:layout_gravity="center"
-                        android:background="#cbcbcb" />
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="159dp"
-                        android:layout_weight="1"
-                        android:background="#f7f7f7">
-
-                        <LinearLayout
-                            android:id="@+id/mian_menu_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerInParent="true"
-                            android:layout_marginTop="25dp"
-                            android:clickable="true"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="41dp"
-                                android:layout_height="42dp"
-                                android:layout_marginBottom="11dp"
-                                android:src="@drawable/main_bottom_center" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="고객센터"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="평일 09:00 ~ 18:00"
-                                android:textColor="@color/black"
-                                android:textSize="11dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(주말/공휴일 제외)"
-                                android:textColor="@color/black"
-                                android:textSize="11dp" />
-                        </LinearLayout>
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -447,6 +553,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="27dp"
+                    android:layout_marginBottom="80dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -454,6 +561,7 @@
                     app:layout_constraintTop_toBottomOf="@id/main_bottom_menu">
 
                     <TextView
+                        android:id="@+id/main_bottom_business_info_text_0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="(주) 위아컴퍼니 사업자정보"
@@ -464,16 +572,17 @@
                     <FrameLayout
                         android:id="@+id/main_bottom_business_info_up_down"
                         android:layout_width="30dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_height="30dp">
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp">
 
                         <ImageView
                             android:id="@+id/main_bottom_business_info_up_down_image"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center|start"
-                            android:src="@drawable/list_category_down_gray"/>
+                            android:src="@drawable/list_category_down_gray" />
                     </FrameLayout>
+
 
                 </LinearLayout>
 
@@ -483,13 +592,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:gravity="center"
                     android:layout_marginBottom="80dp"
+                    android:gravity="center"
                     android:textSize="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_bottom_business_info"/>
+                    app:layout_constraintTop_toBottomOf="@id/main_bottom_business_info" />
 
                 <ImageView
                     android:id="@+id/main_bottom_business_info_icon"
@@ -497,7 +607,6 @@
                     android:layout_height="124dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="80dp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -508,5 +617,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

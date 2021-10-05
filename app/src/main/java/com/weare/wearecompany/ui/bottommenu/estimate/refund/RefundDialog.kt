@@ -7,8 +7,6 @@ import android.view.*
 import androidx.fragment.app.DialogFragment
 import com.weare.wearecompany.R
 import kotlinx.android.synthetic.main.dialog_refund.view.*
-import kotlinx.android.synthetic.main.rent_reservation_check_dialog.view.*
-import kotlinx.android.synthetic.main.rent_reservation_check_dialog.view.rent_reservation_check_ok
 
 class RefundDialog(val itemClick:(String) -> Unit): DialogFragment() {
     override fun onCreateView(
@@ -27,6 +25,9 @@ class RefundDialog(val itemClick:(String) -> Unit): DialogFragment() {
 
         view.rent_reservation_check_ok.setOnClickListener {
             itemClick(view.refund.text.toString())
+            dialog!!.dismiss()
+        }
+        view.rent_reservation_check_no.setOnClickListener {
             dialog!!.dismiss()
         }
     }

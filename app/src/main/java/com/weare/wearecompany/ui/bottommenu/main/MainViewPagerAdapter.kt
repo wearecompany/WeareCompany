@@ -1,3 +1,4 @@
+
 package com.weare.wearecompany.ui.bottommenu.main
 
 import android.content.Intent
@@ -37,14 +38,35 @@ class MainViewPagerAdapter(private val bannerList: ArrayList<banner>): PagerAdap
 
         view.banner_image.setOnClickListener {
 
-            if (position == 3) {
-                val uri: Uri = Uri.parse("http://instagram.com/weare.company/")
+            if (bannerList[position].url != "null") {
+                val uri: Uri = Uri.parse(bannerList[position].url)
                 val Instagram_Intent = Intent(Intent.ACTION_VIEW, uri)
 
-                Instagram_Intent.setPackage("com.instagram.android")
-                view.context.startActivity(Instagram_Intent)
-            }
+                if (position == 0) {
+                    Instagram_Intent.setPackage("com.google.android.youtube")
+                    val insta = view.context.packageManager.getLaunchIntentForPackage("com.google.android.youtube")
+                    if (insta == null) {
+                        val newintent =Intent(Intent.ACTION_VIEW)
+                        newintent.setData(Uri.parse("market://details?id="+ "com.google.android.youtube"))
+                        view.context.startActivity(newintent)
+                    } else {
+                        view.context.startActivity(Instagram_Intent)
+                    }
+                }
+                if (position == 4) {
+                    Instagram_Intent.setPackage("com.instagram.android")
+                    val insta = view.context.packageManager.getLaunchIntentForPackage("com.instagram.android")
+                    if (insta == null) {
+                        val newintent =Intent(Intent.ACTION_VIEW)
+                        newintent.setData(Uri.parse("market://details?id="+ "com.instagram.android"))
+                        view.context.startActivity(newintent)
+                    } else {
+                        view.context.startActivity(Instagram_Intent)
+                    }
+                }
 
+
+            }
 
         }
         return view

@@ -72,11 +72,6 @@ class ProgressRefundRecyclerViewAdapter(
                     .inflate(R.layout.item_individual_trip_send, parent, false)
                 return RefundTripHodel(headerView)
             }
-            TYPE_SHOP -> {
-                val headerView: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_individual_shop_send, parent, false)
-                return RefundShopHodel(headerView)
-            }
             TYPE_REQUEST_HEADER -> {
                 val headerView: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_progress_header, parent, false)
@@ -149,20 +144,6 @@ class ProgressRefundRecyclerViewAdapter(
             holder.apply {
                 if (item != null) {
                     bindWithView(item, context, View.OnClickListener {
-                    })
-                }
-            }
-        } else if (holder is RefundShopHodel) {
-            val item = dataList[position]
-            holder.itemView.setOnClickListener {
-                if (item != null) {
-                    holder.viewStatus()
-                    itemClickListener.onClick(it, position, item)
-                }
-            }
-            holder.apply {
-                if (item != null) {
-                    bindWithView(item, View.OnClickListener {
                     })
                 }
             }

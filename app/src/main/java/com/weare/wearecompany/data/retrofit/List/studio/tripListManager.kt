@@ -24,7 +24,7 @@ class tripListManager {
     private val iRetrofit: IRetrofit? = RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
     fun listdata( array: JsonArray, location: JsonArray, min: String,
-                  max: String,sort: Int, page: Int, completion:(RESPONSE_STATUS, ArrayList<newlist>, ArrayList<trip>) -> Unit) {
+                  max: String,nickname:String,sort: Int, page: Int, completion:(RESPONSE_STATUS, ArrayList<newlist>, ArrayList<trip>) -> Unit) {
 
         val `object` = JsonObject()
         `object`.add("sub_category", array)
@@ -39,6 +39,7 @@ class tripListManager {
         } else {
             `object`.addProperty("maxmoney", max)
         }
+        `object`.addProperty("nickname", nickname)
         `object`.addProperty("sort", sort)
         `object`.addProperty("page", page)
 

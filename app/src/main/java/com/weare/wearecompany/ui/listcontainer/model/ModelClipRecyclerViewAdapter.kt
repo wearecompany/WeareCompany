@@ -34,6 +34,13 @@ class ModelClipRecyclerViewAdapter(private val data: ArrayList<clip>) : Recycler
         holder.clip.setOnClickListener {
             itemClickListener.onClick(it,position,item)
         }
+        holder.clipimge.setOnClickListener{
+            itemClickListener.onClick(it,position,item)
+        }
+        holder.clip.setOnClickListener{
+            itemClickListener.onClick(it,position,item)
+        }
+
         holder.apply {
             bindWithView(item,View.OnClickListener {
 

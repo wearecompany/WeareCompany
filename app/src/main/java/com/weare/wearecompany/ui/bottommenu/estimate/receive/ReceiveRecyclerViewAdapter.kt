@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.bottomnav.estimate.receive.ReceiveAllDate
-import com.weare.wearecompany.data.bottomnav.estimate.receive.ReceiveResponse
 import com.weare.wearecompany.ui.bottommenu.estimate.RequestHeaderViewHodel
 import com.weare.wearecompany.ui.bottommenu.estimate.ReserveHeaderViewHodel
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveModelViewHodel
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceivePhotoViewHodel
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveStudioViewHodel
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveTripViewHodel
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendShopViewHodel
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendViewHodel
 
 class ReceiveRecyclerViewAdapter(
     private val context: Context,
@@ -70,11 +67,6 @@ class ReceiveRecyclerViewAdapter(
                 val headerView: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_individual_trip_send, parent, false)
                 return ReceiveTripViewHodel(headerView)
-            }
-            TYPE_SHOP -> {
-                val headerView: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_individual_shop_send, parent, false)
-                return ReceiveShopViewHodel(headerView)
             }
             TYPE_REQUEST_HEADER -> {
                 val headerView: View = LayoutInflater.from(parent.context)
@@ -144,19 +136,6 @@ class ReceiveRecyclerViewAdapter(
             holder.apply {
                 if (item != null) {
                     bindWithView(item,context, View.OnClickListener {
-                    })
-                }
-            }
-        }else if (holder is ReceiveShopViewHodel) {
-            val item = dataList[position]
-            holder.itemView.setOnClickListener {
-                if (item != null) {
-                    itemClickListener.onClick(it, position, item)
-                }
-            }
-            holder.apply {
-                if (item != null) {
-                    bindWithView(item, View.OnClickListener {
                     })
                 }
             }

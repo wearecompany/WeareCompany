@@ -38,11 +38,16 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
+
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize">
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -297,7 +302,34 @@
                     android:textSize="14dp"
                     />
             </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/review_click_loding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:background="#bcffffff">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/loding"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_Bar"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:indeterminate = "true"
+                        android:progress="10"
+                        android:indeterminateTint="@color/colorPrimaryDark"/>
+                </FrameLayout>
+
+            </FrameLayout>
         </androidx.core.widget.NestedScrollView>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

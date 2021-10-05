@@ -6,11 +6,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath gradlePlugin.android
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath gradlePlugin.kotlin
         classpath gradlePlugin.navigation_safe_args
         classpath gradlePlugin.play_services
-        classpath gradlePlugin.crashltytics
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
         classpath gradlePlugin.perf
         classpath gradlePlugin.safe
 
@@ -24,6 +24,9 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
         maven { url "https://jitpack.io" }
     }
 }

@@ -92,8 +92,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="28dp"
+                    android:layout_marginEnd="20dp"
                     android:orientation="vertical">
 
                     <View
@@ -110,8 +110,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginEnd="95dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="95dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -124,8 +124,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="모던"
-                                    android:textSize="16dp"
-                                    android:textColor="#484848"/>
+                                    android:textColor="#484848"
+                                    android:textSize="16dp" />
 
                                 <TextView
                                     android:id="@+id/send_studio_expert_user_name"
@@ -133,29 +133,29 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="1dp"
                                     android:text="바니 전문가"
-                                    android:textSize="12dp"
-                                    android:textColor="#dedede"/>
+                                    android:textColor="#dedede"
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="9dp"
-                                android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/send_room"/>
+                                    android:src="@drawable/send_room" />
 
                                 <TextView
                                     android:id="@+id/receive_studio_room"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="12dp"
-                                    android:textColor="#484848"/>
+                                    android:textColor="#484848"
+                                    android:textSize="12dp" />
 
                             </LinearLayout>
 
@@ -163,20 +163,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="7dp"
-                                android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_marginEnd="8dp"
-                                    android:src="@drawable/send_tag"/>
+                                    android:src="@drawable/send_tag" />
 
                                 <androidx.recyclerview.widget.RecyclerView
 
                                     android:id="@+id/receive_studio_category_recyclerview"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content" />
                             </LinearLayout>
 
 
@@ -193,8 +193,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.7dp"
-                        android:background="#eaeaea"
-                        android:layout_marginTop="11dp"/>
+                        android:layout_marginTop="11dp"
+                        android:background="#eaeaea" />
 
                 </LinearLayout>
 
@@ -218,9 +218,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:textStyle="bold"
                         android:textColor="#0f0f0f"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
 
 
@@ -250,16 +250,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#0f0f0f"
-                            android:textStyle="bold"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="시간"
                             android:textColor="#0f0f0f"
-                            android:textStyle="bold"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -284,8 +284,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:textColor="#0f0f0f"
-                        android:textStyle="bold"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
 
 
@@ -304,8 +304,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
                     android:textColor="#656565"
                     android:textSize="12dp" />
 
@@ -343,18 +343,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.7dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="22dp"
+                    android:layout_marginEnd="20dp"
                     android:background="#eaeaea" />
 
 
                 <RelativeLayout
                     android:id="@+id/receive_studio_final_price_layout"
                     android:layout_width="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp">
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -369,6 +369,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
                         android:orientation="horizontal">
 
                         <TextView
@@ -376,68 +377,65 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#6d34f3"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="원"
                             android:textColor="#6d34f3"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold"/>
 
                     </LinearLayout>
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:id="@+id/button_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="25dp"
                     android:layout_marginTop="35dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="25dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
+
                     <LinearLayout
-                        android:id="@+id/estimate_studio_chat"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/estimate_btn_background_2"
-                        android:clickable="true"
                         android:gravity="center">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/receive_studio_chat"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/estimate_btn_background_2"
+                            android:clickable="true"
+                            android:gravity="center"
                             android:text="1:1 채팅하기"
                             android:textColor="#484848"
-                            android:textStyle="bold"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/estimate_studio_ok"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="20dp"
-                        android:background="@drawable/estimate_btn_background"
-                        android:clickable="true"
-                        android:gravity="center">
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/receive_studio_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/estimate_btn_background"
+                            android:clickable="true"
+                            android:gravity="center"
                             android:text="결제하기"
                             android:textColor="#fff"
                             android:textSize="12dp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
-
 
 
             </LinearLayout>

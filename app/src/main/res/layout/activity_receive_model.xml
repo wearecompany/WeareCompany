@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data></data>
 
@@ -209,8 +208,8 @@
                         android:layout_height="wrap_content"
                         android:text="예약 날짜"
                         android:textColor="#484848"
-                        android:textStyle="bold"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/receive_model_expert_dt"
@@ -234,8 +233,8 @@
                         android:layout_height="wrap_content"
                         android:text="예약 시간"
                         android:textColor="#484848"
-                        android:textStyle="bold"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -274,8 +273,8 @@
                         android:layout_height="wrap_content"
                         android:text="예약 시간대"
                         android:textColor="#484848"
-                        android:textStyle="bold"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/receive_model_expert_timezone"
@@ -294,9 +293,9 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
                     android:text="문의 사항"
-                    android:textStyle="bold"
                     android:textColor="#484848"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/receive_model_expert_contents"
@@ -403,10 +402,12 @@
                         android:id="@+id/reservation_expert_chat"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_weight="1"
                         android:background="@drawable/estimate_btn_background_2"
                         android:clickable="true"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -421,15 +422,30 @@
                         android:id="@+id/reservation_expert_ok"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
-                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
-                        android:background="@drawable/estimate_btn_background"
                         android:clickable="true"
                         android:gravity="center">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/receive_model_chat"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/estimate_btn_background_2"
+                            android:gravity="center"
+                            android:text="1:1 채팅하기"
+                            android:textColor="#484848"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/request_model_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/estimate_btn_background"
+                            android:gravity="center"
                             android:text="결제하기"
                             android:textColor="#fff"
                             android:textSize="12dp"

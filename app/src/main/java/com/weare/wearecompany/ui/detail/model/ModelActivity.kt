@@ -1,5 +1,6 @@
 package com.weare.wearecompany.ui.detail.model
 
+import android.animation.Animator
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -36,6 +37,7 @@ import com.weare.wearecompany.data.retrofit.bottomnav.mypage.mypageManager
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
 import com.weare.wearecompany.ui.chat.ChatActivity
+import com.weare.wearecompany.ui.chat.detail.DetailChatActivity
 import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelActivity
 import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelDialog
 import com.weare.wearecompany.ui.detail.photo.PhotoReviewRecyclerViewAdapter
@@ -44,6 +46,7 @@ import com.weare.wearecompany.ui.detail.studio.reservation.ReservationStudioActi
 import com.weare.wearecompany.utils.BitmapUtils
 import com.weare.wearecompany.utils.Constants
 import com.weare.wearecompany.utils.LIKE
+import okhttp3.RequestBody
 import java.io.File
 import java.text.DecimalFormat
 
@@ -144,6 +147,7 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
         mViewDataBinding.like.setOnClickListener(this)
         mViewDataBinding.modelReservation.setOnClickListener(this)
         mViewDataBinding.detailModelChat.setOnClickListener(this)
+
         like = date[0].like_status
         if (like) {
             mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
@@ -167,6 +171,7 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
         mViewDataBinding.modelDatailInfo.setText(date[0].info)
         mViewDataBinding.modelDatailCareer.setText(date[0].career)
         mViewDataBinding.modelDatailRule.setText(date[0].rule)
+
 
         if (date[0].review.size != 0) {
             mViewDataBinding.reviewLayout.visibility = View.VISIBLE
@@ -222,6 +227,7 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
                             completion = { responseStatus ->
                                 when (responseStatus) {
                                     LIKE.OKAY -> {
+                                        mViewDataBinding.bookLottie.playAnimation()
                                         mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
                                         like = true
                                     }
@@ -237,7 +243,32 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
                 val dialog: DatailSharingDialog = DatailSharingDialog() {
                     when (it) {
                         0 -> {
-                            val params = FeedTemplate(
+                            val templateId = "52477"
+                            val longId = templateId.toLong()
+                            val map: HashMap<String, String> = HashMap()
+                            map.put("image_one",dateList[0].images[0])
+                            map.put("user_image",dateList[0].thumbnail)
+                            map.put("user_nickname",dateList[0].name)
+                            map.put("user_title",dateList[0].sub_category)
+                            map.put("user_content",dateList[0].title)
+                            map.put("user_like",dateList[0].like.toString())
+                            map.put("item_idx",model_Idx)
+                            map.put("item_type",2.toString())
+
+                            if (LinkClient.instance.isKakaoLinkAvailable(this)) {
+                                LinkClient.instance.customTemplate(this,longId,map) { linkResult, error ->
+                                    if (error != null) {
+                                        Log.e(Constants.TAG, "카카오링크 보내기 실패", error)
+                                    } else if (linkResult != null) {
+                                        Log.d(Constants.TAG, "카카오링크 보내기 성공 ${linkResult.intent}")
+                                        startActivity(linkResult.intent)
+                                        // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
+                                        Log.w(Constants.TAG, "Warning Msg: ${linkResult.warningMsg}")
+                                        Log.w(Constants.TAG, "Argument Msg: ${linkResult.argumentMsg}")
+                                    }
+                            }
+                            }
+                            /*val params = FeedTemplate(
                                 content = Content(
                                     title = dateList[0].name,
                                     description = dateList[0].title,
@@ -281,7 +312,7 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
                                     Log.w(Constants.TAG, "Warning Msg: ${linkResult.warningMsg}")
                                     Log.w(Constants.TAG, "Argument Msg: ${linkResult.argumentMsg}")
                                 }
-                            }
+                            }*/
                         }
                         1 -> {
                             val newIntent = Intent().apply {
@@ -342,7 +373,11 @@ class ModelActivity: BaseActivity<ActivityModelBinding>(
                 }
             }
             R.id.detail_model_chat -> {
-
+                val newIntent = Intent(this, DetailChatActivity::class.java)
+                newIntent.putExtra("expert_type", "2")
+                newIntent.putExtra("expert_idx", dateList[0].idx)
+                newIntent.putExtra("expert_user_idx", dateList[0].expert_user_idx)
+                startActivityForResult(newIntent,3001)
             }
         }
     }

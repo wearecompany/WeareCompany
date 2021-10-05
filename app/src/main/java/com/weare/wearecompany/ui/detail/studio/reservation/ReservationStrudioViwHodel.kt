@@ -15,7 +15,7 @@ import com.weare.wearecompany.R
 import com.weare.wearecompany.data.hotpick.data.room
 import com.weare.wearecompany.utils.Constants
 
-class ReservationStrudioViwHodel(v: View): RecyclerView.ViewHolder(v) {
+class ReservationStrudioViwHodel(v: View) : RecyclerView.ViewHolder(v) {
 
     private val ImageView = itemView.findViewById<ImageView>(R.id.studio_not_list_image)
     private val checkView = itemView.findViewById<ImageView>(R.id.reservation_room_check)
@@ -24,7 +24,7 @@ class ReservationStrudioViwHodel(v: View): RecyclerView.ViewHolder(v) {
     private val room_price = itemView.findViewById<TextView>(R.id.reservation_room_price)
     private val room_time = itemView.findViewById<TextView>(R.id.reservation_room_time)
 
-    fun bindWith(Item: room, check:Boolean,onClickListener: View.OnClickListener) {
+    fun bindWith(Item: room, check: Boolean, onClickListener: View.OnClickListener) {
         Log.d(Constants.TAG, "DatailRoomItemViewHolder - bindWithView() called")
         var multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
         Glide.with(MyApplication.instance)

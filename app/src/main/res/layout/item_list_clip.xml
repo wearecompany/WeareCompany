@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:id="@+id/tag_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:background="@drawable/item_clip"
             android:clickable="true"
@@ -35,6 +35,8 @@
                 android:textSize="10dp" />
 
             <ImageView
+                android:clickable="true"
+                android:id="@+id/clip_image"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_marginStart="5dp"

@@ -1,5 +1,6 @@
 package com.weare.wearecompany.data.retrofit.bottomnav.estimate
 
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.weare.wearecompany.data.bottomnav.estimate.receive.data.ReceiveShopPage
 import com.weare.wearecompany.data.retrofit.IRetrofit
@@ -32,24 +33,19 @@ class refundManager {
             it
         } ?: return
 
-        call.enqueue(object : retrofit2.Callback<JsonObject> {
+        call.enqueue(object : retrofit2.Callback<JsonElement> {
             override fun onResponse(
-                call: Call<JsonObject>,
-                response: Response<JsonObject>
+                call: Call<JsonElement>,
+                response: Response<JsonElement>
             ) {
-                response.body()?.let {
                     when(response.code()) {
                         201 -> {
-
-
                             completion(ESTIMATE.OKAY)
                         }
                     }
-                }
-
             }
 
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
             }
 

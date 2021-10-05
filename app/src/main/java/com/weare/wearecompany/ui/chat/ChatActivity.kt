@@ -2,6 +2,7 @@ package com.weare.wearecompany.ui.chat
 
 import android.Manifest
 import android.app.Activity
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,7 +11,10 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.Environment
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
@@ -46,8 +50,6 @@ import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.Receive
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceivePhotoActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveTripActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendExpertActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendShopActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.SendStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendModelActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendPhotoActivity
@@ -66,7 +68,6 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.timer
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(
     R.layout.activity_chat
@@ -192,8 +193,8 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(
         forbiddenlistsetUp()
         setup()
 
-
-        dataAdapter = ChatRecyclerAdapterView(this, sendlist)
+        var cm : ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        dataAdapter = ChatRecyclerAdapterView(cm,this, sendlist)
 
         mViewDataBinding.chatRecyclerView.layoutManager = LinearLayoutManager(
             this,
@@ -533,102 +534,6 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(
                     mViewDataBinding.chatRecyclerView.postDelayed(Runnable { // Select the last row so it will scroll into view...
                         mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount - 1)
                     }, 200)
-                    /*chattingManager.instance.log(chat_idx, "0", completion = { responseStatus, arraylist ->
-                    when (responseStatus) {
-                        RESPONSE_STATUS.OKAY -> {
-                            chatlist = arraylist
-                            for (i in arraylist[0].chat_log) {
-                                if (i.msg_type == "noti") {
-                                    val dt = i.msg.split("||")
-                                    mViewDataBinding.chatNotiTitle.text = dt[0]
-                                    mViewDataBinding.chatNotiSubTitle.text = dt[1]
-                                } else if (i.send_type == 0) {
-                                    when (i.msg_type) {
-                                        "msg" -> {
-                                            val msgitem = send(
-                                                msg_idx = i.msg_idx,
-                                                msg_type = 0,
-                                                send_type = i.send_type,
-                                                send_day = i.send_day,
-                                                send_time = i.send_time,
-                                                msg = i.msg,
-                                                image_origin_url = "",
-                                                image_resize_url = "",
-                                                origin_width = -1,
-                                                origin_height = -1
-                                            )
-                                            msgidx = i.msg_idx
-                                            dataAdapter.addItem(msgitem)
-                                            mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount - 1)
-                                        }
-                                        "img" -> {
-                                            val dt = i.msg.split("||")
-                                            val msgitem = send(
-                                                msg_idx = i.msg_idx,
-                                                msg_type = 1,
-                                                send_type = i.send_type,
-                                                send_day = i.send_day,
-                                                send_time = i.send_time,
-                                                msg = "",
-                                                image_origin_url = dt[1],
-                                                image_resize_url = dt[0],
-                                                origin_width = dt[2].toInt(),
-                                                origin_height = dt[3].toInt()
-                                            )
-                                            msgidx = i.msg_idx
-                                            dataAdapter.addItem(msgitem)
-                                            mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount - 1)
-                                        }
-                                    }
-                                } else if (i.send_type == 1) {
-                                    when (i.msg_type) {
-                                        "msg" -> {
-                                            val msgitem = send(
-                                                msg_idx = i.msg_idx,
-                                                msg_type = 2,
-                                                send_type = i.send_type,
-                                                send_day = i.send_day,
-                                                send_time = i.send_time,
-                                                msg = i.msg,
-                                                image_origin_url = "",
-                                                image_resize_url = "",
-                                                origin_width = -1,
-                                                origin_height = -1
-                                            )
-                                            msgidx = i.msg_idx
-                                            dataAdapter.addItem(msgitem)
-                                            mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount - 1)
-                                        }
-                                        "img" -> {
-                                            val dt = i.msg.split("||")
-                                            val msgitem = send(
-                                                msg_idx = i.msg_idx,
-                                                msg_type = 3,
-                                                send_type = i.send_type,
-                                                send_day = i.send_day,
-                                                send_time = i.send_time,
-                                                msg = "",
-                                                image_origin_url = dt[1],
-                                                image_resize_url = dt[0],
-                                                origin_width = dt[2].toInt(),
-                                                origin_height = dt[3].toInt()
-                                            )
-                                            msgidx = i.msg_idx
-                                            dataAdapter.addItem(msgitem)
-                                            mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount - 1)
-                                        }
-                                    }
-                                }
-                            }
-                            if (arraylist[0].chat_log.size > 1) {
-                                mViewDataBinding.chatRecyclerView.postDelayed(Runnable { // Select the last row so it will scroll into view...
-                                    mViewDataBinding.chatRecyclerView.smoothScrollToPosition(dataAdapter.itemCount -1)
-                                }, 150)
-                            }
-
-                        }
-                    }
-                })*/
                 }
                 compositeDisposable.dispose()
             }, {
@@ -1025,7 +930,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(
                     try {
                         userphotoFile = createImageFile()
                     } catch (e: IOException) {
-                        e.printStackTrace()
+                       // e.printStackTrace()
                     }
 
                     userphotoFile?.let {
@@ -1210,7 +1115,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(
 
 
         } catch (e: FileNotFoundException) {
-            e.printStackTrace();
+          //  e.printStackTrace();
         }
 
         val file = File(this.cacheDir, "/chat/$fileName")

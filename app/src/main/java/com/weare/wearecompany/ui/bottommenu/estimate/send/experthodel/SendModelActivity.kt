@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -159,11 +160,10 @@ class SendModelActivity:BaseActivity<ActivitySendModelBinding>(
                 startActivityForResult(newIntent, 5000)
             }
             R.id.reservation_expert_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype", 0)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
             R.id.send_model_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
@@ -180,7 +180,7 @@ class SendModelActivity:BaseActivity<ActivitySendModelBinding>(
                                 })
                             val intent = Intent()
                             intent.putExtra("Cancellation", "ok")
-                            setResult(6000, intent)
+                            setResult(2004, intent)
                             finish()
                         }
 

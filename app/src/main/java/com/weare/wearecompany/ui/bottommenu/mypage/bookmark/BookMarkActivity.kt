@@ -15,7 +15,6 @@ import com.weare.wearecompany.ui.base.BaseActivity
 import com.weare.wearecompany.ui.detail.DatailActivity
 import com.weare.wearecompany.ui.detail.model.ModelActivity
 import com.weare.wearecompany.ui.detail.photo.PhotoActivity
-import com.weare.wearecompany.ui.detail.rent.RentActivity
 import com.weare.wearecompany.ui.detail.trip.TripActivity
 import com.weare.wearecompany.utils.LIKE
 
@@ -91,12 +90,6 @@ class BookMarkActivity: BaseActivity<ActivityBookmarkListBinding>(
                                         }
                                         3 -> {
                                             var newIntent = Intent(this@BookMarkActivity, TripActivity::class.java)
-                                            newIntent.putExtra("expert_idx", Item.idx)
-                                            newIntent.putExtra("user_idx", MyApplication.prefs.getString("user_idx", ""))
-                                            startActivityForResult(newIntent,9999)
-                                        }
-                                        4 -> {
-                                            var newIntent = Intent(this@BookMarkActivity, RentActivity::class.java)
                                             newIntent.putExtra("expert_idx", Item.idx)
                                             newIntent.putExtra("user_idx", MyApplication.prefs.getString("user_idx", ""))
                                             startActivityForResult(newIntent,9999)

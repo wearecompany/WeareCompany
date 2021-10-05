@@ -12,6 +12,65 @@
         app:layoutDescription="@xml/studio_list_mostion"
         app:showPaths="false">
 
+        <FrameLayout
+            android:id="@+id/studio_list_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/studio_list_search_edit_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                app:boxStrokeColor="#6d34f3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/studio_list_search_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:id="@+id/studio_list_search_btn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_gravity="center|end">
+
+                <ImageView
+                    android:id="@+id/studio_list_search_image_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:src="@drawable/list_search_cancel"/>
+
+                <ImageView
+                    android:id="@+id/studio_list_search_image_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/list_search"/>
+            </FrameLayout>
+
+        </FrameLayout>
+
+
         <LinearLayout
             android:id="@+id/new_title_layout"
             android:layout_width="wrap_content"
@@ -20,7 +79,7 @@
             android:layout_marginTop="13dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/studio_list_search">
 
             <TextView
                 android:id="@+id/new_title"

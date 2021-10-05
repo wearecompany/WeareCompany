@@ -105,13 +105,6 @@ class SendFragment : BaseFragment<FragmentSendBinding>(
                                                 newIntent.putExtra("type", 0)
                                                 startActivityForResult(newIntent, 2000)
                                             }
-                                            5 -> {
-                                                val newIntent =
-                                                    Intent(context, SendRequestActivity::class.java)
-                                                newIntent.putExtra("request_idx", item.request_idx)
-                                                newIntent.putExtra("type", 0)
-                                                startActivityForResult(newIntent, 2000)
-                                            }
                                         }
                                     }
                                 })

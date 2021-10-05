@@ -5,11 +5,6 @@
     tools:context=".ui.main">
 
     <data>
-        <import type="android.view.View" />
-
-        <variable
-            name="viewmodel"
-            type="com.weare.wearecompany.ui.bottommenu.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,9 +47,32 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/affiliation"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    android:clickable="true"
+                    app:lottie_rawRes="@raw/home_aff" />
+
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/alarm_lottie"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="30dp"
+                    android:clickable="true"
+                    app:lottie_rawRes="@raw/alarm_test_1"
+                    android:layout_gravity="end"/>
+
+
                 <FrameLayout
                     android:id="@+id/notification"
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
+                    android:padding="5dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginEnd="30dp"
@@ -62,9 +80,9 @@
                     android:layout_gravity="end">
 
                     <ImageView
-                        android:layout_width="17.5dp"
+                        android:layout_width="17dp"
                         android:layout_height="23dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/notification"/>
 
                     <ImageView

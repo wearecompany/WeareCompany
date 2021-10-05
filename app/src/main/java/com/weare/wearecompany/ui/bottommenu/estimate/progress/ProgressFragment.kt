@@ -24,10 +24,6 @@ import com.weare.wearecompany.ui.base.BaseFragment
 import com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progress.*
 import com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.refund.*
 import com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.review.ReviewActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendExpertActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendRequestActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendShopActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendStudioActivity
 import com.weare.wearecompany.ui.container.ContainerActivity
 import com.weare.wearecompany.utils.ESTIMATE
 
@@ -151,16 +147,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                                 newIntent.putExtra("chatbool", 0)
                                                 startActivityForResult(newIntent, 2000)
                                             }
-                                            5 -> {
-                                                val newIntent = Intent(
-                                                    context,
-                                                    ProgressManyActivity::class.java
-                                                )
-                                                newIntent.putExtra("request_idx", item.request_idx)
-                                                newIntent.putExtra("chatbool", 0)
-                                                newIntent.putExtra("log_idx", item.request_log_idx)
-                                                startActivityForResult(newIntent, 2000)
-                                            }
                                         }
                                     }
                                 })
@@ -172,132 +158,7 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         position: Int,
                                         item: ProgressAllDate
                                     ) {
-                                        if (item.request_idx != "") {
 
-                                            MaterialAlertDialogBuilder(
-                                                mContext,
-                                                R.style.AlertDialogTheme
-                                            )
-                                                .setTitle("구매확정")
-                                                .setMessage("구매 확정을 하시겠습니까?")
-                                                .setCancelable(false)
-                                                .setNeutralButton("취소") { dialog, which ->
-                                                    dialog.dismiss()
-                                                }
-                                                .setPositiveButton("확정") { dialog, which ->
-
-                                                    progressManager.instance.request_complete(
-                                                        item.request_idx,
-                                                        item.request_log_idx,
-                                                        completion = { responseStatus ->
-                                                            when (responseStatus) {
-                                                                ESTIMATE.OKAY -> {
-                                                                    MaterialAlertDialogBuilder(
-                                                                        mContext,
-                                                                        R.style.AlertDialogTheme
-                                                                    )
-                                                                        .setTitle("구매확정")
-                                                                        .setMessage("구매 확정을 하시겠습니까?")
-                                                                        .setCancelable(false)
-                                                                        .setNeutralButton("취소") { dialog, which ->
-                                                                            dialog.dismiss()
-                                                                        }
-                                                                        .setPositiveButton("확정") { dialog, which ->
-
-                                                                            progress_off(
-                                                                                mViewDataBinding.progressList,
-                                                                                mViewDataBinding.progressListText
-                                                                            )
-                                                                            review_on(
-                                                                                mViewDataBinding.reviewList,
-                                                                                mViewDataBinding.reviewListText,
-                                                                                2
-                                                                            )
-                                                                            reviewRefresh()
-                                                                        }
-                                                                        .show()
-                                                                    progressRefresh()
-                                                                    //refreshFragment(this@ProgressFragment, childFragmentManager)
-                                                                }
-
-                                                            }
-                                                        })
-
-                                                    progress_off(
-                                                        mViewDataBinding.progressList,
-                                                        mViewDataBinding.progressListText
-                                                    )
-                                                    review_on(
-                                                        mViewDataBinding.reviewList,
-                                                        mViewDataBinding.reviewListText,
-                                                        2
-                                                    )
-                                                    reviewRefresh()
-                                                }
-                                                .show()
-                                        } else {
-                                            MaterialAlertDialogBuilder(
-                                                mContext,
-                                                R.style.AlertDialogTheme
-                                            )
-                                                .setTitle("구매확정")
-                                                .setMessage("구매 확정을 하시겠습니까?")
-                                                .setCancelable(false)
-                                                .setNeutralButton("취소") { dialog, which ->
-                                                    dialog.dismiss()
-                                                }
-                                                .setPositiveButton("확정") { dialog, which ->
-
-                                                    progressManager.instance.reserve_complete(
-                                                        item.reserve_idx,
-                                                        completion = { responseStatus ->
-                                                            when (responseStatus) {
-                                                                ESTIMATE.OKAY -> {
-                                                                    MaterialAlertDialogBuilder(
-                                                                        mContext,
-                                                                        R.style.AlertDialogTheme
-                                                                    )
-                                                                        .setTitle("구매확정")
-                                                                        .setMessage("구매 확정을 하시겠습니까?")
-                                                                        .setCancelable(false)
-                                                                        .setNeutralButton("취소") { dialog, which ->
-                                                                            dialog.dismiss()
-                                                                        }
-                                                                        .setPositiveButton("확정") { dialog, which ->
-
-                                                                            progress_off(
-                                                                                mViewDataBinding.progressList,
-                                                                                mViewDataBinding.progressListText
-                                                                            )
-                                                                            review_on(
-                                                                                mViewDataBinding.reviewList,
-                                                                                mViewDataBinding.reviewListText,
-                                                                                2
-                                                                            )
-                                                                            reviewRefresh()
-                                                                        }
-                                                                        .show()
-                                                                    progressRefresh()
-                                                                    //refreshFragment(this@ProgressFragment, childFragmentManager)
-                                                                }
-
-                                                            }
-                                                        })
-
-                                                    progress_off(
-                                                        mViewDataBinding.progressList,
-                                                        mViewDataBinding.progressListText
-                                                    )
-                                                    review_on(
-                                                        mViewDataBinding.reviewList,
-                                                        mViewDataBinding.reviewListText,
-                                                        2
-                                                    )
-                                                    dialog.dismiss()
-                                                    reviewRefresh()
-                                                }
-                                                .show()
-                                        }
                                     }
 
                                 })
@@ -406,122 +267,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                             review_status = list[0].progress?.get(i - 1)!!.studio.review_status,
                             on_progress = list[0].progress?.get(i - 1)!!.studio.on_progress,
                             refund_status = list[0].progress?.get(i - 1)!!.studio.refund_status
-                        )
-                        on_progress_true += 1
-                        ongoingList.add(alldataItem)
-                    }
-                } else if (list[0].progress?.get(i - 1)!!.expert != null) {
-                    if (list[0].progress?.get(i - 1)!!.expert.on_progress == false) {
-                        if (on_progress_true == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -1,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            ongoingList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = list[0].progress?.get(i - 1)!!.expert.expert_type,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.expert.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.expert.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = list[0].progress?.get(i - 1)!!.expert.head_count,
-                            expert_type = list[0].progress?.get(i - 1)!!.expert.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.expert.price,
-                            time = list[0].progress?.get(i - 1)!!.expert.time,
-                            date = list[0].progress?.get(i - 1)!!.expert.date,
-                            date_term = "",
-                            start_date = "",
-                            end_date = "",
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.expert.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.expert.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.expert.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.expert.refund_status
-                        )
-                        on_progress_true += 1
-                        ongoingList.add(alldataItem)
-                    }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.on_progress == false) {
-                        if (on_progress_true == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -1,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            ongoingList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
                         )
                         on_progress_true += 1
                         ongoingList.add(alldataItem)
@@ -702,64 +447,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                             review_status = list[0].progress?.get(i - 1)!!.expert.review_status,
                             on_progress = list[0].progress?.get(i - 1)!!.expert.on_progress,
                             refund_status = list[0].progress?.get(i - 1)!!.expert.refund_status
-                        )
-                        on_progress_false += 1
-                        ongoingList.add(alldataItem)
-                    }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.on_progress == true) {
-                        if (on_progress_false == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -2,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            ongoingList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
                         )
                         on_progress_false += 1
                         ongoingList.add(alldataItem)
@@ -951,64 +638,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                         refund_false += 1
                         refundList.add(alldataItem)
                     }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.refund_status == false) {
-                        if (refund_false == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -1,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            refundList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
-                        )
-                        refund_false += 1
-                        refundList.add(alldataItem)
-                    }
                 } else if (list[0].progress?.get(i - 1)!!.request != null) {
                     if (list[0].progress?.get(i - 1)!!.request.refund_status == false) {
                         if (refund_false == 0) {
@@ -1185,64 +814,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                             review_status = list[0].progress?.get(i - 1)!!.expert.review_status,
                             on_progress = list[0].progress?.get(i - 1)!!.expert.on_progress,
                             refund_status = list[0].progress?.get(i - 1)!!.expert.refund_status
-                        )
-                        refund_true += 1
-                        refundList.add(alldataItem)
-                    }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.refund_status == true) {
-                        if (refund_true == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -2,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            refundList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
                         )
                         refund_true += 1
                         refundList.add(alldataItem)
@@ -1434,64 +1005,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                         review_false += 1
                         reviewList.add(alldataItem)
                     }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.review_status == false) {
-                        if (review_false == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -1,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            reviewList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
-                        )
-                        review_false += 1
-                        reviewList.add(alldataItem)
-                    }
                 } else if (list[0].progress?.get(i - 1)!!.request != null) {
                     if (list[0].progress?.get(i - 1)!!.request.review_status == false) {
                         if (review_false == 0) {
@@ -1668,64 +1181,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                             review_status = list[0].progress?.get(i - 1)!!.expert.review_status,
                             on_progress = list[0].progress?.get(i - 1)!!.expert.on_progress,
                             refund_status = list[0].progress?.get(i - 1)!!.expert.refund_status
-                        )
-                        review_true += 1
-                        reviewList.add(alldataItem)
-                    }
-                } else if (list[0].progress?.get(i - 1)!!.shop != null) {
-                    if (list[0].progress?.get(i - 1)!!.shop.review_status == true) {
-                        if (review_true == 0) {
-                            val ongoingItem = ProgressAllDate(
-                                type = -2,
-                                reserve_idx = "",
-                                expert_idx = "",
-                                request_idx = "",
-                                request_log_idx = "",
-                                room_name = "",
-                                head_count = "",
-                                expert_type = null,
-                                price = null,
-                                time = "",
-                                date = "",
-                                date_term = "",
-                                start_date = "",
-                                end_date = "",
-                                sub_category = "",
-                                user_nickname = "",
-                                user_thumbnail = "",
-                                datetime = "",
-                                thumbnail = null,
-                                view_status = false,
-                                review_status = false,
-                                on_progress = false,
-                                refund_status = false
-                            )
-                            reviewList.add(ongoingItem)
-                        }
-                        val alldataItem = ProgressAllDate(
-                            type = 4,
-                            reserve_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            expert_idx = list[0].progress?.get(i - 1)!!.shop.reserve_idx,
-                            request_idx = "",
-                            request_log_idx = "",
-                            room_name = "",
-                            head_count = "",
-                            expert_type = list[0].progress?.get(i - 1)!!.shop.expert_type,
-                            price = list[0].progress?.get(i - 1)!!.shop.price,
-                            time = "",
-                            date = "",
-                            date_term = list[0].progress?.get(i - 1)!!.shop.date_term,
-                            start_date = list[0].progress?.get(i - 1)!!.shop.start_date,
-                            end_date = list[0].progress?.get(i - 1)!!.shop.end_date,
-                            sub_category = "",
-                            user_nickname = "",
-                            user_thumbnail = "",
-                            datetime = "",
-                            thumbnail = null,
-                            view_status = list[0].progress?.get(i - 1)!!.shop.view_status,
-                            review_status = list[0].progress?.get(i - 1)!!.shop.review_status,
-                            on_progress = list[0].progress?.get(i - 1)!!.shop.on_progress,
-                            refund_status = list[0].progress?.get(i - 1)!!.shop.refund_status
                         )
                         review_true += 1
                         reviewList.add(alldataItem)
@@ -1919,131 +1374,7 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                                 position: Int,
                                                 item: ProgressAllDate
                                             ) {
-                                                if (item.request_idx != "") {
-                                                    MaterialAlertDialogBuilder(
-                                                        mContext,
-                                                        R.style.AlertDialogTheme
-                                                    )
-                                                        .setTitle("구매확정")
-                                                        .setMessage("구매 확정을 하시겠습니까?")
-                                                        .setCancelable(false)
-                                                        .setNeutralButton("취소") { dialog, which ->
-                                                            dialog.dismiss()
-                                                        }
-                                                        .setPositiveButton("확정") { dialog, which ->
 
-                                                            progressManager.instance.request_complete(
-                                                                item.request_idx,
-                                                                item.request_log_idx,
-                                                                completion = { responseStatus ->
-                                                                    when (responseStatus) {
-                                                                        ESTIMATE.OKAY -> {
-                                                                            MaterialAlertDialogBuilder(
-                                                                                mContext,
-                                                                                R.style.AlertDialogTheme
-                                                                            )
-                                                                                .setTitle("구매확정")
-                                                                                .setMessage("구매 확정을 하시겠습니까?")
-                                                                                .setCancelable(false)
-                                                                                .setNeutralButton("취소") { dialog, which ->
-                                                                                    dialog.dismiss()
-                                                                                }
-                                                                                .setPositiveButton("확정") { dialog, which ->
-
-                                                                                    progress_off(
-                                                                                        mViewDataBinding.progressList,
-                                                                                        mViewDataBinding.progressListText
-                                                                                    )
-                                                                                    review_on(
-                                                                                        mViewDataBinding.reviewList,
-                                                                                        mViewDataBinding.reviewListText,
-                                                                                        2
-                                                                                    )
-                                                                                    reviewRefresh()
-                                                                                }
-                                                                                .show()
-                                                                            progressRefresh()
-                                                                            //refreshFragment(this@ProgressFragment, childFragmentManager)
-                                                                        }
-
-                                                                    }
-                                                                })
-
-                                                            progress_off(
-                                                                mViewDataBinding.progressList,
-                                                                mViewDataBinding.progressListText
-                                                            )
-                                                            review_on(
-                                                                mViewDataBinding.reviewList,
-                                                                mViewDataBinding.reviewListText,
-                                                                2
-                                                            )
-                                                            reviewRefresh()
-                                                        }
-                                                        .show()
-                                                } else {
-                                                    MaterialAlertDialogBuilder(
-                                                        mContext,
-                                                        R.style.AlertDialogTheme
-                                                    )
-                                                        .setTitle("구매확정")
-                                                        .setMessage("구매 확정을 하시겠습니까?")
-                                                        .setCancelable(false)
-                                                        .setNeutralButton("취소") { dialog, which ->
-                                                            dialog.dismiss()
-                                                        }
-                                                        .setPositiveButton("확정") { dialog, which ->
-
-                                                            progressManager.instance.reserve_complete(
-                                                                item.reserve_idx,
-                                                                completion = { responseStatus ->
-                                                                    when (responseStatus) {
-                                                                        ESTIMATE.OKAY -> {
-                                                                            MaterialAlertDialogBuilder(
-                                                                                mContext,
-                                                                                R.style.AlertDialogTheme
-                                                                            )
-                                                                                .setTitle("구매확정")
-                                                                                .setMessage("구매 확정을 하시겠습니까?")
-                                                                                .setCancelable(false)
-                                                                                .setNeutralButton("취소") { dialog, which ->
-                                                                                    dialog.dismiss()
-                                                                                }
-                                                                                .setPositiveButton("확정") { dialog, which ->
-
-                                                                                    progress_off(
-                                                                                        mViewDataBinding.progressList,
-                                                                                        mViewDataBinding.progressListText
-                                                                                    )
-                                                                                    review_on(
-                                                                                        mViewDataBinding.reviewList,
-                                                                                        mViewDataBinding.reviewListText,
-                                                                                        2
-                                                                                    )
-                                                                                    reviewRefresh()
-                                                                                }
-                                                                                .show()
-                                                                            progressRefresh()
-                                                                            //refreshFragment(this@ProgressFragment, childFragmentManager)
-                                                                        }
-
-                                                                    }
-                                                                })
-
-                                                            progress_off(
-                                                                mViewDataBinding.progressList,
-                                                                mViewDataBinding.progressListText
-                                                            )
-                                                            review_on(
-                                                                mViewDataBinding.reviewList,
-                                                                mViewDataBinding.reviewListText,
-                                                                2
-                                                            )
-                                                            dialog.dismiss()
-                                                            reviewRefresh()
-                                                        }
-                                                        .show()
-                                                }
                                             }
 
                                         })
@@ -2363,7 +1694,7 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                     } else {
                                         mViewDataBinding.progressNotDataLayout.visibility =
                                             View.VISIBLE
-                                        mViewDataBinding.listNotImage.setImageResource(R.drawable.review_not_list)
+                                        mViewDataBinding.listNotImage.setImageResource(R.drawable.my_service_not_list)
                                         mViewDataBinding.listNotText1.text = "후기작성 내역이 없습니다"
                                         mViewDataBinding.listNotText2.text = "원하는 전문가에게 서비스를 받고\n후기를 남겨주세요"
                                         mViewDataBinding.progressRecyclerview.visibility = View.GONE
@@ -2442,13 +1773,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3001)
                                         }
-                                        4 -> {
-                                            val newIntent =
-                                                Intent(context, ProgressShopActivity::class.java)
-                                            newIntent.putExtra("reserve_idx", item.reserve_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            startActivityForResult(newIntent, 3001)
-                                        }
                                         5 -> {
                                             val newIntent =
                                                 Intent(context, ProgressManyActivity::class.java)
@@ -2470,23 +1794,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                     position: Int,
                                     item: ProgressAllDate
                                 ) {
-                                    if (item.request_idx != "") {
-                                        progressManager.instance.request_complete(
-                                            item.request_idx,
-                                            item.request_log_idx,
-                                            completion = { responseStatus ->
-                                                when (responseStatus) {
-                                                    ESTIMATE.OKAY -> {
-                                                        setup()
-                                                        Toast.makeText(
-                                                            mContext,
-                                                            "후기 작성 탭에서 후기를 작성해 주세요!",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
-                                                    }
-                                                }
-                                            })
-                                    } else {
                                         progressManager.instance.reserve_complete(
                                             item.reserve_idx,
                                             completion = { responseStatus ->
@@ -2501,7 +1808,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                                     }
                                                 }
                                             })
-                                    }
                                 }
 
                             })
@@ -2579,14 +1885,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         3 -> {
                                             val newIntent =
                                                 Intent(context, ProgressExpertActivity::class.java)
-                                            newIntent.putExtra("reserve_idx", item.reserve_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            newIntent.putExtra("review_check", 1)
-                                            startActivityForResult(newIntent, 3003)
-                                        }
-                                        4 -> {
-                                            val newIntent =
-                                                Intent(context, ProgressShopActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             newIntent.putExtra("review_check", 1)
@@ -2704,13 +2002,6 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3002)
                                         }
-                                        4 -> {
-                                            val newIntent =
-                                                Intent(context, RefundShopActivity::class.java)
-                                            newIntent.putExtra("reserve_idx", item.reserve_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            startActivityForResult(newIntent, 3002)
-                                        }
                                         5 -> {
                                             val newIntent =
                                                 Intent(context, RefundManyActivity::class.java)
@@ -2768,6 +2059,10 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
         when (resultCode) {
             3004 -> {
                 reviewRefresh()
+            }
+            2001 -> {
+                setup()
+                Toast.makeText(context,"환불을 요청했습니다. 취소현황에서 확인해보세요",Toast.LENGTH_SHORT).show()
             }
         }
 

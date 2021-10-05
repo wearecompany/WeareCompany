@@ -9,6 +9,7 @@ import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.notification.data.alarm
 import com.weare.wearecompany.data.retrofit.bottomnav.main.MainManager
+import com.weare.wearecompany.data.retrofit.bottomnav.main.alarmManager
 import com.weare.wearecompany.databinding.ActivityAlarmBinding
 import com.weare.wearecompany.ui.base.BaseActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progress.*
@@ -18,13 +19,12 @@ import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.Receive
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceivePhotoActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveTripActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendExpertActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.SendRequestActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendShopActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.SendStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendModelActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendPhotoActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendTripActivity
+import com.weare.wearecompany.utils.ALARM
 import com.weare.wearecompany.utils.RESPONSE_STATUS
 
 class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
@@ -34,6 +34,7 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
     lateinit var user_idx:String
     private var alarm_idx = ""
     var delete_image_status = false
+    lateinit var newIntent:Intent
 
     lateinit var dataAdapter:AlarmRecyclerViewAdapter
     override fun onCreate() {
@@ -353,28 +354,68 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                 11 -> {
                                                     when(Item.expert_type) {
                                                         0 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, ReceiveStudioActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            newIntent.putExtra("type", 1)
-                                                            startActivityForResult(newIntent, 2000)
+                                                            alarmManager.instance.receivestudio(Item.target_idx, completion = { responseStatus ->
+                                                                when(responseStatus) {
+                                                                    ALARM.OKAY -> {
+                                                                        val newIntent = Intent(this@AlarmActivity, ReceiveStudioActivity::class.java)
+                                                                        newIntent.putExtra("reserve_idx", Item.target_idx)
+                                                                        newIntent.putExtra("type", 1)
+                                                                        startActivityForResult(newIntent, 2000)
+                                                                    }
+                                                                    ALARM.NOT_CONTENT -> {
+                                                                        var LastDialog:AlarmLastDialog = AlarmLastDialog{
+                                                                            when(it) {
+                                                                                1 -> {
+                                                                                    MainManager.instance.alarmdelete(Item.idx,complation = {responseStatus ->
+                                                                                        when(responseStatus){
+                                                                                            RESPONSE_STATUS.OKAY -> {
+                                                                                                dataAdapter.removeItem(position)
+                                                                                            }
+                                                                                        }
+                                                                                    })
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        LastDialog.isCancelable = false
+                                                                        LastDialog.show(supportFragmentManager, LastDialog.tag)
+                                                                    }
+                                                                }
+                                                            })
                                                         }
-                                                        1 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, ReceivePhotoActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            newIntent.putExtra("type", 1)
-                                                            startActivityForResult(newIntent, 2000)
-                                                        }
-                                                        2 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, ReceiveModelActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            newIntent.putExtra("type", 1)
-                                                            startActivityForResult(newIntent, 2000)
-                                                        }
-                                                        3 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, ReceiveTripActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            newIntent.putExtra("type", 1)
-                                                            startActivityForResult(newIntent, 2000)
+                                                        1,2,3 -> {
+                                                            alarmManager.instance.receiveexpert(Item.target_idx, completion = { responseStatus ->
+                                                                when(responseStatus) {
+                                                                    ALARM.OKAY -> {
+                                                                        when(Item.expert_type) {
+                                                                            1 -> newIntent = Intent(this@AlarmActivity, ReceivePhotoActivity::class.java)
+                                                                            2 -> newIntent = Intent(this@AlarmActivity, ReceiveModelActivity::class.java)
+                                                                            3 -> newIntent = Intent(this@AlarmActivity, ReceiveTripActivity::class.java)
+                                                                        }
+                                                                        newIntent.putExtra("reserve_idx", Item.target_idx)
+                                                                        newIntent.putExtra("type", 1)
+                                                                        startActivityForResult(newIntent, 2000)
+                                                                    }
+                                                                    ALARM.NOT_CONTENT -> {
+                                                                        var LastDialog:AlarmLastDialog = AlarmLastDialog{
+                                                                            when(it) {
+                                                                                1 -> {
+                                                                                    MainManager.instance.alarmdelete(Item.idx,complation = {responseStatus ->
+                                                                                        when(responseStatus){
+                                                                                            RESPONSE_STATUS.OKAY -> {
+                                                                                                dataAdapter.removeItem(position)
+                                                                                            }
+                                                                                        }
+                                                                                    })
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        LastDialog.isCancelable = false
+                                                                        LastDialog.show(supportFragmentManager, LastDialog.tag)
+                                                                    }
+
+                                                                }
+                                                            })
+
                                                         }
                                                     }
                                                 }
@@ -457,24 +498,67 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                 15 -> {
                                                     when(Item.expert_type) {
                                                         0 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, RefundStudioActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            startActivityForResult(newIntent, 2000)
+
+                                                            alarmManager.instance.refundstudio(Item.target_idx, completion = { responseStatus ->
+                                                                when(responseStatus) {
+                                                                    ALARM.OKAY -> {
+                                                                        val newIntent = Intent(this@AlarmActivity, RefundStudioActivity::class.java)
+                                                                        newIntent.putExtra("reserve_idx", Item.target_idx)
+                                                                        startActivityForResult(newIntent, 2000)
+                                                                    }
+                                                                    ALARM.NOT_CONTENT -> {
+                                                                        var LastDialog:AlarmLastDialog = AlarmLastDialog{
+                                                                            when(it) {
+                                                                                1 -> {
+                                                                                    MainManager.instance.alarmdelete(Item.idx,complation = {responseStatus ->
+                                                                                        when(responseStatus){
+                                                                                            RESPONSE_STATUS.OKAY -> {
+                                                                                                dataAdapter.removeItem(position)
+                                                                                            }
+                                                                                        }
+                                                                                    })
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        LastDialog.isCancelable = false
+                                                                        LastDialog.show(supportFragmentManager, LastDialog.tag)
+                                                                    }
+                                                                }
+                                                            })
                                                         }
-                                                        1 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, RefundPhotoActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            startActivityForResult(newIntent, 2000)
-                                                        }
-                                                        2 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, RefundModelActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            startActivityForResult(newIntent, 2000)
-                                                        }
-                                                        3 -> {
-                                                            val newIntent = Intent(this@AlarmActivity, RefundTripActivity::class.java)
-                                                            newIntent.putExtra("reserve_idx", Item.target_idx)
-                                                            startActivityForResult(newIntent, 2000)
+                                                        1,2,3 -> {
+                                                            alarmManager.instance.refundexpert(Item.target_idx, completion = { responseStatus ->
+                                                                when(responseStatus) {
+                                                                    ALARM.OKAY -> {
+                                                                        when(Item.expert_type) {
+                                                                            1 -> newIntent = Intent(this@AlarmActivity, RefundPhotoActivity::class.java)
+                                                                            2 -> newIntent = Intent(this@AlarmActivity, RefundModelActivity::class.java)
+                                                                            3 -> newIntent = Intent(this@AlarmActivity, RefundTripActivity::class.java)
+                                                                        }
+                                                                        newIntent.putExtra("reserve_idx", Item.target_idx)
+                                                                        newIntent.putExtra("type", 1)
+                                                                        startActivityForResult(newIntent, 2000)
+                                                                    }
+                                                                    ALARM.NOT_CONTENT -> {
+                                                                        var LastDialog:AlarmLastDialog = AlarmLastDialog{
+                                                                            when(it) {
+                                                                                1 -> {
+                                                                                    MainManager.instance.alarmdelete(Item.idx,complation = {responseStatus ->
+                                                                                        when(responseStatus){
+                                                                                            RESPONSE_STATUS.OKAY -> {
+                                                                                                dataAdapter.removeItem(position)
+                                                                                            }
+                                                                                        }
+                                                                                    })
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        LastDialog.isCancelable = false
+                                                                        LastDialog.show(supportFragmentManager, LastDialog.tag)
+                                                                    }
+
+                                                                }
+                                                            })
                                                         }
                                                     }
                                                 }
@@ -486,14 +570,7 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                     newIntent.putExtra("type", 0)
                                                     startActivityForResult(newIntent, 2000)
                                                 }
-                                                21 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, ReceiveRequestActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
-                                                    newIntent.putExtra("type", 1)
-                                                    startActivityForResult(newIntent, 2000)
-                                                }
+
                                                 22 -> {
                                                     val newIntent = Intent(this@AlarmActivity, ProgressManyActivity::class.java)
                                                     val tag = Item.target_idx.split(",")
@@ -511,14 +588,6 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                     startActivityForResult(newIntent, 2000)
                                                 }
                                                 24 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, RefundManyActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
-                                                    newIntent.putExtra("chatbool", 0)
-                                                    startActivityForResult(newIntent, 2000)
-                                                }
-                                                25 -> {
                                                     val newIntent = Intent(this@AlarmActivity, RefundManyActivity::class.java)
                                                     val tag = Item.target_idx.split(",")
                                                     newIntent.putExtra("request_idx", tag[0])
@@ -553,6 +622,10 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                 }
             }
         })
+    }
+
+    fun notalarm(item : alarm) {
+
     }
 
     override fun onClick(v: View?) {

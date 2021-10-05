@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="bluishPurple">#6d34f3</color>
+    <color name="bluishPurple2">#ec9eff</color>
+    <color name="bluishPurple3">#bae9af</color>
+    <color name="bluishPurple4">#fec394</color>
 
 
     <color name="login_text">#0f0f0f</color>

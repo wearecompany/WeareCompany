@@ -145,7 +145,6 @@ class BottomCategoryPhotoFragment(var setupdata:Int, val itemClick: (Int) -> Uni
         view.bottom_photo_request.setOnClickListener {
             dialog?.dismiss()
         }
-
     }
 
     private fun bottomOn(text:TextView, num:Int) {

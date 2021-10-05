@@ -426,14 +426,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:elevation="0dp"
             android:contentDescription="@string/app_name"
             app:fabSize="normal"
-            app:srcCompat="@drawable/bottom_chat"
+            app:srcCompat="@drawable/datail_chat"
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="15dp"
             app:tint="#fff"
-            app:backgroundTint="#A6CBF0" />
+            app:backgroundTint="#9dabe6" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/book_lottie"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/payment_test_1"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"

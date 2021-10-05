@@ -34,24 +34,7 @@ class PinchActivity : BaseActivity<ActivityDetailPinchBinding>(
             .transition(withCrossFade(factory))
             .into(DrawableImageViewTarget(mViewDataBinding.photoView))
 
-            /*Picasso.get().load(imageuri).into(object : Target {
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-               mViewDataBinding.photoView.setImageBitmap(bitmap)
-            }
-
-            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-
-            }
-
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-            }
-
-        })*/
-
-
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
@@ -23,12 +24,16 @@ import com.weare.wearecompany.ui.bottommenu.main.contents.ContentsFragment
 import com.weare.wearecompany.ui.bottommenu.main.event.EventFragment
 import com.weare.wearecompany.ui.bottommenu.main.home.HomeFragment
 import com.weare.wearecompany.ui.bottommenu.main.home.HomeLIstRecyeclerViewAdapter
+import com.weare.wearecompany.ui.bottommenu.main.home.affiliation.AffiliationActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.WeeklyFragment
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
 import com.weare.wearecompany.ui.container.ContainerActivity
 import com.weare.wearecompany.utils.API
 import com.weare.wearecompany.utils.RESPONSE_STATUS
+import java.lang.Exception
 import java.util.*
+import java.util.logging.Handler
+import kotlin.concurrent.timer
 
 
 class mainFangment : BaseFragment<FragmentMainBinding>(
@@ -46,23 +51,15 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
     private lateinit var homelistAdapter: HomeLIstRecyeclerViewAdapter
 
     private lateinit var user_idx: String
-    private val hotpickpostion = IntArray(2)
-    private var infoCheckBox = false
-
-    private var listType = 2
-    private var alarm = -1
 
     private var alarm_type_1 = ""
     private var alarm_type_2 = ""
-    val REQ_tall_PERMISSION = 1001
+
 
     // 레트로핏 인터페이스 가져오기
     private val iRetrofit: IRetrofit? =
         RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
-    //private lateinit var bannarAdapter: MainBannerRecyeclerViewAdapter
-    //private lateinit var bannarAdapter: MainBannerRecyeclerViewAdapter
-    //private lateinit var bannarAdapter: MainBannerRecyeclerViewAdapter
 
     private lateinit var mContext: Context
 
@@ -78,6 +75,7 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
         //throw RuntimeException("App Crashed")
 
         setup()
+
         user_idx = MyApplication.prefs.getString("user_idx", "")
         if (user_idx != "") {
             setUpFirebaseMessaging()
@@ -90,29 +88,18 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
         adapter.addFragment(EventFragment(), "이벤트")
         adapter.addFragment(ContentsFragment(), "컨텐츠")
         mViewDataBinding.mainViewpager.adapter = adapter
+        mViewDataBinding.mainViewpager.offscreenPageLimit = 2
         mViewDataBinding.mainTab.setupWithViewPager(mViewDataBinding.mainViewpager)
 
 
-
-        mViewDataBinding.mainTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-        })
 
     }
 
     fun setup() {
 
-        mViewDataBinding.notification.setOnClickListener(this)
+        mViewDataBinding.alarmLottie.setOnClickListener(this)
         mViewDataBinding.textBtn.setOnClickListener(this)
+        mViewDataBinding.affiliation.setOnClickListener(this)
 
         alarm_type_1 = arguments?.getString("type_1").toString()
         alarm_type_2 = arguments?.getString("type_2").toString()
@@ -124,9 +111,10 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
             when (responseStatus) {
                 RESPONSE_STATUS.OKAY -> {
                     if (i == 0) {
-                        mViewDataBinding.notificationStatus.visibility = View.GONE
+                        mViewDataBinding.alarmLottie.repeatCount = 0
                     } else {
-                        mViewDataBinding.notificationStatus.visibility = View.VISIBLE
+                        mViewDataBinding.alarmLottie.repeatCount = 99
+                        mViewDataBinding.alarmLottie.playAnimation()
                     }
                 }
             }
@@ -178,7 +166,7 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.notification -> {
+            R.id.alarm_lottie -> {
                 var newIntent = Intent(context, AlarmActivity::class.java)
                 startActivityForResult(newIntent, 12)
             }
@@ -193,6 +181,10 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
                 }
                 testdi.show(childFragmentManager, testdi.tag)
 
+            }
+            R.id.affiliation -> {
+                var newIntent = Intent(context, AffiliationActivity::class.java)
+                startActivityForResult(newIntent, 9999)
             }
         }
     }

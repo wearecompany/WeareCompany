@@ -105,16 +105,6 @@ object BitmapUtils {
             .into(imageView)
     }
 
-    fun getExifInfo(file: File): ExifInterface? {
-        var exif: ExifInterface? = null
-        try {
-            exif = ExifInterface(file.absolutePath)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return exif
-    }
-
     fun rotateImage(bitmap: Bitmap, path: String?): Bitmap {
         var rotate = 0
         val exif: ExifInterface
@@ -132,33 +122,6 @@ object BitmapUtils {
             }
             matrix.postRotate(rotate.toFloat())
         } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return Bitmap.createBitmap(
-            bitmap, 0, 0, bitmap.width,
-            bitmap.height, matrix, true
-        )
-    }
-
-    fun rotateImage(path: String?): Bitmap? {
-        val bitmap = BitmapFactory.decodeFile(path)
-        var rotate = 0
-        val exif: ExifInterface
-        val matrix = Matrix()
-        try {
-            exif = ExifInterface(path!!)
-            val orientation = exif.getAttributeInt(
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_NORMAL
-            )
-            when (orientation) {
-                ExifInterface.ORIENTATION_ROTATE_270 -> rotate = 270
-                ExifInterface.ORIENTATION_ROTATE_180 -> rotate = 180
-                ExifInterface.ORIENTATION_ROTATE_90 -> rotate = 90
-            }
-            matrix.postRotate(rotate.toFloat())
-        } catch (e: IOException) {
-            e.printStackTrace()
         }
         return Bitmap.createBitmap(
             bitmap, 0, 0, bitmap.width,

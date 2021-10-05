@@ -1,6 +1,5 @@
 package com.weare.wearecompany.ui.detail.trip.reservation
 
-
 import android.view.View
 
 import android.widget.TextView

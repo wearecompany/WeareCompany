@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/menu_expter"
-        android:title="요청함"
-        android:icon="@drawable/bottom_estimate" />
+        android:title="스토리"
+        android:icon="@drawable/ic_stories_34"/>
 
     <item
         android:id="@+id/placeholder"
-        android:title="요청" />
+        android:title="원클릭" />
 
     <item
         android:id="@+id/menu_estimate"

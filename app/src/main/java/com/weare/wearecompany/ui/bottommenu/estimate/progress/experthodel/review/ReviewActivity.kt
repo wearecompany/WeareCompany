@@ -37,9 +37,9 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReviewActivity:BaseActivity<ActivityReviewBinding>(
+class ReviewActivity : BaseActivity<ActivityReviewBinding>(
     R.layout.activity_review
-),View.OnClickListener {
+), View.OnClickListener {
 
     private val REQ_CAMERA_PERMISSION = 1001
     val REQ_STORAGE_PERMISSION = 1001
@@ -57,7 +57,7 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
     private var request_idx: String = ""
     private var request_log_idx: String = ""
     private var type: Int = -1
-    private var uploadFile:File? = null
+    private var uploadFile: File? = null
 
     private var photocheck = false
     private var grade = 1
@@ -71,12 +71,8 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
         ActionBar.setDisplayShowTitleEnabled(false)
 
         type = intent.getIntExtra("type", 0)
-        if (type == 0) {
-            reserve_idx = intent.getStringExtra("reserve_idx").toString()
-        } else if (type == 1) {
-            request_idx = intent.getStringExtra("reserve_idx").toString()
-            request_log_idx = intent.getStringExtra("reserve_idx").toString()
-        }
+        reserve_idx = intent.getStringExtra("reserve_idx").toString()
+
 
         setup()
 
@@ -93,21 +89,25 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
         mViewDataBinding.reviewItem4.setOnClickListener(this)
         mViewDataBinding.reviewOk.setOnClickListener(this)
 
-        progressManager.instance.review(type,reserve_idx,request_idx,request_log_idx,completion = {responseStatus,arrayList ->
-            when(responseStatus) {
-                ESTIMATE.OKAY -> {
-                    mViewDataBinding.expertUserNickname.text = arrayList[0].expert_user_nickname
-                    mViewDataBinding.expertCategory.text = arrayList[0].expert_category
-                    mViewDataBinding.expertTitle.text = arrayList[0].expert_title
-                    var multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
+        progressManager.instance.review(
+            type,
+            reserve_idx,
+            completion = { responseStatus, arrayList ->
+                when (responseStatus) {
+                    ESTIMATE.OKAY -> {
+                        mViewDataBinding.expertUserNickname.text = arrayList[0].expert_user_nickname
+                        mViewDataBinding.expertCategory.text = arrayList[0].expert_category
+                        mViewDataBinding.expertTitle.text = arrayList[0].expert_title
+                        var multiTransformation =
+                            MultiTransformation(CenterCrop(), RoundedCorners(20))
 
-                    Glide.with(MyApplication.instance)
-                        .load(arrayList[0].expert_thumbnail)
-                        .apply(RequestOptions.bitmapTransform(multiTransformation))
-                        .into(mViewDataBinding.expertThumbnail)
+                        Glide.with(MyApplication.instance)
+                            .load(arrayList[0].expert_thumbnail)
+                            .apply(RequestOptions.bitmapTransform(multiTransformation))
+                            .into(mViewDataBinding.expertThumbnail)
+                    }
                 }
-            }
-        })
+            })
     }
 
     private fun selectCamera() {
@@ -162,9 +162,9 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
         Log.v("알림", "storageDir 존재함$storageDir")
 
         //빈 파일 생성
-            storageDir = File(
-                this.cacheDir, "/Wearecompany/$imageFileName"
-            )
+        storageDir = File(
+            this.cacheDir, "/Wearecompany/$imageFileName"
+        )
 
         imagePath = storageDir.absolutePath
         return storageDir
@@ -187,6 +187,16 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
                 REQ_STORAGE_PERMISSION
             )
         } else {
+
+            // 이미지가 저장될 주소
+            storageDir = File(
+                this.getCacheDir(), "/Wearecompany/"
+            )
+            if (!storageDir.exists()) {
+                Log.v("알림", "storageDir 존재 x$storageDir")
+                storageDir.mkdirs()
+            }
+            Log.v("알림", "storageDir 존재함$storageDir")
             var intent = Intent(Intent.ACTION_PICK)
             intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             intent.type = "image/*"
@@ -208,10 +218,10 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
     }
 
     override fun onClick(v: View?) {
-        when(v?.id) {
+        when (v?.id) {
             R.id.photo_upload -> {
-                var photoFragment : ReviewPhotoUploadDialog = ReviewPhotoUploadDialog(){
-                    when(it) {
+                var photoFragment: ReviewPhotoUploadDialog = ReviewPhotoUploadDialog() {
+                    when (it) {
                         0 -> {
                             selectCamera()
                         }
@@ -220,7 +230,7 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
                         }
                     }
                 }
-                photoFragment.show(supportFragmentManager,photoFragment.tag)
+                photoFragment.show(supportFragmentManager, photoFragment.tag)
             }
             R.id.review_photo -> {
                 mViewDataBinding.reviewPhoto.visibility = View.GONE
@@ -263,22 +273,30 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
                 mViewDataBinding.reviewItem4.setImageResource(R.drawable.review_on)
             }
             R.id.review_ok -> {
-                if (mViewDataBinding.reviewText.text?.isNotEmpty() == false){
-                     Toast.makeText(this,"후기 내용을 작성해주세요.",Toast.LENGTH_SHORT).show()
+                if (mViewDataBinding.reviewText.text?.isNotEmpty() == false) {
+                    Toast.makeText(this, "후기 내용을 작성해주세요.", Toast.LENGTH_SHORT).show()
                 } else {
+                    mViewDataBinding.reviewClickLoding.visibility = View.VISIBLE
                     if (photoUri != null) {
                         uploadFile = imageReSize(photoUri!!, 700, imageFileName)
                     }
                     reviewManager.instance.upload(
-                        type,reserve_idx,request_idx,request_log_idx,grade,mViewDataBinding.reviewText.text.toString(),uploadFile,completion = {responseStatus ->
-                            when(responseStatus) {
+                        type,
+                        reserve_idx,
+                        request_idx,
+                        request_log_idx,
+                        grade,
+                        mViewDataBinding.reviewText.text.toString(),
+                        uploadFile,
+                        completion = { responseStatus ->
+                            when (responseStatus) {
                                 ESTIMATE.OKAY -> {
                                     val file = File(this.cacheDir, imageFileName)
                                     if (file.exists()) {
                                         file.delete()
                                     }
                                     val intent = Intent()
-                                    setResult(3004, intent)
+                                    setResult(2002, intent)
                                     finish()
                                 }
                             }
@@ -309,7 +327,8 @@ class ReviewActivity:BaseActivity<ActivityReviewBinding>(
                         imageFileName = ""
                         imageFileName = "review_" + timeStamp + "_"
 
-                        var multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(20))
+                        var multiTransformation =
+                            MultiTransformation(CenterCrop(), RoundedCorners(20))
                         Glide.with(MyApplication.instance)
                             .load(photoUri)
                             .apply(RequestOptions.bitmapTransform(multiTransformation))

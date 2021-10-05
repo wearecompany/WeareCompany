@@ -139,7 +139,7 @@ class MainManager {
         })
     }
 
-    fun hotpicklist(complation: (RESPONSE_STATUS, ArrayList<hotpick>) -> Unit) {
+  /* fun hotpicklist(complation: (RESPONSE_STATUS, ArrayList<hotpick>) -> Unit) {
 
         val call = iRetrofit?.mainhotpick().let {
             it
@@ -181,9 +181,9 @@ class MainManager {
             }
 
         })
-    }
+    }*/
 
-    fun eventlist(complation: (RESPONSE_STATUS, ArrayList<banner>,ArrayList<event>) -> Unit) {
+   /* fun eventlist(complation: (RESPONSE_STATUS, ArrayList<banner>,ArrayList<event>) -> Unit) {
 
         val call = iRetrofit?.mainevent().let {
             it
@@ -236,7 +236,7 @@ class MainManager {
             }
 
         })
-    }
+    } */
 
     fun event_page(event_idx: String, complation: (RESPONSE_STATUS, ArrayList<eventpage>) -> Unit) {
 

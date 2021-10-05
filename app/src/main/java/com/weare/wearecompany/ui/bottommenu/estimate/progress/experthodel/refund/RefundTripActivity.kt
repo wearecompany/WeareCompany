@@ -2,6 +2,7 @@ package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.refun
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -47,7 +48,7 @@ class RefundTripActivity:BaseActivity<ActivityRefundTripBinding>(
         ActionBar.setDisplayShowTitleEnabled(false)
 
         reserve_idx = intent.getStringExtra("reserve_idx").toString()
-        //type = intent.getIntExtra("type", 0)
+        type = intent.getIntExtra("type", 0)
         chatcheck = intent.getIntExtra("chatbool", 0)
 
         setup()
@@ -64,69 +65,129 @@ class RefundTripActivity:BaseActivity<ActivityRefundTripBinding>(
             mViewDataBinding.refundTripChat.visibility = View.GONE
         }
 
-        progressManager.instance.expertPage(
-            reserve_idx,
-            completion = { responseStatus, data ->
-                when (responseStatus) {
-                    ESTIMATE.OKAY -> {
-                        type = data[0].expert_type
-                        expert_idx = data[0].expert_idx
-                        if (data[0].refund_status == 2) {
-                            mViewDataBinding.refundTripTopManu.visibility = View.GONE
-                            mViewDataBinding.refundInfoTitle.text = "환불 접수가 완료되었습니다."
-                            mViewDataBinding.refundInfo1.text = "*신용카드로 결제한 경우, 실제 환불 일자는 신용카드사에 따라\n차이가 있을 수 있습니다. 보다 정확한 사항은 카드사로\n문의하시기 바랍니다."
-                            mViewDataBinding.refundInfo2.visibility = View.VISIBLE
-                            mViewDataBinding.refundInfo2.text = "*계좌이체로 구매한 겨우, 지불하신 출금계좌로 입금되며\n영업일 기준으로 1-3일 소요됩니다."
-                            mViewDataBinding.refundInfo1.setTextColor(Color.parseColor("#8276f4"))
-                            mViewDataBinding.refundTripBillDateTitle.text = "환불일자/시간 "
-                            mViewDataBinding.refundTripMoneyLayout.visibility = View.VISIBLE
-                            mViewDataBinding.refundTripMoneyTitle.text = "환불금액"
-                            mViewDataBinding.refundTripMoney.text = data[0].refund_money.toString()
+        when(type) {
+            0 -> {
+                progressManager.instance.expertRefundPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
+                                if (data[0].refund_status == 1) {
+                                    mViewDataBinding.refundTripBillDateTitle.text = "환불일자/시간 "
+                                }
+
+                                mViewDataBinding.refundTripExpertName.text = data[0].expert_name
+                                mViewDataBinding.refundTripExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.refundTripExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.refundTripExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.refundTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.refundTripExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.refundTripTid.text = data[0].reserve_tid
+                                mViewDataBinding.refundTripBillMethod.text = data[0].bill_method
+                                mViewDataBinding.refundTripBillDate.text = data[0].bill_date
+                                mViewDataBinding.refundTripDt.text = data[0].reserve_dt
+                                mViewDataBinding.refundTripTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.refundTripTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.refundTripHeadcount.text =
+                                    data[0].reserve_headcount.toString()
+
+                                mViewDataBinding.refundTripContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.refundTripAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.refundTripAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.refundTripFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
+                    })
+            }
+            1 -> {
+                progressManager.instance.expertRefundOkPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
+                                if (data[0].refund_status == 2) {
+                                    mViewDataBinding.refundTripTopManu.visibility = View.GONE
+                                    mViewDataBinding.refundInfoTitle.text = "환불 접수가 완료되었습니다."
+                                    mViewDataBinding.refundInfo1.text = "*신용카드로 결제한 경우, 실제 환불 일자는 신용카드사에 따라\n차이가 있을 수 있습니다. 보다 정확한 사항은 카드사로\n문의하시기 바랍니다."
+                                    mViewDataBinding.refundInfo2.visibility = View.VISIBLE
+                                    mViewDataBinding.refundInfo2.text = "*계좌이체로 구매한 겨우, 지불하신 출금계좌로 입금되며\n영업일 기준으로 1-3일 소요됩니다."
+                                    mViewDataBinding.refundInfo1.setTextColor(Color.parseColor("#8276f4"))
+                                    mViewDataBinding.refundTripBillDateTitle.text = "환불일자/시간 "
+                                    mViewDataBinding.refundTripMoneyLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.refundTripMoneyTitle.text = "환불금액"
+                                    mViewDataBinding.refundTripMoney.text = data[0].refund_money.toString()
+                                }
 
-                        mViewDataBinding.refundTripExpertName.text = data[0].expert_name
-                        mViewDataBinding.refundTripExpertPlace.text = data[0].expert_place
-                        mViewDataBinding.refundTripExpertPrice.text = data[0].expert_price
+                                mViewDataBinding.refundTripExpertName.text = data[0].expert_name
+                                mViewDataBinding.refundTripExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.refundTripExpertPrice.text = data[0].expert_price
 
-                        var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
 
-                        Glide.with(MyApplication.instance)
-                            .load(data[0].expert_image)
-                            .apply(RequestOptions.bitmapTransform(multiTransformation))
-                            .into(mViewDataBinding.refundTripExpertImage)
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.refundTripExpertImage)
 
-                        taglist = ArrayList<String>()
-                        val tag = data[0].expert_category.split(",")
-                        for (i in tag) {
-                            taglist.add(i)
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.refundTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.refundTripExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.refundTripTid.text = data[0].reserve_tid
+                                mViewDataBinding.refundTripBillMethod.text = data[0].bill_method
+                                mViewDataBinding.refundTripBillDate.text = data[0].bill_date
+                                mViewDataBinding.refundTripDt.text = data[0].reserve_dt
+                                mViewDataBinding.refundTripTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.refundTripTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.refundTripHeadcount.text =
+                                    data[0].reserve_headcount.toString()
+
+                                mViewDataBinding.refundTripContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.refundTripAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.refundTripAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.refundTripFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
-                        tagAdapter = SendTagRecyclerViewAdapter(taglist)
-                        mViewDataBinding.refundTripExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL, false
-                        )
-                        mViewDataBinding.refundTripExpertCategoryRecyclerview.adapter = tagAdapter
-
-                        mViewDataBinding.refundTripTid.text = data[0].reserve_tid
-                        mViewDataBinding.refundTripBillMethod.text = data[0].bill_method
-                        mViewDataBinding.refundTripBillDate.text = data[0].bill_date
-                        mViewDataBinding.refundTripDt.text = data[0].reserve_dt
-                        mViewDataBinding.refundTripTime.text = data[0].reserve_time.toString()
-                        mViewDataBinding.refundTripTimeTerm.text = data[0].reserve_time_term
-                        mViewDataBinding.refundTripHeadcount.text =
-                            data[0].reserve_headcount.toString()
-
-                        mViewDataBinding.refundTripContents.text = data[0].reserve_contents
-
-                        if (data[0].reserve_add_contents != "") {
-                            mViewDataBinding.refundTripAddContentsLayout.visibility = View.VISIBLE
-                            mViewDataBinding.refundTripAddContents.text = data[0].reserve_add_contents
-                        }
-
-                        mViewDataBinding.refundTripFinalPrice.text = dec.format(data[0].reserve_price)
-                    }
-                }
-            })
+                    })
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -152,11 +213,10 @@ class RefundTripActivity:BaseActivity<ActivityRefundTripBinding>(
 
             }
             R.id.refund_trip_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("type",0)
-                newIntent.putExtra("Entrytype",0)
-                newIntent.putExtra("reserve_idx",reserve_idx)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
         }
     }

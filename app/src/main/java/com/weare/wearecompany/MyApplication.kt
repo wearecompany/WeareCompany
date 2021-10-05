@@ -2,9 +2,9 @@ package com.weare.wearecompany
 
 import android.app.Application
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.kakao.sdk.common.KakaoSdk
 import com.weare.wearecompany.di.retrofitModule
 import com.weare.wearecompany.utils.PreferenceUtil
-import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import java.util.*
@@ -35,9 +35,9 @@ class MyApplication: Application() {
                 retrofitModule
             )
         }
-
-
-
     }
+
+
+
 
 }

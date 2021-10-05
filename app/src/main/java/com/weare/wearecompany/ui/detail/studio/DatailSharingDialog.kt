@@ -22,7 +22,7 @@ class DatailSharingDialog(val itemClick: (Int) -> Unit) : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        //dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         view.sharing_kakao.setOnClickListener {
             itemClick(0)

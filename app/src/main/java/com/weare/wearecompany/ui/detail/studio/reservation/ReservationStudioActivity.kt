@@ -1,9 +1,6 @@
 package com.weare.wearecompany.ui.detail.studio.reservation
 
-
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
@@ -15,7 +12,6 @@ import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.hotpick.data.room
-import com.weare.wearecompany.data.retrofit.dateil.expertReserveManager
 import com.weare.wearecompany.data.retrofit.dateil.studioReserveManager
 import com.weare.wearecompany.databinding.ActivityReservationStudioBinding
 import com.weare.wearecompany.ui.base.BaseActivity
@@ -133,26 +129,38 @@ class ReservationStudioActivity : BaseActivity<ActivityReservationStudioBinding>
             R.id.reservation_ok -> {
                 daylist = ArrayList<String>()
 
-                    if (click_room == -1) {
-                        Toast.makeText(this,"룸을 먼저 선택해주세요",Toast.LENGTH_SHORT).show()
-                    } else if(mViewDataBinding.calendarView.selectedDates.size == 0){
-                        Toast.makeText(this,"날짜를 선택해주세요",Toast.LENGTH_SHORT).show()
-                    } else if(mViewDataBinding.reserveContents.text.toString() == ""){
-                        Toast.makeText(this,"문의사항을 입력해주세요.",Toast.LENGTH_SHORT).show()
-                    } else {
+                if (click_room == -1) {
+                    Toast.makeText(this, "룸을 먼저 선택해주세요", Toast.LENGTH_SHORT).show()
+                } else if (mViewDataBinding.calendarView.selectedDates.size == 0) {
+                    Toast.makeText(this, "날짜를 선택해주세요", Toast.LENGTH_SHORT).show()
+                } else if (mViewDataBinding.reserveContents.text.toString() == "") {
+                    Toast.makeText(this, "문의사항을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                } else {
 
-                        for (i in mViewDataBinding.calendarView.selectedDates) {
-                            daylist.add(korFotmatt.format(i.time))
-                        }
-                        daylist.sort()
+                    for (i in mViewDataBinding.calendarView.selectedDates) {
+                        daylist.add(korFotmatt.format(i.time))
+                    }
+                    daylist.sort()
 
-                        val studioDialog: ReservationStudioDialog = ReservationStudioDialog(room_name,daylist,mViewDataBinding.reserveContents.text.toString()){
-                            when(it) {
-                                1 -> {
-                                    studioReserveManager.instance.reserve(user_idx,expert_user_idx,expert_idx,room_idx,daylist,mViewDataBinding.reserveContents.text.toString(),completion = { responseStatus ->
-                                        when(responseStatus) {
+                    val studioDialog: ReservationStudioDialog = ReservationStudioDialog(
+                        room_name,
+                        daylist,
+                        mViewDataBinding.reserveContents.text.toString()
+                    ) {
+                        when (it) {
+                            1 -> {
+                                studioReserveManager.instance.reserve(
+                                    user_idx,
+                                    expert_user_idx,
+                                    expert_idx,
+                                    room_idx,
+                                    daylist,
+                                    mViewDataBinding.reserveContents.text.toString(),
+                                    completion = { responseStatus ->
+                                        when (responseStatus) {
                                             RESPONSE_STATUS.OKAY -> {
-                                                var newIntent = Intent(this, ContainerActivity::class.java)
+                                                var newIntent =
+                                                    Intent(this, ContainerActivity::class.java)
                                                 newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                                 newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                                 newIntent.putExtra("reservation", 1)
@@ -160,12 +168,12 @@ class ReservationStudioActivity : BaseActivity<ActivityReservationStudioBinding>
                                             }
                                         }
                                     })
-                                }
                             }
                         }
-                        studioDialog.isCancelable = false
-                        studioDialog.show(supportFragmentManager,studioDialog.tag)
                     }
+                    studioDialog.isCancelable = false
+                    studioDialog.show(supportFragmentManager, studioDialog.tag)
+                }
 
             }
 

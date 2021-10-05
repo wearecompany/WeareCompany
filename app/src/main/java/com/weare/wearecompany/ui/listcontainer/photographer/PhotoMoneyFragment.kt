@@ -9,7 +9,6 @@ import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.BottomDialogAllMoneyBinding
 import com.weare.wearecompany.ui.base.BaseFragment
 import com.weare.wearecompany.ui.listcontainer.ListContainerActivity
-import com.weare.wearecompany.ui.listcontainer.model.ModelViewModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -22,8 +21,8 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
 
     private lateinit var mContext: Context
 
-    var min:String = ""
-    var max:String = ""
+    var min: String = ""
+    var max: String = ""
     private val dec = DecimalFormat("#,###")
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,11 +43,11 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
         max = viewmodel.getMax()
 
         if (min == "" && max == "") {
-            mViewDataBinding.allMoney.setValues(0f,500000f)
+            mViewDataBinding.allMoney.setValues(0f, 500000f)
             mViewDataBinding.minMoney.text = dec.format(0)
             mViewDataBinding.maxMoney.text = dec.format(500000)
-        } else if (min != "" && max == ""){
-            mViewDataBinding.allMoney.setValues(min.toFloat(),500000f)
+        } else if (min != "" && max == "") {
+            mViewDataBinding.allMoney.setValues(min.toFloat(), 500000f)
             mViewDataBinding.minMoney.text = dec.format(min.toInt())
             mViewDataBinding.maxMoney.text = dec.format(500000)
             mViewDataBinding.minMoney.setTextColor(Color.parseColor("#0f0f0f"))
@@ -56,8 +55,8 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
             mViewDataBinding.maxMoney.setTextColor(Color.parseColor("#0f0f0f"))
             mViewDataBinding.maxMoneyTitle.setTextColor(Color.parseColor("#0f0f0f"))
             mViewDataBinding.moneyAnd.setTextColor(Color.parseColor("#0f0f0f"))
-        } else if (min == "" && max != ""){
-            mViewDataBinding.allMoney.setValues(0f,max.toFloat())
+        } else if (min == "" && max != "") {
+            mViewDataBinding.allMoney.setValues(0f, max.toFloat())
             mViewDataBinding.minMoney.text = dec.format(0)
             mViewDataBinding.maxMoney.text = dec.format(max.toInt())
             mViewDataBinding.minMoney.setTextColor(Color.parseColor("#0f0f0f"))
@@ -66,7 +65,7 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
             mViewDataBinding.maxMoneyTitle.setTextColor(Color.parseColor("#0f0f0f"))
             mViewDataBinding.moneyAnd.setTextColor(Color.parseColor("#0f0f0f"))
         } else {
-            mViewDataBinding.allMoney.setValues(min.toFloat(),max.toFloat())
+            mViewDataBinding.allMoney.setValues(min.toFloat(), max.toFloat())
             mViewDataBinding.minMoney.text = dec.format(min.toInt())
             mViewDataBinding.maxMoney.text = dec.format(max.toInt())
             mViewDataBinding.minMoney.setTextColor(Color.parseColor("#0f0f0f"))
@@ -77,7 +76,8 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
         }
 
 
-        /*mViewDataBinding.allMoney.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
+        mViewDataBinding.allMoney.addOnSliderTouchListener(object :
+            RangeSlider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: RangeSlider) {
 
             }
@@ -85,18 +85,21 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
             override fun onStopTrackingTouch(slider: RangeSlider) {
                 val values = slider.values
 
-                mViewDataBinding.minMoney.text = values[0].toString()
-                mViewDataBinding.maxMoney.text = values[1].toString()
+                min = String.format("%.0f", values[0])
+                max = String.format("%.0f", values[1])
+
+                mViewDataBinding.minMoney.text = dec.format(min.toInt())
+                mViewDataBinding.maxMoney.text = dec.format(max.toInt())
             }
 
-        })*/
+        })
 
-        mViewDataBinding.allMoney.addOnChangeListener(object : RangeSlider.OnChangeListener{
+        mViewDataBinding.allMoney.addOnChangeListener(object : RangeSlider.OnChangeListener {
             override fun onValueChange(slider: RangeSlider, value: Float, fromUser: Boolean) {
                 val values = slider.values
 
-                min = String.format("%.0f",values[0])
-                max = String.format("%.0f",values[1])
+                min = String.format("%.0f", values[0])
+                max = String.format("%.0f", values[1])
 
                 activity?.runOnUiThread {
                     if (min == "0" && max == "500000") {
@@ -124,6 +127,7 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
                             mViewDataBinding.maxMoney.text = dec.format(max.toInt())
                         } else {
                             viewmodel.setMax("")
+                            mViewDataBinding.maxMoneyTitle.text = "원 이상"
                             mViewDataBinding.maxMoney.text = dec.format(500000)
                         }
                         mViewDataBinding.minMoney.setTextColor(Color.parseColor("#0f0f0f"))
@@ -132,10 +136,10 @@ class PhotoMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
                         mViewDataBinding.maxMoneyTitle.setTextColor(Color.parseColor("#0f0f0f"))
                         mViewDataBinding.moneyAnd.setTextColor(Color.parseColor("#0f0f0f"))
                     }
-                    /*viewmodel.setMin(min)
+                    viewmodel.setMin(min)
                     mViewDataBinding.minMoney.text = dec.format(min)
                     viewmodel.setMax(max)
-                    mViewDataBinding.maxMoney.text = dec.format(max)*/
+                    mViewDataBinding.maxMoney.text = dec.format(max)
                 }
             }
 

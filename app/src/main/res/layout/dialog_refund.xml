@@ -14,29 +14,29 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="환불 사유"
             android:layout_marginTop="21dp"
+            android:text="환불 사유"
             android:textColor="#6d34f3"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/studio_name_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
             app:boxStrokeColor="#eaeaea"
             app:counterEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperText="환불 사유 작성 후 취소 및 삭제가 불가능 합니다."
             app:counterMaxLength="100"
+            app:helperText="환불 사유 작성 후 취소 및 삭제가 불가능 합니다."
+            app:helperTextEnabled="true"
             app:helperTextTextColor="#c9c9c9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,44 +44,54 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/refund"
-                android:gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:gravity="top"
                 android:maxLength="100"
                 android:textColor="#787878"
                 android:textSize="14dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/rent_reservation_check_ok"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/rent_reservation_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:backgroundTint="#6d34f3"
-            android:text="환불요청"
-            android:textColor="#fff"
-            android:textColorHint="#cbcbcb"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/rent_reservation_check_no"
-            app:layout_constraintTop_toTopOf="@+id/rent_reservation_check_no" />
-
-        <Button
-            android:id="@+id/rent_reservation_check_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#fff"
+            android:orientation="horizontal"
             android:layout_marginTop="20dp"
-            android:text="취소"
-            android:textColor="#cbcbcb"
-            android:textSize="14dp"
-            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/studio_name_layout" />
+            app:layout_constraintEnd_toEndOf="@+id/studio_name_layout"
+            app:layout_constraintStart_toStartOf="@+id/studio_name_layout"
+            app:layout_constraintTop_toBottomOf="@+id/studio_name_layout">
+
+
+            <TextView
+                android:id="@+id/rent_reservation_check_no"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/estimate_btn_background_2"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="취소"
+                android:textColor="#484848"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rent_reservation_check_ok"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/estimate_btn_background"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="환불요청"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

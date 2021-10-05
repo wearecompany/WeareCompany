@@ -5,6 +5,7 @@ import java.io.Serializable
 data class Receivepage (
     val request_idx: String,
     val request_log_idx: String,
+    val expert_idx: String,
     val expert_name: String,
     val expert_image: String,
     val expert_type: String,

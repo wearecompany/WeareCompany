@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -64,9 +65,9 @@ class ReceiveTripActivity : BaseActivity<ActivityReceiveTripBinding>(
 
     private fun setup() {
 
-        mViewDataBinding.reservationExpertOk.setOnClickListener(this)
+        mViewDataBinding.receiveTripPayment.setOnClickListener(this)
         mViewDataBinding.receiveTripToolbarRefundMenu.setOnClickListener(this)
-        mViewDataBinding.reservationExpertChat.setOnClickListener(this)
+        mViewDataBinding.receiveTripChat.setOnClickListener(this)
         mViewDataBinding.receiveTripExpertInfoLayout.setOnClickListener(this)
 
         receiveManager.instance.expertPage(
@@ -143,7 +144,7 @@ class ReceiveTripActivity : BaseActivity<ActivityReceiveTripBinding>(
             5001 -> {
                 val intent = Intent()
                 intent.putExtra("payment", "ok")
-                setResult(5001, intent)
+                setResult(3001, intent)
                 finish()
             }
         }
@@ -158,18 +159,17 @@ class ReceiveTripActivity : BaseActivity<ActivityReceiveTripBinding>(
                 newIntent.putExtra("expert_idx", expert_idx)
                 startActivity(newIntent)
             }
-            R.id.reservation_expert_ok -> {
+            R.id.receive_trip_payment -> {
                 val newIntent = Intent(this, paymentActivity::class.java)
                 newIntent.putExtra("reserve_idx", reserve_idx)
                 newIntent.putExtra("type", 0)
                 startActivityForResult(newIntent, 5000)
             }
-            R.id.reservation_expert_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype", 0)
-                startActivity(newIntent)
+            R.id.receive_trip_chat -> {
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
             R.id.receive_trip_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
@@ -186,7 +186,7 @@ class ReceiveTripActivity : BaseActivity<ActivityReceiveTripBinding>(
                                 })
                             val intent = Intent()
                             intent.putExtra("Cancellation", "ok")
-                            setResult(6000, intent)
+                            setResult(2003, intent)
                             finish()
                         }
 

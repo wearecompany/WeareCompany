@@ -12,6 +12,64 @@
         app:layoutDescription="@xml/model_list_mostion"
         tools:showPaths="true">
 
+        <FrameLayout
+            android:id="@+id/model_list_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/model_list_search_edit_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                app:boxStrokeColor="#6d34f3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/model_list_search_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:id="@+id/model_list_search_btn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_gravity="center|end"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/model_list_search_image_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:src="@drawable/list_search_cancel"/>
+
+                <ImageView
+                    android:id="@+id/model_list_search_image_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/list_search"/>
+            </FrameLayout>
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/new_title_layout"
@@ -21,7 +79,7 @@
             android:layout_marginTop="13dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/model_list_search">
 
             <TextView
                 android:id="@+id/new_title"
@@ -30,6 +88,7 @@
                 android:background="@drawable/event_background"
                 android:paddingStart="9dp"
                 android:paddingEnd="9dp"
+                android:layout_marginTop="10dp"
                 android:text="NEW"
                 android:textColor="#fff"
                 android:textSize="10dp"
@@ -43,9 +102,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="9dp"
-            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/new_title_layout"
             app:layout_constraintTop_toBottomOf="@id/new_title_layout" />
+
 
         <LinearLayout
             android:id="@+id/header_view"
@@ -201,6 +260,44 @@
             android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_view" />
+
+        <LinearLayout
+            android:id="@+id/model_not_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="#fff"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/header_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/send_not_list"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조건에 맞는 전문가가 없습니다."
+                android:textSize="12dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#707070"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="현재 페이지에는\n해당하는 전문가가 존재하지 않습니다."
+                android:textSize="12dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#cbcbcb"/>
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

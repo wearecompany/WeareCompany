@@ -162,7 +162,9 @@ class InformationChangeActivity : BaseActivity<ActivityInformationChangeBinding>
                                             completion = { responseStatus, response ->
                                                 when (responseStatus) {
                                                     RESPONSE_STATUS.OKAY -> {
-                                                        onBackPressed()
+                                                        val intent = Intent()
+                                                        setResult(998, intent)
+                                                        finish()
                                                     }
                                                 }
                                             })
@@ -203,7 +205,7 @@ class InformationChangeActivity : BaseActivity<ActivityInformationChangeBinding>
                     try {
 
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                       // e.printStackTrace()
                     }
                 }
             }
@@ -227,7 +229,7 @@ class InformationChangeActivity : BaseActivity<ActivityInformationChangeBinding>
                     try {
                         photoFile = createImageFile()
                     } catch (e: IOException) {
-                        e.printStackTrace()
+                       // e.printStackTrace()
                     }
 
                     photoFile?.let {
@@ -368,7 +370,7 @@ class InformationChangeActivity : BaseActivity<ActivityInformationChangeBinding>
             }
 
         } catch (e: FileNotFoundException) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
         return resizedBitmap
 

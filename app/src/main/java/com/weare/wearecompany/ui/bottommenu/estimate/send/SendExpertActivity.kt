@@ -280,20 +280,11 @@ class SendExpertActivity:BaseActivity<ActivityEstimateExpertBinding>(
                                     mViewDataBinding.estimateExpertReserveAddContents.visibility = View.VISIBLE
                                     mViewDataBinding.estimateExpertReserveAddContents.text = data[0].reserve_add_contents
                                 }
-                                mViewDataBinding.estimateExpertReservePriceLayout.visibility = View.VISIBLE
-                                mViewDataBinding.estimateExpertReservePrice.text = dec.format(data[0].reserve_price)
 
-                                if (data[0].reserve_add_price_contents != "") {
-                                    mViewDataBinding.estimateExpertReserveAddPriceLayout.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPrice.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPrice.text = data[0].reserve_add_price.toString()
-                                    mViewDataBinding.estimateExpertReserveAddPriceContents.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPriceContents.text = data[0].reserve_add_price_contents
-                                }
                                 mViewDataBinding.estimateExpertReserveFinalPriceTitleBottomView.visibility = View.VISIBLE
                                 mViewDataBinding.reservationExpertReserveFinalPriceLayout.visibility = View.VISIBLE
                                 mViewDataBinding.reservationExpertReserveFinalPriceTitle.text = "최종 결제 금액"
-                                mViewDataBinding.reservationExpertReserveFinalPrice.text = dec.format(data[0].reserve_final_price)
+                                mViewDataBinding.reservationExpertReserveFinalPrice.text = dec.format(data[0].reserve_price)
                                 mViewDataBinding.buttonLayout.visibility = View.VISIBLE
                                 if (chatcheck == 1) {
                                     mViewDataBinding.reservationExpertChat.visibility = View.GONE
@@ -351,19 +342,9 @@ class SendExpertActivity:BaseActivity<ActivityEstimateExpertBinding>(
                                     mViewDataBinding.estimateExpertReserveAddContents.visibility = View.VISIBLE
                                     mViewDataBinding.estimateExpertReserveAddContents.text = data[0].reserve_add_contents
                                 }
-                                mViewDataBinding.estimateExpertReservePriceLayout.visibility = View.VISIBLE
-                                mViewDataBinding.estimateExpertReservePrice.text = dec.format(data[0].reserve_price)
 
-                                if (data[0].reserve_add_price_contents != "") {
-                                    mViewDataBinding.estimateExpertReserveAddPriceLayout.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPrice.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPrice.text = data[0].reserve_add_price.toString()
-                                    mViewDataBinding.estimateExpertReserveAddPriceContents.visibility = View.VISIBLE
-                                    mViewDataBinding.estimateExpertReserveAddPriceContents.text = data[0].reserve_add_price_contents
-                                    mViewDataBinding.estimateExpertReserveFinalPriceTitleBottomView.visibility = View.VISIBLE
-                                }
-
-                                mViewDataBinding.reservationExpertReserveFinalPrice.text = dec.format(data[0].reserve_final_price)
+                                mViewDataBinding.estimateExpertReserveFinalPriceTitleBottomView.visibility = View.VISIBLE
+                                mViewDataBinding.reservationExpertReserveFinalPrice.text = dec.format(data[0].reserve_price)
                                 if (chatcheck != 1) {
                                     mViewDataBinding.reservationExpertChat.visibility = View.VISIBLE
                                 }

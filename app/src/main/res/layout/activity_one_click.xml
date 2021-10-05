@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/main_scrollview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    app:elevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="57dp"
+                        android:background="#fff"
+                        android:theme="?attr/actionBarTheme"
+                        app:layout_collapseMode="pin">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="원클릭 요청"
+                            android:textColor="#0f0f0f"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <RelativeLayout
+                    android:id="@+id/one_click_noti"
+                    android:layout_width="0dp"
+                    android:layout_height="108dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/one_click_request_bac"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appBar">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="원클릭 요청"
+                            android:textColor="#0f0f0f"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="일일이 찾지 않고 내가 원하는 조건으로\n한번에, 쉽게, 빠르게\n전문가를 구할 수있습니다."
+                            android:textColor="#0f0f0f"
+                            android:textSize="10dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="77dp"
+                        android:layout_height="72dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="19dp"
+                        android:src="@drawable/one_click_noti" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/one_click_Job_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="구인 카테고리"
+                    android:textColor="#484848"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/one_click_noti"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_noti" />
+
+                <LinearLayout
+                    android:id="@+id/one_click_ca_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/one_click_Job_title"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_Job_title">
+
+                    <CheckBox
+                        android:id="@+id/one_click_model"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:buttonTint="#eaeaea" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="모델"
+                        android:textColor="#656565"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/one_click_ca_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/one_click_ca_0"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_ca_0">
+
+                    <CheckBox
+                        android:id="@+id/one_click_trip"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:buttonTint="#eaeaea" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="뷰티전문가"
+                        android:textColor="#656565"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/one_click_ca_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/one_click_ca_1"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_ca_1">
+
+                    <CheckBox
+                        android:id="@+id/one_click_photo"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:buttonTint="#eaeaea" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="포토그래퍼"
+                        android:textColor="#656565"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/one_click_ca_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/one_click_ca_2"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_ca_2">
+
+                    <CheckBox
+                        android:id="@+id/one_click_studio"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:buttonTint="#eaeaea" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스튜디오"
+                        android:textColor="#656565"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/one_click_Job_title_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="요청 레퍼런스"
+                    android:textColor="#484848"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/one_click_Job_title"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_ca_3" />
+
+                <LinearLayout
+                    android:id="@+id/one_click_request_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/one_click_Job_title_2"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_Job_title_2">
+
+                    <LinearLayout
+                        android:id="@+id/request_image_upload"
+                        android:layout_width="77dp"
+                        android:layout_height="77dp"
+                        android:background="@drawable/join_background"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_test_camera_25" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/oneclick_image_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#cbcbcb"
+                                android:textSize="9dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="/6"
+                                android:textColor="#cbcbcb"
+                                android:textSize="9dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/oneclick_image_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/one_click_Job_title_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="요청 내용"
+                    android:textColor="#484848"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/one_click_Job_title"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_request_image" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/one_click_contents"
+                    android:layout_width="0dp"
+                    android:layout_height="137dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/join_background"
+                    android:gravity="top"
+                    android:hint="ex) 빠른 컨택을 위해 위치,날짜,시간을 꼭 말씀해 주세요\n(미정일 때도 말씀해주세요!)"
+                    android:paddingLeft="13dp"
+                    android:paddingTop="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#cbcbcb"
+                    android:textSize="11dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/one_click_Job_title"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_Job_title_3" />
+
+                <TextView
+                    android:id="@+id/one_click_money_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="희망금액"
+                    android:textColor="#484848"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/one_click_money_layout"
+                    app:layout_constraintStart_toStartOf="@id/one_click_contents"
+                    app:layout_constraintTop_toTopOf="@id/one_click_money_layout" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/one_click_money_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    app:boxStrokeColor="#6d34f3"
+                    app:layout_constraintEnd_toEndOf="@id/one_click_contents"
+                    app:layout_constraintTop_toBottomOf="@+id/one_click_contents"
+                    app:suffixText="원">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/one_click_money"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/one_click_consent_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@id/one_click_money_layout"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_money_layout">
+
+                    <CheckBox
+                        android:id="@+id/one_click_consent"
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:buttonTint="#eaeaea" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/oneclick_personal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:text="개인정보 수집 이용 동의"
+                            android:textColor="#6d34f3"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#6d34f3" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/one_click_ok"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/estimate_btn_background"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="요청서 발송하기"
+                    android:textColor="#fff"
+                    android:layout_marginBottom="22dp"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/one_click_consent_layout" />
+
+                <FrameLayout
+                    android:id="@+id/one_click_loding"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:clickable="false"
+                    android:visibility="gone"
+                    android:background="#bcffffff"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/loding"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_Bar"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:indeterminate = "true"
+                        android:progress="10"
+                        android:indeterminateTint="@color/colorPrimaryDark"/>
+                </FrameLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

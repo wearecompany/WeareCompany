@@ -9,6 +9,8 @@ data class studio (var idx: String?,
                    var title: String?,
                    var address: String?,
                    var price: String?,
+                   var lat: String?,
+                   var long: String?,
                    var grade: String?,
                    var event: ArrayList<String>?) : Serializable {
 }

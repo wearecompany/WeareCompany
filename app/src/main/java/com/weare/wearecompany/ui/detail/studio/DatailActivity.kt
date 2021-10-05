@@ -2,9 +2,6 @@ package com.weare.wearecompany.ui.detail
 
 import android.Manifest
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -27,11 +24,18 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.dynamiclinks.ktx.*
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.link.LinkClient
+import com.kakao.sdk.navi.NaviClient
+import com.kakao.sdk.navi.model.CoordType
+import com.kakao.sdk.navi.model.KakaoNaviParams
+import com.kakao.sdk.navi.model.Location
+import com.kakao.sdk.navi.model.NaviOption
 import com.kakao.sdk.template.model.*
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
 import com.weare.wearecompany.BuildConfig
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
@@ -45,23 +49,22 @@ import com.weare.wearecompany.databinding.ActivityStudioBinding
 import com.weare.wearecompany.ui.base.BaseActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
-import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelActivity
+import com.weare.wearecompany.ui.chat.detail.DetailChatActivity
 import com.weare.wearecompany.ui.detail.studio.*
 import com.weare.wearecompany.ui.detail.studio.reservation.ReservationStudioActivity
 import com.weare.wearecompany.utils.BitmapUtils
 import com.weare.wearecompany.utils.Constants
 import com.weare.wearecompany.utils.LIKE
 import com.weare.wearecompany.utils.RESPONSE_STATUS
-import kotlinx.android.synthetic.main.activity_studio.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import java.io.File
-import java.text.DecimalFormat
+import java.net.URLEncoder
 
 class DatailActivity : BaseActivity<ActivityStudioBinding>(
     R.layout.activity_studio
-), View.OnClickListener, MapView.MapViewEventListener,NestedScrollView.OnScrollChangeListener {
+), View.OnClickListener, OnMapReadyCallback,NestedScrollView.OnScrollChangeListener {
 
     private var dataList = ArrayList<datail>()
     private var roomList = ArrayList<room>()
@@ -83,6 +86,8 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
     lateinit var serveruri: String
     private lateinit var sharebitmap: Bitmap
     private lateinit var sharefile: File
+
+    private lateinit var map: NaverMap
 
     private lateinit var datalist:ArrayList<room>
     private lateinit var reviewlist: ArrayList<review>
@@ -208,6 +213,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
 
         mViewDataBinding.sharing.setOnClickListener(this)
         mViewDataBinding.like.setOnClickListener(this)
+        mViewDataBinding.navi.setOnClickListener(this)
         mViewDataBinding.studioReservation.setOnClickListener(this)
         mViewDataBinding.datailStudioChat.setOnClickListener(this)
 
@@ -232,11 +238,18 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
         mViewDataBinding.studioParking.setText(data[0].parking)
         mViewDataBinding.studioMapAddress.setText(data[0].address)
 
-        mapView = MapView(this)
-        val mapViewContainer = map_view
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.map, it).commit()
+            }
+        mapFragment.getMapAsync(this)
+
+        /*mapView = MapView(this)
+      //  val mapViewContainer = map_view
 
         mapView.setMapViewEventListener(this)
-        mapViewContainer.addView(mapView)
+       // mapViewContainer.addView(mapView)
 
         val permissionCheck = ContextCompat.checkSelfPermission(
             this,
@@ -275,7 +288,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
                 REQUIRED_PERMISSIONS,
                 PERMISSIONS_REQUEST_CODE
             )
-        }
+        }*/
 
         if (data[0].review.size != 0) {
             mViewDataBinding.reviewLayout.visibility = View.VISIBLE
@@ -326,6 +339,72 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
             R.id.addr_copy -> {
                 Toast.makeText(this, "주소복사 완료", Toast.LENGTH_SHORT).show()
             }
+            R.id.navi -> {
+                val dialog: DatailNaviDialog = DatailNaviDialog {
+                    when (it) {
+                        0 -> {
+                            if (NaviClient.instance.isKakaoNaviInstalled(this)) {
+                                Log.i(Constants.TAG, "카카오내비 앱으로 길안내 가능")
+                                startActivity(
+                                    NaviClient.instance.shareDestinationIntent(
+                                        Location(
+                                            dataList[0].name,
+                                            dataList[0].longitude,
+                                            dataList[0].latitude,
+                                        ),
+                                        NaviOption(coordType = CoordType.WGS84)
+                                    )
+                                )
+                            } else {
+                                Toast.makeText(this, "카카오내비 앱이 필요합니다.", Toast.LENGTH_SHORT)
+                                    .show()
+                                val newintent = Intent(Intent.ACTION_VIEW)
+                                newintent.setData(Uri.parse("market://details?id=com.locnall.KimGiSa"))
+                                startActivity(newintent)
+                            }
+                        }
+                        1 -> {
+                            var dname_encode = URLEncoder.encode(dataList[0].address)
+                            val url =
+                                "nmap://navigation?dlat=" + dataList[0].latitude + "&dlng=" + dataList[0].longitude + "&dname=" + dname_encode +"&appname=com.weare.wearecompany.ui.detail"
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                            val list = packageManager.queryIntentActivities(
+                                intent,
+                                PackageManager.MATCH_DEFAULT_ONLY
+                            )
+
+                            if (list == null || list.isEmpty()) {
+                                Toast.makeText(this, "네이버 지도 앱이 필요합니다.", Toast.LENGTH_SHORT)
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("market://details?id=com.nhn.android.nmap")
+                                    )
+                                )
+                            } else {
+                                startActivity(intent)
+                            }
+
+
+                        }
+                    }
+                }
+                dialog.show(supportFragmentManager, dialog.tag)
+
+                /*val destination: Kakao =
+                    com.kakao.kakaonavi.Location.newBuilder(
+                        "위치",
+                        viewModel.getPicZone().getCoordinate().get(0).doubleValue(),
+                        viewModel.getPicZone().getCoordinate().get(1).doubleValue()
+                    ).build()
+
+                val builder: KakaoNaviParams= KakaoNaviParams.
+                    .setNaviOptions(NaviOptions.newBuilder().setCoordType(CoordType.WGS84).build())
+
+                KakaoNaviService.getInstance()
+                    .shareDestination(this@DetailMapActivity, builder.build())*/
+            }
             R.id.like -> {
                 if (MyApplication.prefs.getString("user_idx", "") != "") {
                     if (like) {
@@ -350,6 +429,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
                             completion = { responseStatus ->
                                 when (responseStatus) {
                                     LIKE.OKAY -> {
+                                        mViewDataBinding.bookLottie.playAnimation()
                                         mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
                                         like = true
                                     }
@@ -403,9 +483,9 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
                             // 피드 메시지 보내기
                             LinkClient.instance.defaultTemplate(this, params) { linkResult, error ->
                                 if (error != null) {
-                                    Log.e(Constants.TAG, "카카오링크 보내기 실패", error)
+                                    //Log.e(Constants.TAG, "카카오링크 보내기 실패", error)
                                 } else if (linkResult != null) {
-                                    Log.d(Constants.TAG, "카카오링크 보내기 성공 ${linkResult.intent}")
+                                    //Log.d(Constants.TAG, "카카오링크 보내기 성공 ${linkResult.intent}")
                                     startActivity(linkResult.intent)
 
                                     // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
@@ -436,18 +516,21 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
             }
             R.id.studio_reservation -> {
                 if (MyApplication.prefs.getString("user_idx", "") != "") {
-                    MainManager.instance.certcheck(user_idx,complation = { responseStatus, check ->
-                        when(responseStatus) {
+                    MainManager.instance.certcheck(user_idx, complation = { responseStatus, check ->
+                        when (responseStatus) {
                             RESPONSE_STATUS.OKAY -> {
-                                when(check) {
+                                when (check) {
                                     0 -> {
                                         val testdi: tesdialog = tesdialog {
-                                            when(it) {
+                                            when (it) {
                                                 0 -> {
 
                                                 }
                                                 1 -> {
-                                                    var newIntent = Intent(this, PhotoPaymentActivity::class.java)
+                                                    var newIntent = Intent(
+                                                        this,
+                                                        PhotoPaymentActivity::class.java
+                                                    )
                                                     startActivityForResult(newIntent, 9999)
                                                 }
                                             }
@@ -455,11 +538,17 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
                                         testdi.show(supportFragmentManager, testdi.tag)
                                     }
                                     1 -> {
-                                        var newIntent = Intent(this@DatailActivity, ReservationStudioActivity::class.java)
-                                        newIntent.putExtra("user_idx",user_idx)
-                                        newIntent.putExtra("expert_user_idx",dataList[0].expert_user_idx)
-                                        newIntent.putExtra("expert_idx",dataList[0].idx)
-                                        newIntent.putParcelableArrayListExtra("roomdata",datalist)
+                                        var newIntent = Intent(
+                                            this@DatailActivity,
+                                            ReservationStudioActivity::class.java
+                                        )
+                                        newIntent.putExtra("user_idx", user_idx)
+                                        newIntent.putExtra(
+                                            "expert_user_idx",
+                                            dataList[0].expert_user_idx
+                                        )
+                                        newIntent.putExtra("expert_idx", dataList[0].idx)
+                                        newIntent.putParcelableArrayListExtra("roomdata", datalist)
                                         startActivity(newIntent)
                                     }
                                 }
@@ -471,7 +560,11 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
                 }
             }
             R.id.datail_studio_chat -> {
-
+                val newIntent = Intent(this, DetailChatActivity::class.java)
+                newIntent.putExtra("expert_type", "0")
+                newIntent.putExtra("expert_idx", dataList[0].idx)
+                newIntent.putExtra("expert_user_idx", dataList[0].expert_user_idx)
+                startActivityForResult(newIntent,3001)
             }
         }
     }
@@ -479,7 +572,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
     private fun dynamicLicnk() {
         val dynamicLink =
             Firebase.dynamicLinks.dynamicLink { // or Firebase.dynamicLinks.shortLinkAsync
-                link = Uri.parse("https://wraer.com/" )
+                link = Uri.parse("https://wraer.com/")
                 domainUriPrefix = "https://wearecompany.page.link"
                 androidParameters("com.weare.wearecompany") {
                     minimumVersion = 3
@@ -526,7 +619,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
     }
 
 
-    override fun onMapViewInitialized(p0: MapView?) {
+   /* override fun onMapViewInitialized(p0: MapView?) {
     }
 
     override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
@@ -559,7 +652,7 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
 
     override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
         mViewDataBinding.detailNestedScrollview.requestDisallowInterceptTouchEvent(true)
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -583,6 +676,10 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
         oldScrollX: Int,
         oldScrollY: Int
     ) {
+    }
+
+    override fun onMapReady(p0: NaverMap) {
+        map = p0
     }
 
 

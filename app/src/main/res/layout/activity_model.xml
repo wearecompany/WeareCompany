@@ -224,132 +224,272 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginEnd="19dp"
-                    android:background="@drawable/model_user_info_top_background"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="신장"
-                        android:textColor="#000"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="발"
-                        android:textColor="#000"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="상의"
-                        android:textColor="#000"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="하의"
-                        android:textColor="#000"
-                        android:textSize="12dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
                     android:layout_marginBottom="29dp"
-                    android:background="@drawable/model_user_info_bottom_background"
                     android:orientation="horizontal">
 
                     <LinearLayout
+
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/model_datail_tall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="13dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:text="cm"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="0.5"
+                                android:background="#6d34f3"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/model_datail_tall"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:gravity="center"
-                            android:textColor="#000"
+                            android:layout_marginTop="7dp"
                             android:textSize="12dp"
-                            android:textStyle="bold" />
+                            android:textColor="#383838"
+                            android:text="신장"
+                            android:gravity="center"/>
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/model_datail_feet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="13dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:text="mm"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="0.5"
+                                android:background="#6d34f3"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/model_datail_feet"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textColor="#000"
+                            android:layout_marginTop="7dp"
                             android:textSize="12dp"
-                            android:textStyle="bold" />
+                            android:textColor="#383838"
+                            android:text="발"
+                            android:gravity="center"/>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/model_datail_top_size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="13dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:text="size"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="0.5"
+                                android:background="#6d34f3"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/model_datail_top_size"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textColor="#000"
+                            android:layout_marginTop="7dp"
                             android:textSize="12dp"
-                            android:textStyle="bold" />
+                            android:textColor="#383838"
+                            android:text="상의"
+                            android:gravity="center"/>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/model_datail_bottom_size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="5dp"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="13dp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:text="size"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="0.5"
+                                android:background="#6d34f3"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#eaeaea"/>
+                        </LinearLayout>
 
                         <TextView
-                            android:id="@+id/model_datail_bottom_size"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textColor="#000"
+                            android:layout_marginTop="7dp"
                             android:textSize="12dp"
-                            android:textStyle="bold" />
+                            android:textColor="#383838"
+                            android:text="하의"
+                            android:gravity="center"/>
 
                     </LinearLayout>
+
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -553,12 +693,19 @@
             android:contentDescription="@string/app_name"
             app:fabSize="normal"
             android:visibility="gone"
-            app:srcCompat="@drawable/bottom_chat"
+            app:srcCompat="@drawable/datail_chat"
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="15dp"
             app:tint="#fff"
-            app:backgroundTint="#A6CBF0" />
+            app:backgroundTint="#9dabe6" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/book_lottie"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/payment_test_1"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -611,7 +758,7 @@
                 android:text="요청서 보내기"
                 android:textColor="#fff"
                 android:textColorHint="#cbcbcb"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

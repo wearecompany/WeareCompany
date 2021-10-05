@@ -15,7 +15,6 @@ import com.weare.wearecompany.data.photo.dateil.list.date.dateilTrip
 import com.weare.wearecompany.utils.API
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.weare.wearecompany.data.bottomnav.estimate.data.uploadRequest
 import com.weare.wearecompany.data.bottomnav.estimate.progress.ProgressList
 import com.weare.wearecompany.data.bottomnav.estimate.progress.Review
 import com.weare.wearecompany.data.bottomnav.estimate.progress.data.*
@@ -29,20 +28,23 @@ import com.weare.wearecompany.data.bottomnav.estimate.send.data.SendExpertPage
 import com.weare.wearecompany.data.bottomnav.estimate.send.data.SendShopPage
 import com.weare.wearecompany.data.bottomnav.estimate.send.data.SendStudioPage
 import com.weare.wearecompany.data.bottomnav.mypage.*
-import com.weare.wearecompany.data.bottomnav.mypage.data.allList
 import com.weare.wearecompany.data.chatting.ChatDatail
 import com.weare.wearecompany.data.chatting.ChatList
 import com.weare.wearecompany.data.chatting.ChatLog
 import com.weare.wearecompany.data.chatting.Detail
+import com.weare.wearecompany.data.division.Division
+import com.weare.wearecompany.data.division.DivisionPage
 import com.weare.wearecompany.data.login.Login
 import com.weare.wearecompany.data.main.*
+import com.weare.wearecompany.data.main.Request.*
+import com.weare.wearecompany.data.main.Request.deta.sendoneclickpage
+import com.weare.wearecompany.data.main.Request.deta.top
 import com.weare.wearecompany.data.main.data.eventpage
 import com.weare.wearecompany.data.notification.AlarmList
 import com.weare.wearecompany.data.studio.main.Main
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -68,7 +70,7 @@ interface IRetrofit {
 
     @Headers("Content-Type: application/json")
     @POST(API.MAIN_HOTPICK)
-    fun mainhotpick(): Call<HotpickList>
+    fun mainhotpick(): Single<HotpickList>
 
     @Headers("Content-Type: application/json")
     @POST(API.MY_REVIEW_LIST)
@@ -76,7 +78,7 @@ interface IRetrofit {
 
     @Headers("Content-Type: application/json")
     @POST(API.MAIN_EVENT)
-    fun mainevent(): Call<EventList>
+    fun mainevent(): Single<EventList>
 
     @Headers("Content-Type: application/json")
     @POST(API.EVENT_PAGE)
@@ -185,14 +187,6 @@ interface IRetrofit {
     @POST(API.INFORMATION)
     fun information(): Call<Information>
 
-    @Multipart
-    @POST(API.REQUEST)
-    fun request(@PartMap params: HashMap<String, RequestBody>,
-                @Part("expert_type") expert_type: Int?,
-                @Part("expert_category") expert_category: Int?,
-                @Part("place") place: Int?,
-                @Part("request_dt_status") request_dt_status: Boolean? ): Call<JsonElement>
-
     @Headers("Content-Type: application/json")
     @POST(API.NOTICE)
     fun notice(): Call<Notice>
@@ -200,6 +194,18 @@ interface IRetrofit {
     @Headers("Content-Type: application/json")
     @POST(API.TOKEN)
     fun token(@Body jsonObject: JsonObject): Call<JsonElement>
+
+    /**
+     * 전속모델 리스트
+     */
+    @Headers("Content-Type: application/json")
+    @GET(API.DIVISION_LIST)
+    fun divisionlist(): Call<Division>
+
+    @Headers("Content-Type: application/json")
+    @GET(API.DIVISION_PAGE)
+    fun divisionpage( @Query("user_idx") user_idx: String,
+                      @Query("model_idx") model_idx: String): Call<DivisionPage>
 
 
 
@@ -220,10 +226,134 @@ interface IRetrofit {
     @Headers("Content-Type: application/json")
     @POST(API.RESERVE_SHOP)
     fun reserverent(@Body jsonObject: JsonObject): Call<JsonElement>
+
+    /**
+     * 변경된 견적요청
+     */
+
+    @Multipart
+    @POST(API.ONCLICK_CALL)
+    fun oneclickcall(@PartMap params: HashMap<String, RequestBody>,
+                @Part("expert_type") expert_type: List<Int>,
+                @Part("price") price: Int ): Call<JsonElement>
+
+    //보낸요청
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_TOP_LIST)
+    fun requesttopList(@Body jsonObject: JsonObject): Call<TopList>
+
+    //보낸요청
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_SEND_LIST)
+    fun requestSendList(@Body jsonObject: JsonObject): Call<requestSendList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_ONECLICK_PAGE)
+    fun sendonclickpage(@Body jsonObject: JsonObject): Call<sendoneclickpage>
+
+    //받은견적
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_RECEIVE_LIST)
+    fun requestReceiveList(@Body jsonObject: JsonObject): Call<requestReceiveList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.RECEIVE_ONECLICK_PAGE)
+    fun receiveonclickpage(@Body jsonObject: JsonObject): Call<receiveOneClickPage>
+
+    //결제완료
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_PROGRESS_LIST)
+    fun requestProgressList(@Body jsonObject: JsonObject): Call<requestReceiveList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_STUDIO_PAGE)
+    fun progressstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_EXPERT_PAGE)
+    fun progressexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_ONECLICK_PAGE)
+    fun progressonclickList(@Body jsonObject: JsonObject): Call<progressOneClickPage>
+
+    //진행완료
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_PROGRESS_OK_LIST)
+    fun requestProgressOkList(@Body jsonObject: JsonObject): Call<requestReceiveList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_OK_STUDIO_PAGE)
+    fun progressokstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_OK_EXPERT_PAGE)
+    fun progressokexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_OK_ONECLICK_PAGE)
+    fun progressokoneclickpage(@Body jsonObject: JsonObject): Call<progressOneClickPage>
+
+    //구매확정
+    @Headers("Content-Type: application/json")
+    @POST(API.PROGRESS_RESERVE_COMPLETE)
+    fun progressreservecomplete(@Body jsonObject: JsonObject): Call<JsonElement>
+
+    //후기작성
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_REVIEW_LIST)
+    fun requestReviewList(@Body jsonObject: JsonObject): Call<requestReviewList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REVIEW_EXPERT_PAGE)
+    fun reviewexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REVIEW_STUDIO_PAGE)
+    fun reviewstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REVIEW_ONECLICK_PAGE)
+    fun reviewoneclickpage(@Body jsonObject: JsonObject): Call<progressOneClickPage>
+
+    //취소요청
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_REFUND_LIST)
+    fun requestRefundList(@Body jsonObject: JsonObject): Call<requestReceiveList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_EXPERT_PAGE)
+    fun refundexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_STUDIO_PAGE)
+    fun refundstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_ONECLICK_PAGE)
+    fun refundoneclickpage(@Body jsonObject: JsonObject): Call<progressOneClickPage>
+
+    //취소완료
+    @Headers("Content-Type: application/json")
+    @POST(API.REQUEST_REFUND_OK_LIST)
+    fun requestRefundOkList(@Body jsonObject: JsonObject): Call<requestReceiveList>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_OK_EXPERT_PAGE)
+    fun refundokexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_OK_STUDIO_PAGE)
+    fun refundokstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.REFUND_OK_ONECLICK_PAGE)
+    fun refundokoneclickpage(@Body jsonObject: JsonObject): Call<progressOneClickPage>
+
+
     /**
      * 견적요청
      */
-
     //보낸견적
     @Headers("Content-Type: application/json")
     @POST(API.REQUEST_LIST)
@@ -240,10 +370,6 @@ interface IRetrofit {
     @Headers("Content-Type: application/json")
     @POST(API.REQUEST_SHOP_PAGE)
     fun sendshoppage(@Body jsonObject: JsonObject): Call<SendShopPage>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.REQUEST_PAGE)
-    fun sendpage(@Body jsonObject: JsonObject): Call<Sendpage>
 
 
     //받은견적
@@ -263,45 +389,12 @@ interface IRetrofit {
     @POST(API.RECEIVE_LIST)
     fun receivelist(@Body jsonObject: JsonObject): Call<ReceiveList>
 
-    @Headers("Content-Type: application/json")
-    @POST(API.RECEIVE_MANY_PAGE)
-    fun receivepage(@Body jsonObject: JsonObject): Call<Receivepage>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.RECEIVE_PAYMENT)
-    fun receivepayment(@Body jsonObject: JsonObject): Call<JsonElement>
-
 
     //진행현황
     @Headers("Content-Type: application/json")
     @POST(API.PROGRESS_LIST)
     fun progresslist(@Body jsonObject: JsonObject): Call<ProgressList>
 
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_STUDIO_PAGE)
-    fun progressstudiopage(@Body jsonObject: JsonObject): Call<ProgressStudioPage>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_EXPERT_PAGE)
-    fun progressexpertpage(@Body jsonObject: JsonObject): Call<ProgressExpertPage>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_SHOP_PAGE)
-    fun progressshoppage(@Body jsonObject: JsonObject): Call<ProgressShopPage>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_MANY_PAGE)
-    fun progressmanypage(@Body jsonObject: JsonObject): Call<ProgressManyPage>
-
-
-
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_RESERVE_COMPLETE)
-    fun progressreservecomplete(@Body jsonObject: JsonObject): Call<JsonObject>
-
-    @Headers("Content-Type: application/json")
-    @POST(API.PROGRESS_REQUEST_COMPLETE)
-    fun progressrequestcomplete(@Body jsonObject: JsonObject): Call<JsonObject>
 
     /**
      * 환불요청
@@ -309,7 +402,7 @@ interface IRetrofit {
 
     @Headers("Content-Type: application/json")
     @POST(API.REFUND_RESERVE)
-    fun refundreserve(@Body jsonObject: JsonObject): Call<JsonObject>
+    fun refundreserve(@Body jsonObject: JsonObject): Call<JsonElement>
 
     @Headers("Content-Type: application/json")
     @POST(API.REFUND_REQUEST)
@@ -323,9 +416,7 @@ interface IRetrofit {
     @GET(API.REVIEW_CALL)
     fun reviewcall(
         @Query("type") type: Int,
-        @Query("reserve_idx") reserve_idx: String,
-        @Query("request_idx") request_idx: String,
-        @Query("request_log_idx") request_log_idx: String): Call<Review>
+        @Query("reserve_idx") reserve_idx: String ): Call<Review>
 
     @Multipart
     @POST(API.REVIEW_UPLOAD)
@@ -352,6 +443,10 @@ interface IRetrofit {
     @Headers("Content-Type: application/json")
     @POST(API.CHAT_DETAIL)
     fun chatdetail(@Body jsonObject: JsonObject): Call<Detail>
+
+    @Headers("Content-Type: application/json")
+    @POST(API.CHAT_SERVICE_DETAIL)
+    fun chatservicedetail(@Body jsonObject: JsonObject): Call<ChatDatail>
 
     @Multipart
     @POST(API.CHAT_IMAGE)

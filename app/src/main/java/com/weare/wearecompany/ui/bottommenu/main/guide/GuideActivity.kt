@@ -18,7 +18,7 @@ class GuideActivity: BaseActivity<ActivityGuideDetailBinding> (
         ActionBar.setDisplayShowTitleEnabled(false)
         mViewDataBinding.guideWeb.getSettings().textZoom = 100  //시스템 텍스트 크기를 무시한 텍스트 사이즈 고정
 
-        mViewDataBinding.guideWeb.loadUrl("https://dev.wearecompany.co.kr/guide/app/1/"+intent.getStringExtra("idx"))
+        mViewDataBinding.guideWeb.loadUrl("https://wearecompany.co.kr/guide/app/1/"+intent.getStringExtra("idx"))
 
 
     }

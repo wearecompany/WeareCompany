@@ -116,22 +116,6 @@ class login : BaseActivity<ActivityLoginBinding>(
         }
     }
 
-    private fun getAppKeyHash() {
-        try {
-            val info =
-                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                var md: MessageDigest
-                md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val something = String(Base64.encode(md.digest(), 0))
-                Log.e("Hash key", something)
-            }
-        } catch (e: Exception) {
-            Log.e("name not found", e.toString())
-        }
-    }
-
     fun name(token: String) {
         UserApiClient.instance.me { user, error ->
             if (error != null) {

@@ -8,9 +8,9 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val viewModel: Module = module {
-    viewModel { LoginViewModel(get()) }
+   /* viewModel { LoginViewModel(get()) }
     viewModel { JoinViewModel(get()) }
-    viewModel { ContainerViewModel(get()) }
+    viewModel { ContainerViewModel(get()) }*/
 }
 
 val appModules = listOf{

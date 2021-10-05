@@ -76,7 +76,7 @@ class TripMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
         }
 
 
-        /*mViewDataBinding.allMoney.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
+        mViewDataBinding.allMoney.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
             override fun onStartTrackingTouch(slider: RangeSlider) {
 
             }
@@ -84,11 +84,14 @@ class TripMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
             override fun onStopTrackingTouch(slider: RangeSlider) {
                 val values = slider.values
 
-                mViewDataBinding.minMoney.text = values[0].toString()
-                mViewDataBinding.maxMoney.text = values[1].toString()
+                min = String.format("%.0f", values[0])
+                max = String.format("%.0f", values[1])
+
+                mViewDataBinding.minMoney.text = dec.format(min.toInt())
+                mViewDataBinding.maxMoney.text = dec.format(max.toInt())
             }
 
-        })*/
+        })
 
         mViewDataBinding.allMoney.addOnChangeListener(object : RangeSlider.OnChangeListener{
             override fun onValueChange(slider: RangeSlider, value: Float, fromUser: Boolean) {
@@ -123,6 +126,7 @@ class TripMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
                             mViewDataBinding.maxMoney.text = dec.format(max.toInt())
                         } else {
                             viewmodel.setMax("")
+                            mViewDataBinding.maxMoneyTitle.text = "원 이상"
                             mViewDataBinding.maxMoney.text = dec.format(500000)
                         }
                         mViewDataBinding.minMoney.setTextColor(Color.parseColor("#0f0f0f"))
@@ -131,10 +135,10 @@ class TripMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
                         mViewDataBinding.maxMoneyTitle.setTextColor(Color.parseColor("#0f0f0f"))
                         mViewDataBinding.moneyAnd.setTextColor(Color.parseColor("#0f0f0f"))
                     }
-                    /*viewmodel.setMin(min)
+                    viewmodel.setMin(min)
                     mViewDataBinding.minMoney.text = dec.format(min)
                     viewmodel.setMax(max)
-                    mViewDataBinding.maxMoney.text = dec.format(max)*/
+                    mViewDataBinding.maxMoney.text = dec.format(max)
                 }
             }
 

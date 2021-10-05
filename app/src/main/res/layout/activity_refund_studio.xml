@@ -205,6 +205,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="원"
+                                android:layout_marginStart="5dp"
                                 android:textColor="#656565"
                                 android:textSize="12dp" />
                         </LinearLayout>
@@ -222,13 +223,12 @@
                     android:id="@+id/refund_studio_expert_info_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="11dp"
                     android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="11dp">
+                        android:layout_height="wrap_content">
 
                         <LinearLayout
                             android:layout_width="match_parent"

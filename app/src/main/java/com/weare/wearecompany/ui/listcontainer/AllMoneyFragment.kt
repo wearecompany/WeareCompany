@@ -40,7 +40,7 @@ class AllMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
         }
 
         min = viewmodel.getMin()
-        max = viewmodel.getMax()
+       max = viewmodel.getMax()
 
         if (min == "" && max == "") {
             mViewDataBinding.allMoney.setValues(0f,500000f)
@@ -76,7 +76,7 @@ class AllMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
         }
 
 
-        /*mViewDataBinding.allMoney.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
+        mViewDataBinding.allMoney.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
             override fun onStartTrackingTouch(slider: RangeSlider) {
 
             }
@@ -84,11 +84,14 @@ class AllMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
             override fun onStopTrackingTouch(slider: RangeSlider) {
                 val values = slider.values
 
-                mViewDataBinding.minMoney.text = values[0].toString()
-                mViewDataBinding.maxMoney.text = values[1].toString()
+                min = String.format("%.0f", values[0])
+                max = String.format("%.0f", values[1])
+
+                mViewDataBinding.minMoney.text = dec.format(min.toInt())
+                mViewDataBinding.maxMoney.text = dec.format(max.toInt())
             }
 
-        })*/
+        })
 
         mViewDataBinding.allMoney.addOnChangeListener(object : RangeSlider.OnChangeListener{
             override fun onValueChange(slider: RangeSlider, value: Float, fromUser: Boolean) {
@@ -132,10 +135,10 @@ class AllMoneyFragment : BaseFragment<BottomDialogAllMoneyBinding>(
                         mViewDataBinding.maxMoneyTitle.setTextColor(Color.parseColor("#0f0f0f"))
                         mViewDataBinding.moneyAnd.setTextColor(Color.parseColor("#0f0f0f"))
                     }
-                    /*viewmodel.setMin(min)
-                    mViewDataBinding.minMoney.text = dec.format(min)
+                    viewmodel.setMin(min)
+                    mViewDataBinding.minMoney.text = dec.format(min.toInt())
                     viewmodel.setMax(max)
-                    mViewDataBinding.maxMoney.text = dec.format(max)*/
+                    mViewDataBinding.maxMoney.text = dec.format(max.toInt())
                 }
             }
 

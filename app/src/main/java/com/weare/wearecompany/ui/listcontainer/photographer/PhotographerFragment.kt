@@ -1,24 +1,18 @@
 package com.weare.wearecompany.ui.listcontainer.photographer
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,27 +20,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.List.model.photographer.data.photo
 import com.weare.wearecompany.data.retrofit.List.studio.photographerListManager
-import com.weare.wearecompany.databinding.FragmentListPhotographerBinding
-import com.weare.wearecompany.ui.base.BaseFragment
 import com.weare.wearecompany.ui.detail.photo.PhotoActivity
 import com.weare.wearecompany.ui.listcontainer.ListContainerActivity
 import com.weare.wearecompany.utils.RESPONSE_STATUS
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.JsonArray
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.data.List.clip
 import com.weare.wearecompany.data.model.list.data.newlist
-import com.weare.wearecompany.data.retrofit.List.studio.modelListManager
-import com.weare.wearecompany.ui.bottom.BottomCategoryLocationFragment
-import com.weare.wearecompany.ui.bottom.BottomCategoryPhotoFragment
-import com.weare.wearecompany.ui.listcontainer.MoneyDialog
-import com.weare.wearecompany.ui.listcontainer.SortDialog
 import com.weare.wearecompany.ui.listcontainer.model.ModelNewRecyclerViewAdapter
-import com.weare.wearecompany.ui.listcontainer.trip.TripAllDialog
-import com.weare.wearecompany.ui.listcontainer.trip.TripClipRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_list_model.view.*
 import kotlinx.android.synthetic.main.fragment_list_photographer.view.*
-import kotlinx.android.synthetic.main.fragment_list_trip.view.*
 
 class PhotographerFragment : Fragment(
 ), View.OnClickListener {
@@ -54,6 +36,7 @@ class PhotographerFragment : Fragment(
     private var ca_click = -1
     private var min_money = ""
     private var max_money = ""
+    private var nick_name = ""
     private var la_click = ArrayList<Int>()
     private var locationList = ArrayList<Int>()
 
@@ -100,10 +83,56 @@ class PhotographerFragment : Fragment(
             photor_datetime_array,
             min_money,
             max_money,
+            nick_name,
             Psort_check,
             1
         )
         bindsetup()
+
+        viewe.photo_list_search_edit.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (viewe.photo_list_search_edit.isFocusable && !s.toString().equals("")) {
+                    viewe.photo_list_search_image_1.visibility = View.VISIBLE
+                    viewe.photo_list_search_image_2.visibility = View.GONE
+                } else if (viewe.photo_list_search_edit.isFocusable && s.toString().equals("")) {
+                    viewe.photo_list_search_image_1.visibility = View.GONE
+                    viewe.photo_list_search_image_2.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
+
+        viewe.photo_list_search_edit.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+               when(actionId) {
+                   EditorInfo.IME_ACTION_DONE -> {
+                       nick_name = viewe.photo_list_search_edit.text.toString()
+                       datacall(
+                           photor_category_array,
+                           photor_location_array,
+                           photor_datetime_array,
+                           min_money,
+                           max_money,
+                           nick_name,
+                           Psort_check,
+                           page_count
+                       )
+                       return false
+                   }
+                   else -> {
+                       return false
+                   }
+               }
+                return true
+            }
+
+        })
 
 
         viewe.photo_list_recycler.addOnScrollListener(object  : RecyclerView.OnScrollListener(){
@@ -119,6 +148,7 @@ class PhotographerFragment : Fragment(
                         photor_datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         Psort_check,
                         page_count,
                         completion = { responseStatus, responsenewlist, responsestudiokList ->
@@ -157,6 +187,8 @@ class PhotographerFragment : Fragment(
         viewe.list_photo_location.setOnClickListener(this)
         viewe.list_photo_money.setOnClickListener(this)
         viewe.list_photo_sort.setOnClickListener(this)
+        viewe.photo_list_search_btn.setOnClickListener(this)
+        viewe.photo_list_search_image_1.setOnClickListener(this)
     }
 
 
@@ -166,6 +198,7 @@ class PhotographerFragment : Fragment(
         timeArray: JsonArray,
         min: String,
         max: String,
+        nickname: String,
         sort: Int,
         page: Int
     ) {
@@ -227,12 +260,11 @@ class PhotographerFragment : Fragment(
             clipList.add(sortitem)
         }
         photographerListManager.instant.listdata(
-            photorArray, locationArray, timeArray, min, max, sort, page,
+            photorArray, locationArray, timeArray, min, max, nickname, sort, page,
             completion = { responseStatus, responsenewlist,responsestudiokList ->
 
                 when (responseStatus) {
                     RESPONSE_STATUS.OKAY -> {
-                        if (responsestudiokList != null) {
 
                             newPhotoAdapter = ModelNewRecyclerViewAdapter(responsenewlist)
                             viewe.list_photo_new_recyclerview.layoutManager = LinearLayoutManager(
@@ -251,6 +283,7 @@ class PhotographerFragment : Fragment(
 
                             })
 
+                        if (responsestudiokList.size != 0) {
                             photographerDataList = responsestudiokList
                             photoAdapter =
                                 PhotographerRecyclerViewAdapter(photographerDataList)
@@ -330,6 +363,7 @@ class PhotographerFragment : Fragment(
                                             photor_datetime_array,
                                             min_money,
                                             max_money,
+                                            nick_name,
                                             Psort_check,
                                             page_count
                                         )
@@ -339,7 +373,11 @@ class PhotographerFragment : Fragment(
                             } else {
                                 viewe.list_photo_clip_recyclerview.visibility = View.GONE
                             }
+                        } else {
+                            Toast.makeText(mContext,"조건에 맞는 전문가가 없습니다.",Toast.LENGTH_SHORT).show()
                         }
+
+
                     }
                 }
             })
@@ -348,6 +386,22 @@ class PhotographerFragment : Fragment(
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.photo_list_search_image_1 -> {
+                viewe.photo_list_search_image_1.visibility = View.GONE
+                viewe.photo_list_search_image_2.visibility = View.VISIBLE
+                viewe.photo_list_search_edit.setText("")
+                nick_name = ""
+                datacall(
+                    photor_category_array,
+                    photor_location_array,
+                    photor_datetime_array,
+                    min_money,
+                    max_money,
+                    nick_name,
+                    Psort_check,
+                    page_count
+                )
+            }
             R.id.list_photo_category -> {
                 val testiew: PhotoAllDialog = PhotoAllDialog(
                     0,
@@ -362,7 +416,7 @@ class PhotographerFragment : Fragment(
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_puple)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#6d34f3"))
                     } else {
-                        viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                        viewe.list_photo_category.setBackgroundResource(R.drawable.list_sub_background_off)
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_gray)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#7f7f7f"))
                     }
@@ -422,6 +476,7 @@ class PhotographerFragment : Fragment(
                         photor_datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         Psort_check,
                         page_count
                     )
@@ -436,7 +491,7 @@ class PhotographerFragment : Fragment(
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_puple)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#6d34f3"))
                     } else {
-                        viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                        viewe.list_photo_category.setBackgroundResource(R.drawable.list_sub_background_off)
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_gray)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#7f7f7f"))
                     }
@@ -494,6 +549,7 @@ class PhotographerFragment : Fragment(
                         photor_datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         Psort_check,
                         page_count
                     )
@@ -508,7 +564,7 @@ class PhotographerFragment : Fragment(
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_puple)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#6d34f3"))
                     } else {
-                        viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                        viewe.list_photo_category.setBackgroundResource(R.drawable.list_sub_background_off)
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_gray)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#7f7f7f"))
                     }
@@ -566,6 +622,7 @@ class PhotographerFragment : Fragment(
                         photor_datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         Psort_check,
                         page_count
                     )
@@ -580,7 +637,7 @@ class PhotographerFragment : Fragment(
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_puple)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#6d34f3"))
                     } else {
-                        viewe.list_trip_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                        viewe.list_photo_category.setBackgroundResource(R.drawable.list_sub_background_off)
                         viewe.photor_category_image.setImageResource(R.drawable.list_category_down_gray)
                         viewe.photor_category_text.setTextColor(Color.parseColor("#7f7f7f"))
                     }
@@ -638,6 +695,7 @@ class PhotographerFragment : Fragment(
                         photor_datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         Psort_check,
                         page_count
                     )

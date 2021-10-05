@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -63,9 +64,9 @@ class ReceivePhotoActivity : BaseActivity<ActivityReceivePhotoBinding>(
 
     private fun setup() {
 
-        mViewDataBinding.reservationExpertOk.setOnClickListener(this)
+        mViewDataBinding.receivePhotoPayment.setOnClickListener(this)
         mViewDataBinding.receivePhotoToolbarRefundMenu.setOnClickListener(this)
-        mViewDataBinding.reservationExpertChat.setOnClickListener(this)
+        mViewDataBinding.receivePhotoChat.setOnClickListener(this)
         mViewDataBinding.receivePhotoExpertInfoLayout.setOnClickListener(this)
 
         receiveManager.instance.expertPage(
@@ -141,7 +142,7 @@ class ReceivePhotoActivity : BaseActivity<ActivityReceivePhotoBinding>(
             5001 -> {
                 val intent = Intent()
                 intent.putExtra("payment", "ok")
-                setResult(5001, intent)
+                setResult(3001, intent)
                 finish()
             }
         }
@@ -150,28 +151,25 @@ class ReceivePhotoActivity : BaseActivity<ActivityReceivePhotoBinding>(
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.receive_trip_expert_info_layout -> {
+            R.id.receive_photo_expert_info_layout -> {
                 var newIntent = Intent()
-
                 newIntent = Intent(this, PhotoActivity::class.java)
-
                 newIntent.putExtra("expert_idx", expert_idx)
                 startActivity(newIntent)
             }
-            R.id.reservation_expert_ok -> {
+            R.id.receive_photo_payment -> {
                 val newIntent = Intent(this, paymentActivity::class.java)
                 newIntent.putExtra("reserve_idx", reserve_idx)
                 newIntent.putExtra("type", 0)
                 startActivityForResult(newIntent, 5000)
             }
-            R.id.reservation_expert_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype", 0)
-                startActivity(newIntent)
+            R.id.receive_photo_chat -> {
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
-            R.id.receive_trip_toolbar_refund_menu -> {
+            R.id.receive_photo_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
                     when (it) {
                         1 -> {
@@ -185,8 +183,7 @@ class ReceivePhotoActivity : BaseActivity<ActivityReceivePhotoBinding>(
                                     }
                                 })
                             val intent = Intent()
-                            intent.putExtra("Cancellation", "ok")
-                            setResult(6000, intent)
+                            setResult(2003, intent)
                             finish()
                         }
 

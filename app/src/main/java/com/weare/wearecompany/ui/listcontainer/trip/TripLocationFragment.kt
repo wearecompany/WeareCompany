@@ -7,11 +7,10 @@ import androidx.fragment.app.activityViewModels
 import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.BottomDialogAllLocationBinding
 import com.weare.wearecompany.ui.base.BaseFragment
-import com.weare.wearecompany.ui.listcontainer.studio.StudioViewModel
 
 class TripLocationFragment : BaseFragment<BottomDialogAllLocationBinding>(
     R.layout.bottom_dialog_all_location
-), View.OnClickListener {
+),View.OnClickListener{
 
     private val viewmodel: TripViewModel by activityViewModels()
 

@@ -4,7 +4,6 @@ import com.google.gson.JsonObject
 import com.weare.wearecompany.data.bottomnav.estimate.receive.data.ReceiveExpertPage
 import com.weare.wearecompany.data.bottomnav.estimate.receive.data.ReceiveShopPage
 import com.weare.wearecompany.data.bottomnav.estimate.receive.data.ReceiveStudioPage
-import com.weare.wearecompany.data.bottomnav.estimate.send.data.SendShopPage
 import com.weare.wearecompany.data.retrofit.IRetrofit
 import com.weare.wearecompany.data.retrofit.RetrofitClient
 import com.weare.wearecompany.utils.API
@@ -21,6 +20,7 @@ class receiveManager {
 
     private val iRetrofit: IRetrofit? =
         RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
+
     fun studioPage(
         reserve_idx: String,
         completion: (ESTIMATE, ArrayList<ReceiveStudioPage>) -> Unit) {
@@ -55,10 +55,7 @@ class receiveManager {
                                 reserve_headcount = it.reserve_headcount,
                                 reserve_contents = it.reserve_contents,
                                 reserve_add_contents = it.reserve_add_contents,
-                                reserve_price = it.reserve_price,
-                                reserve_add_price = it.reserve_add_price,
-                                reserve_add_price_contents = it.reserve_add_price_contents,
-                                reserve_final_price = it.reserve_final_price
+                                reserve_price = it.reserve_price
                             )
                             shoppage.add(shoppageItem)
                             completion(ESTIMATE.OKAY, shoppage)
@@ -113,10 +110,7 @@ class receiveManager {
                                 reserve_headcount = it.reserve_headcount,
                                 reserve_contents = it.reserve_contents,
                                 reserve_add_contents = it.reserve_add_contents,
-                                reserve_price = it.reserve_price,
-                                reserve_add_price = it.reserve_add_price,
-                                reserve_add_price_contents = it.reserve_add_price_contents,
-                                reserve_final_price = it.reserve_final_price
+                                reserve_price = it.reserve_price
                             )
                             shoppage.add(shoppageItem)
                             completion(ESTIMATE.OKAY, shoppage)

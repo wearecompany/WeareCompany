@@ -87,6 +87,59 @@ class chattingManager {
         })
     }
 
+    fun servicedetail(
+        user_idx: Int,
+        expert_type: String,
+        expert_idx: String,
+        expert_user_idx: String,
+        completion: (RESPONSE_STATUS, ArrayList<ChatDatail>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("user_idx", user_idx)
+        `object`.addProperty("expert_type", expert_type)
+        `object`.addProperty("expert_idx", expert_idx)
+        `object`.addProperty("expert_user_idx", expert_user_idx)
+
+        val call = iRetrofit?.chatservicedetail(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ChatDatail> {
+            override fun onResponse(call: Call<ChatDatail>, response: Response<ChatDatail>) {
+
+                response.body()?.let {
+
+                    when (response.code()) {
+                        201 -> {
+                            var detailArry = ArrayList<ChatDatail>()
+
+                            val detailItem = ChatDatail(
+                                chat_idx = it.chat_idx,
+                                user_idx = it.user_idx,
+                                expert_user_idx = it.expert_user_idx,
+                                oppenent_nickname = it.oppenent_nickname,
+                                expert_type = it.expert_type,
+                                expert_idx = it.expert_idx,
+                                room_id = it.room_id,
+                                report_status = it.report_status,
+                            )
+                            detailArry.add(detailItem)
+                            completion(RESPONSE_STATUS.OKAY, detailArry)
+                        }
+                        404 -> {
+
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ChatDatail>, t: Throwable) {
+                Log.d(Constants.TAG, "chattingManager - detail - onFailure() called / t: $t")
+            }
+        })
+    }
+
     fun img(
         chat_idx: String,
         chat_image: File,

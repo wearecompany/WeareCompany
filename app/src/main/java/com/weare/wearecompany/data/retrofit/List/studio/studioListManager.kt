@@ -30,6 +30,7 @@ class studioListManager {
         datatime: JsonArray,
         lowmoney: String,
         maxmoney: String,
+        nickname: String,
         sort: Int,
         page: Int
     , completion:(RESPONSE_STATUS, ArrayList<newStudio>, ArrayList<studio>) -> Unit) {
@@ -48,6 +49,7 @@ class studioListManager {
         } else {
             `object`.addProperty("maxmoney",maxmoney)
         }
+        `object`.addProperty("nickname",nickname)
         `object`.addProperty("sort",sort)
         `object`.addProperty("page",page)
 
@@ -92,6 +94,8 @@ class studioListManager {
                             title = it.title,
                             address = it.address,
                             price = it.price,
+                            lat = it.lat,
+                            long = it.long,
                             grade = it.grade,
                             event = it.event
                         )

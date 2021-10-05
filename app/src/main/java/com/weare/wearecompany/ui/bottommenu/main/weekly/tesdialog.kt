@@ -12,7 +12,7 @@ import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
 import com.weare.wearecompany.ui.detail.studio.reservation.ReservationStudioDialogRecyclerViewAdapter
 import kotlinx.android.synthetic.main.dialog_certified.view.*
-import kotlinx.android.synthetic.main.studio_reservation_check_dialog.view.*
+
 import java.text.DecimalFormat
 
 class tesdialog(val itemClick:(Int) -> Unit): DialogFragment() {

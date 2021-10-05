@@ -2,6 +2,7 @@ package com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -63,9 +64,9 @@ class ReceiveModelActivity : BaseActivity<ActivityReceiveModelBinding>(
 
     private fun setup() {
 
-        mViewDataBinding.reservationExpertOk.setOnClickListener(this)
+        mViewDataBinding.requestModelPayment.setOnClickListener(this)
         mViewDataBinding.receiveModelToolbarRefundMenu.setOnClickListener(this)
-        mViewDataBinding.reservationExpertChat.setOnClickListener(this)
+        mViewDataBinding.receiveModelChat.setOnClickListener(this)
         mViewDataBinding.receiveModelExpertInfoLayout.setOnClickListener(this)
 
         receiveManager.instance.expertPage(
@@ -139,7 +140,7 @@ class ReceiveModelActivity : BaseActivity<ActivityReceiveModelBinding>(
             5001 -> {
                 val intent = Intent()
                 intent.putExtra("payment", "ok")
-                setResult(5001, intent)
+                setResult(3001, intent)
                 finish()
             }
         }
@@ -156,18 +157,17 @@ class ReceiveModelActivity : BaseActivity<ActivityReceiveModelBinding>(
                 newIntent.putExtra("expert_idx", expert_idx)
                 startActivity(newIntent)
             }
-            R.id.reservation_expert_ok -> {
+            R.id.request_model_payment -> {
                 val newIntent = Intent(this, paymentActivity::class.java)
                 newIntent.putExtra("reserve_idx", reserve_idx)
                 newIntent.putExtra("type", 0)
                 startActivityForResult(newIntent, 5000)
             }
-            R.id.reservation_expert_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype", 0)
-                startActivity(newIntent)
+            R.id.receive_model_chat -> {
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
             R.id.receive_model_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
@@ -183,8 +183,7 @@ class ReceiveModelActivity : BaseActivity<ActivityReceiveModelBinding>(
                                     }
                                 })
                             val intent = Intent()
-                            intent.putExtra("Cancellation", "ok")
-                            setResult(6000, intent)
+                            setResult(2003, intent)
                             finish()
                         }
 

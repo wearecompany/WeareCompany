@@ -1,26 +1,24 @@
 package com.weare.wearecompany.ui.listcontainer
 
-import android.os.Bundle
+import android.content.Intent
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.tabs.TabLayout
 import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.ActivityListcontainerBinding
 import com.weare.wearecompany.ui.base.BaseActivity
-import com.weare.wearecompany.ui.listcontainer.trip.TripFragment
 import com.weare.wearecompany.ui.listcontainer.model.ModelFragment
 import com.weare.wearecompany.ui.listcontainer.photographer.PhotographerFragment
-import com.weare.wearecompany.ui.listcontainer.rent.RentFragment
 import com.weare.wearecompany.ui.listcontainer.studio.StudioFragment
-import com.google.android.material.tabs.TabLayout
+import com.weare.wearecompany.ui.listcontainer.studio.StudioMapSearchActivity
+import com.weare.wearecompany.ui.listcontainer.trip.TripFragment
 
 
-class
-ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
+class ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
         R.layout.activity_listcontainer
-){
+),View.OnClickListener{
 
     companion object {
 
@@ -44,6 +42,8 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
         ActionBar.setDisplayHomeAsUpEnabled(true)
         ActionBar.setDisplayShowTitleEnabled(false)
 
+        mViewDataBinding.map.setOnClickListener(this)
+
         imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager?
 
         supportFragmentManager.beginTransaction().apply {
@@ -58,6 +58,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
         if (intent.getIntExtra("num", 0) != null) {
             when(intent.getIntExtra("num", 0)) {
                 0 -> {
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.toolbarName.setText("모델")
                         hide(Studiofragment)
@@ -69,7 +70,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
                     }
                 }
                 1 -> {
-
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.listTab.selectTab(mViewDataBinding.listTab.getTabAt(1))
                         mViewDataBinding.toolbarName.setText("뷰티전문가")
@@ -84,6 +85,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
 
                 }
                 2 -> {
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.listTab.selectTab(mViewDataBinding.listTab.getTabAt(2))
                         mViewDataBinding.toolbarName.setText("포토그래퍼")
@@ -96,6 +98,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
                     }
                 }
                 3 -> {
+                    mViewDataBinding.map.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.listTab.selectTab(mViewDataBinding.listTab.getTabAt(3))
                         mViewDataBinding.toolbarName.setText("스튜디오")
@@ -115,7 +118,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
         mViewDataBinding.listTab.addOnTabSelectedListener(object  : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.position == 0) {
-
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.toolbarName.setText("모델")
                         hide(Studiofragment)
@@ -128,6 +131,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
                     }
 
                 } else if (tab?.position == 1) {
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.toolbarName.setText("뷰티전문가")
                         hide(Studiofragment)
@@ -140,7 +144,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
                     }
 
                 } else if (tab?.position == 2) {
-
+                    mViewDataBinding.map.visibility = View.GONE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.toolbarName.setText("포토그래퍼")
                         hide(Studiofragment)
@@ -153,7 +157,7 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
                     }
 
                 } else if (tab?.position == 3) {
-
+                    mViewDataBinding.map.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction().apply {
                         mViewDataBinding.toolbarName.setText("스튜디오")
                         show(Studiofragment)
@@ -188,5 +192,14 @@ ListContainerActivity : BaseActivity<ActivityListcontainerBinding>(
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.map -> {
+                val newIntent = Intent(this, StudioMapSearchActivity::class.java)
+                startActivity(newIntent)
+            }
+        }
     }
 }

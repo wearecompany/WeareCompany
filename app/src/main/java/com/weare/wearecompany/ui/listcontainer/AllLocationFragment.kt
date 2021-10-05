@@ -2,7 +2,6 @@ package com.weare.wearecompany.ui.listcontainer
 
 import android.graphics.Color
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.weare.wearecompany.R
@@ -510,7 +509,7 @@ class AllLocationFragment : BaseFragment<BottomDialogAllLocationBinding>(
 
                 } else {
                     viewmodel.addLocation(12)
-                   //click_list.add(12)
+                    //click_list.add(12)
                     locationOn(mViewDataBinding.btnAllModelLoText12, 12)
                 }
             }

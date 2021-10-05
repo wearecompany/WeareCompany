@@ -5,10 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +27,9 @@ import com.weare.wearecompany.data.main.data.studio
 import com.weare.wearecompany.data.retrofit.List.studio.studioListManager
 import com.weare.wearecompany.ui.detail.DatailActivity
 import com.weare.wearecompany.ui.listcontainer.ListContainerActivity
-import com.weare.wearecompany.ui.listcontainer.photographer.PhotoAllDialog
-import com.weare.wearecompany.ui.listcontainer.photographer.PhotoClipRecyclerViewAdapter
 import com.weare.wearecompany.utils.RESPONSE_STATUS
-import kotlinx.android.synthetic.main.fragment_list_model.view.*
-import kotlinx.android.synthetic.main.fragment_list_photographer.view.*
 import kotlinx.android.synthetic.main.fragment_list_stdio.view.*
-import kotlinx.android.synthetic.main.fragment_list_trip.view.*
+
 
 
 class StudioFragment : Fragment(
@@ -37,6 +38,7 @@ class StudioFragment : Fragment(
     private var ca_click = ArrayList<Int>()
     private var min_money = ""
     private var max_money = ""
+    private var nick_name = ""
     private var la_click = ArrayList<Int>()
     private var locationList = ArrayList<Int>()
     private var categoryList = ArrayList<Int>()
@@ -79,14 +81,57 @@ class StudioFragment : Fragment(
             datetime_array,
             min_money,
             max_money,
+            nick_name,
             sort_check,
             page_count
         )
         bindsetup()
 
+        viewe.studio_list_search_edit.setOnEditorActionListener(object  : TextView.OnEditorActionListener{
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                when(actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        nick_name = viewe.studio_list_search_edit.text.toString()
+                        datacall(
+                            studio_array,
+                            location_array,
+                            datetime_array,
+                            min_money,
+                            max_money,
+                            nick_name,
+                            sort_check,
+                            page_count
+                        )
+                        return false
+                    }
+                    else -> {
+                        return false
+                    }
+                }
+                return true
+            }
 
+        })
+
+        viewe.studio_list_search_edit.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (viewe.studio_list_search_edit.isFocusable && !s.toString().equals("")) {
+                    viewe.studio_list_search_image_1.visibility = View.VISIBLE
+                    viewe.studio_list_search_image_2.visibility = View.GONE
+                } else if (viewe.studio_list_search_edit.isFocusable && s.toString().equals("")) {
+                    viewe.studio_list_search_image_1.visibility = View.GONE
+                    viewe.studio_list_search_image_2.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
         viewe.studio_list_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
@@ -98,6 +143,7 @@ class StudioFragment : Fragment(
                         datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         sort_check,
                         page_count,
                         completion = { responseStatus, responsenewlist, responsestudiokList ->
@@ -121,6 +167,8 @@ class StudioFragment : Fragment(
         viewe.list_studio_location.setOnClickListener(this)
         viewe.list_studio_money.setOnClickListener(this)
         viewe.list_studio_sort.setOnClickListener(this)
+        viewe.studio_list_search_btn.setOnClickListener(this)
+        viewe.studio_list_search_image_1.setOnClickListener(this)
     }
 
 
@@ -130,6 +178,7 @@ class StudioFragment : Fragment(
         timeArray: JsonArray,
         min: String,
         max: String,
+        nickname: String,
         sort: Int,
         page: Int
     ) {
@@ -197,13 +246,13 @@ class StudioFragment : Fragment(
             timeArray,
             min,
             max,
+            nickname,
             sort,
             page,
             completion = { responseStatus, responsenewlist, responsestudiokList ->
 
                 when (responseStatus) {
                     RESPONSE_STATUS.OKAY -> {
-                        if (responsestudiokList != null) {
 
                             newStudioAdapter = StudioNewRecyclerViewAdapter(responsenewlist)
                             viewe.list_studio_new_recyclerview.layoutManager =
@@ -227,6 +276,7 @@ class StudioFragment : Fragment(
 
                             })
 
+                        if (responsestudiokList.size != 0) {
                             studioDataList = responsestudiokList
                             studioAdapter = StudioRecyclerViewAdapter(studioDataList)
                             viewe.studio_list_recycler.layoutManager =
@@ -314,6 +364,7 @@ class StudioFragment : Fragment(
                                             datetime_array,
                                             min_money,
                                             max_money,
+                                            nick_name,
                                             sort_check,
                                             page_count
                                         )
@@ -323,7 +374,11 @@ class StudioFragment : Fragment(
                             } else {
                                 viewe.list_studio_clip_recyclerview.visibility = View.GONE
                             }
+                        } else {
+                            Toast.makeText(mContext,"조건에 맞는 스튜디오가 없습니다.", Toast.LENGTH_SHORT).show()
                         }
+
+
                     }
                 }
             })
@@ -332,6 +387,22 @@ class StudioFragment : Fragment(
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.studio_list_search_image_1 -> {
+                viewe.studio_list_search_image_1.visibility = View.GONE
+                viewe.studio_list_search_image_2.visibility = View.VISIBLE
+                viewe.studio_list_search_edit.setText("")
+                nick_name = ""
+                datacall(
+                    studio_array,
+                    location_array,
+                    datetime_array,
+                    min_money,
+                    max_money,
+                    nick_name,
+                    sort_check,
+                    page_count
+                )
+            }
             R.id.list_studio_category -> {
                 val testiew: StudioAllDialog = StudioAllDialog(
                     0,
@@ -406,6 +477,7 @@ class StudioFragment : Fragment(
                         datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         sort_check,
                         page_count
                     )
@@ -486,6 +558,7 @@ class StudioFragment : Fragment(
                         datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         sort_check,
                         page_count
                     )
@@ -566,6 +639,7 @@ class StudioFragment : Fragment(
                         datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         sort_check,
                         page_count
                     )
@@ -639,6 +713,7 @@ class StudioFragment : Fragment(
                         datetime_array,
                         min_money,
                         max_money,
+                        nick_name,
                         sort_check,
                         page_count
                     )

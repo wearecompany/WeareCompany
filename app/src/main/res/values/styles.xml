@@ -37,6 +37,10 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="UrlLinkAccent">
+        <item name="colorAccent">#6d34f3</item>
+    </style>
+
     <style name="AnimationPopupStyle">
         <item name="android:windowEnterAnimation">@anim/open</item>
         <item name="android:windowExitAnimation">@anim/close</item>

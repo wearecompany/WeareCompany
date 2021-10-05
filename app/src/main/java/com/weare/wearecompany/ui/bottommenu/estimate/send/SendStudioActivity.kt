@@ -1,30 +1,24 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.send
 
-import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
-import com.weare.wearecompany.data.retrofit.bottomnav.estimate.receiveManager
 import com.weare.wearecompany.data.retrofit.bottomnav.estimate.sendManager
-import com.weare.wearecompany.databinding.ActivityEstimateStudioBinding
 import com.weare.wearecompany.databinding.ActivitySendStudioBinding
 import com.weare.wearecompany.ui.base.BaseActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.paymentActivity
-import com.weare.wearecompany.ui.chat.ChatActivity
 import com.weare.wearecompany.ui.detail.DatailActivity
 import com.weare.wearecompany.ui.detail.studio.reservation.ReservationStudioDialogRecyclerViewAdapter
 import com.weare.wearecompany.utils.ESTIMATE
@@ -151,11 +145,10 @@ class SendStudioActivity : BaseActivity<ActivitySendStudioBinding>(
                 startActivityForResult(newIntent,5000)
             }
             R.id.estimate_studio_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype",0)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
             R.id.send_studio_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
@@ -167,7 +160,7 @@ class SendStudioActivity : BaseActivity<ActivitySendStudioBinding>(
 
                                         val intent = Intent()
                                         intent.putExtra("Cancellation", "ok")
-                                        setResult(6000, intent)
+                                        setResult(2004, intent)
                                         finish()
 
                                     }

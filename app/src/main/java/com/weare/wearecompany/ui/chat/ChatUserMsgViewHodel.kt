@@ -8,7 +8,7 @@ import com.weare.wearecompany.data.chatting.data.send
 
 class ChatUserMsgViewHodel(v: View) : RecyclerView.ViewHolder(v) {
 
-    private val msg = itemView.findViewById<TextView>(R.id.send_user_text)
+    val msg = itemView.findViewById<TextView>(R.id.send_user_text)
     private val day = itemView.findViewById<TextView>(R.id.send_user_day)
     private val time = itemView.findViewById<TextView>(R.id.send_user_time)
     fun bindWithView(Item: send, onClickListener: View.OnClickListener) {

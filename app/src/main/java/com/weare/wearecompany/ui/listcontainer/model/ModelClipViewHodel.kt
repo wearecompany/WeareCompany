@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.listcontainer.model
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +13,8 @@ import com.weare.wearecompany.data.chatting.data.send
 class ModelClipViewHodel(v: View) : RecyclerView.ViewHolder(v) {
 
     val clip = itemView.findViewById<TextView>(R.id.clip_text)
+    val cliplayout = itemView.findViewById<LinearLayout>(R.id.tag_layout)
+    val clipimge = itemView.findViewById<ImageView>(R.id.clip_image)
 
     fun bindWithView(Item: clip, onClickListener: View.OnClickListener) {
 

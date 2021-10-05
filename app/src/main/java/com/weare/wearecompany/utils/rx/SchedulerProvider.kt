@@ -5,15 +5,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 interface SchedulerProvider {
-    fun computation(): Scheduler? {
+
+    fun computation(): Scheduler {
         return Schedulers.computation()
     }
 
-    fun io(): Scheduler?{
+    fun io(): Scheduler{
         return Schedulers.io()
     }
 
-    fun ui(): Scheduler? {
+    fun ui(): Scheduler {
         return AndroidSchedulers.mainThread()
     }
 }

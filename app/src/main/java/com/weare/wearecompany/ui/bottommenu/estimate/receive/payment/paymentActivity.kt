@@ -1,5 +1,6 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.receive.payment
 
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
@@ -18,6 +19,7 @@ import io.socket.client.IO
 import io.socket.client.Socket
 import org.json.JSONObject
 import java.io.UnsupportedEncodingException
+import java.lang.reflect.InvocationTargetException
 import java.net.URISyntaxException
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -35,7 +37,8 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
     private var reserve_idx:String = ""
     private var request_log_idx:String = ""
     private var type:Int = -1
-    private var handler: Handler = Handler()
+
+    private var testurl = "https://dev.wearecompany.co.kr/A00/reserve/bill/oneclick/start"
 
     lateinit var socket: Socket
 
@@ -52,6 +55,7 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                 reserve_idx = intent.getStringExtra("reserve_idx").toString()
             }
             1 -> {
+                reserve_idx = intent.getStringExtra("reserve_idx").toString()
                 request_idx = intent.getStringExtra("request_idx").toString()
                 request_log_idx = intent.getStringExtra("log_idx").toString()
             }
@@ -66,6 +70,8 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
         setUp()
 
     }
+
+
 
     fun activityCallback() {
         // 소켓 서버 연결
@@ -137,26 +143,43 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                         try {
                             intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME)
                         } catch (e: URISyntaxException) {
-                            println("error : " + e.printStackTrace())
-                        }
-
-                        if( view?.context?.packageManager?.resolveActivity(intent!!, 0) == null ) {
-                            val pkgName = intent?.`package`
-                            val dataString = intent?.dataString
-                            if (dataString != null) {
-                                val uri = Uri.parse(intent?.dataString)
-                                intent = Intent(Intent.ACTION_VIEW, uri)
-                                //intent.data = Uri.parse("payment://")
-                                view?.context?.startActivity(intent)
-                            } else if( pkgName != null ) {
-                                val uri = Uri.parse("market://search?q=pname:" + pkgName)
-                                intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.data = Uri.parse("payment://")
-                                view?.context?.startActivity(intent)
-                            }
-                        } else {
+                            //println("error : " + e.printStackTrace())
+                        } catch (e: InvocationTargetException) {
 
                         }
+
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                            if( view?.context?.packageManager?.resolveActivity(intent!!, 0) == null ) {
+                                val pkgName = intent?.`package`
+                                if (pkgName != null) {
+                                    val uri = Uri.parse("market://details?id=" + pkgName)
+                                    intent = Intent(Intent.ACTION_VIEW, uri)
+                                    //intent.data = Uri.parse("payment://")
+                                    startActivity(intent)
+                                }
+                            } else {
+                                    val uri = Uri.parse(intent?.dataString)
+                                    intent = Intent(Intent.ACTION_VIEW, uri)
+                                    //intent.data = Uri.parse("payment://")
+                                    startActivity(intent)
+                                }
+                            } else {
+                                try {
+                                    startActivity(intent)
+                                } catch (e: ActivityNotFoundException) {
+                                    val pkgName = intent?.`package`
+                                    if (pkgName != null) {
+                                        val uri = Uri.parse("market://details?id=" + pkgName)
+                                        intent = Intent(Intent.ACTION_VIEW, uri)
+                                        //intent.data = Uri.parse("payment://")
+                                        startActivity(intent)
+                                    }
+                                }
+                                catch (e: InvocationTargetException) {
+
+                                }
+                        }
+
                     } else if(url.startsWith("kftc-bankpay")){
 
                             val sub_str_param = "kftc-bankpay://eftpay?"
@@ -164,7 +187,10 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                             try {
                                 reqParam = URLDecoder.decode(reqParam, "utf-8")
                             } catch (e: UnsupportedEncodingException) {
-                                e.printStackTrace()
+                                //e.printStackTrace()
+                            }
+                            catch (e: InvocationTargetException) {
+
                             }
                             reqParam = reqParam?.let { makeBankPayData(it) }
                             intent = Intent(Intent.ACTION_MAIN)
@@ -176,11 +202,13 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                             startActivityForResult(intent, 1)
 
 
-                    }else {
+                    } else {
                         view?.loadUrl(url)
                     }
                 } catch (e: Exception) {
-                    println("error : " + e.printStackTrace())
+                    //println("error : " + e.printStackTrace())
+                    return false
+                } catch (e: InvocationTargetException) {
                     return false
                 }
                 return true
@@ -196,12 +224,11 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                 )
             }
             1 -> {
-                val str = "request_idx=" + URLEncoder.encode(request_idx, "UTF-8")
-
-                    .toString() + "&request_log_idx=" + URLEncoder.encode(request_log_idx, "UTF-8")
+                val str = "reserve_idx=" + URLEncoder.encode(reserve_idx, "UTF-8").toString()
+                    //.toString() + "&request_log_idx=" + URLEncoder.encode(request_log_idx, "UTF-8")
                 //mViewDataBinding.paymentWeb.loadUrl("https://dev.wearecompany.co.kr/A00/request/bill")
                 mViewDataBinding.paymentWeb.postUrl(
-                    PAYMENT_REQ_URL,
+                    testurl,
                     str.toByteArray()
                 )
             }
@@ -217,6 +244,7 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                 parse_temp = arr[i].split("=".toRegex()).toTypedArray()
                 tempMap[parse_temp[0]] = parse_temp[1]
             } catch (e: java.lang.Exception) {
+            } catch (e: InvocationTargetException) {
             }
         }
         BANK_TID = tempMap["user_key"].toString()

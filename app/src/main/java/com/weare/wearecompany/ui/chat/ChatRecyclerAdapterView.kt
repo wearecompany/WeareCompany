@@ -1,15 +1,21 @@
 package com.weare.wearecompany.ui.chat
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.chatting.data.send
 
 
-class ChatRecyclerAdapterView(private val context: Context, private val dataList: ArrayList<send>) :
+class ChatRecyclerAdapterView(private val clip: ClipboardManager, val context: Context, private val dataList: ArrayList<send>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mSize = 0
 
@@ -79,6 +85,15 @@ class ChatRecyclerAdapterView(private val context: Context, private val dataList
                 }
             }
             is ChatUserMsgViewHodel -> {
+                holder.msg.setOnLongClickListener(object : View.OnLongClickListener{
+                    override fun onLongClick(v: View?): Boolean {
+                        val clipdata : ClipData = ClipData.newPlainText("label",(v as TextView).text)
+                        clip.setPrimaryClip(clipdata)
+                        Toast.makeText(context,"복사되었습니다.",Toast.LENGTH_SHORT).show()
+                        return true
+                    }
+
+                })
                 holder.itemView.setOnClickListener {
                     if (data != null) {
                         itemClickListener.onClick(it, position, data)

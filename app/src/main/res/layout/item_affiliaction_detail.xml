@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#6a32eb"/>
+
+            <TextView
+                android:id="@+id/aff_detail_qa_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[위픽] 전속 모델 정선민님 개인인터뷰"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp"
+                android:textColor="#383838"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A"
+                    android:textSize="15dp"
+                    android:textColor="#ec9eff"/>
+
+                <TextView
+                    android:id="@+id/aff_detail_qa_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[위픽] 전속 모델 정선민님 개인인터뷰"
+                    android:textSize="12dp"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#787878"/>
+            </LinearLayout>
+
+    </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

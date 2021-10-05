@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.hotpick.data.review
-import com.weare.wearecompany.ui.detail.rent.RentReviewViewHodel
 
 class ModelReviewRecyclerViewAdapter (private val data: ArrayList<review>) : RecyclerView.Adapter<ModelReviewViewHodel>() {
 

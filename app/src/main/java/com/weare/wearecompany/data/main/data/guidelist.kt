@@ -7,6 +7,4 @@ data class guidelist(
     var title: String?,
     var sub: String?,
     var image: String?
-) : Serializable {
-
-}
+) : Serializable

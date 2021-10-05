@@ -42,7 +42,7 @@
         android:layout_width="7dp"
         android:layout_height="11dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/location_min_pin"
+        android:src="@drawable/datail_addr_pin"
         app:layout_constraintBottom_toBottomOf="@+id/weekly_studio_image"
         app:layout_constraintStart_toStartOf="@+id/weekly_studio_title"
         />

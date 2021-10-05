@@ -1,5 +1,6 @@
 package com.weare.wearecompany.ui.detail.trip
 
+import android.animation.Animator
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -35,6 +36,7 @@ import com.weare.wearecompany.data.retrofit.bottomnav.main.MainManager
 import com.weare.wearecompany.data.retrofit.bottomnav.mypage.mypageManager
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.payment.PhotoPaymentActivity
 import com.weare.wearecompany.ui.bottommenu.main.weekly.tesdialog
+import com.weare.wearecompany.ui.chat.detail.DetailChatActivity
 import com.weare.wearecompany.ui.detail.model.reservation.ReservationModelActivity
 import com.weare.wearecompany.ui.detail.photo.PhotoReviewRecyclerViewAdapter
 import com.weare.wearecompany.ui.detail.studio.DatailSharingDialog
@@ -144,6 +146,7 @@ class TripActivity : BaseActivity<ActivityTripBinding>(
         mViewDataBinding.sharing.setOnClickListener(this)
         mViewDataBinding.like.setOnClickListener(this)
         mViewDataBinding.tripReservation.setOnClickListener(this)
+        mViewDataBinding.datailTripChat.setOnClickListener(this)
 
         like = date[0].like_status
         if (like) {
@@ -218,6 +221,7 @@ class TripActivity : BaseActivity<ActivityTripBinding>(
                             completion = { responseStatus ->
                                 when (responseStatus) {
                                     LIKE.OKAY -> {
+                                        mViewDataBinding.bookLottie.playAnimation()
                                         mViewDataBinding.likeImage.setImageResource(R.drawable.like_on)
                                         like = true
                                     }
@@ -303,7 +307,6 @@ class TripActivity : BaseActivity<ActivityTripBinding>(
                 dialog.show(supportFragmentManager, dialog.tag)
             }
             R.id.trip_reservation -> {
-
                 if (MyApplication.prefs.getString("user_idx", "") != "") {
                     MainManager.instance.certcheck(user_idx,complation = { responseStatus, check ->
                         when(responseStatus) {
@@ -340,6 +343,13 @@ class TripActivity : BaseActivity<ActivityTripBinding>(
                     Toast.makeText(this, "로그인후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
                 }
 
+            }
+            R.id.datail_trip_chat -> {
+                val newIntent = Intent(this, DetailChatActivity::class.java)
+                newIntent.putExtra("expert_type", "3")
+                newIntent.putExtra("expert_idx", dateList[0].idx)
+                newIntent.putExtra("expert_user_idx", dateList[0].expert_user_idx)
+                startActivityForResult(newIntent,3001)
             }
         }
     }

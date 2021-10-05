@@ -2,6 +2,7 @@ package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progr
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -56,6 +57,7 @@ class ProgressStudioActivity : BaseActivity<ActivityProgressStudioBinding>(
 
         reserve_idx = intent.getStringExtra("reserve_idx").toString()
         chatcheck = intent.getIntExtra("chatbool", 0)
+        type = intent.getIntExtra("type", 0)
         reviewcheck = intent.getIntExtra("review_check", 0)
 
         setup()
@@ -70,76 +72,182 @@ class ProgressStudioActivity : BaseActivity<ActivityProgressStudioBinding>(
         if (chatcheck == 1) {
             mViewDataBinding.progressChat.visibility = View.GONE
         }
+        when(type) {
+            2 -> {
+                progressManager.instance.studioPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                expert_idx = data[0].expert_idx
 
-        progressManager.instance.studioPage(
-            reserve_idx,
-            completion = { responseStatus, data ->
-                when (responseStatus) {
-                    ESTIMATE.OKAY -> {
-                        expert_idx = data[0].expert_idx
-                        /*if (data[0].refund_status == 1) {
-                            mViewDataBinding.progressTopManu.visibility = View.GONE
-                            mViewDataBinding.progressInfoTitle.text = "전문가에게 환불을 요청했습니다."
-                            mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#8276f4"))
-                            mViewDataBinding.progressInfo1.text = "전문가가 확인 후 환불이 진행됩니다.\n환불이 계속 진행되지 않는다면, 아래 [1:1 채팅하기] 버튼을 눌러 전문가에게 요청해 주세요."
-                        } else if (data[0].refund_status == 2) {
-                            mViewDataBinding.progressTopManu.visibility = View.GONE
-                            mViewDataBinding.progressInfoTitle.text = "환불 접수가 완료되었습니다."
-                            mViewDataBinding.progressInfo1.text = "*신용카드로 결제한 경우, 실제 환불 일자는 신용카드사에 따라\n차이가 있을 수 있습니다. 보다 정확한 사항은 카드사로\n문의하시기 바랍니다."
-                            mViewDataBinding.progressInfo2.visibility = View.VISIBLE
-                            mViewDataBinding.progressInfo2.text = "*계좌이체로 구매한 겨우, 지불하신 출금계좌로 입금되며\n영업일 기준으로 1-3일 소요됩니다."
-                            mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#8276f4"))
-                        } else {
-                            if (reviewcheck == 1) {
-                                mViewDataBinding.progressTopManu.visibility = View.GONE
-                            } else {
-                                mViewDataBinding.progressTopManu.visibility = View.VISIBLE
-                                mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#f96565"))
-                                mViewDataBinding.progressInfo2.visibility = View.GONE
+                                mViewDataBinding.progressStudioName.text = data[0].expert_name
+                                mViewDataBinding.progressStudioExpertUserName.text = data[0].expert_user_name
+                                mViewDataBinding.progressStudioRoom.text = data[0].room_name
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].room_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressStudioRoomImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressStudioCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressStudioCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.reserveTid.text = data[0].reserve_tid
+                                mViewDataBinding.billMethod.text = data[0].bill_method
+                                mViewDataBinding.billDate.text = data[0].bill_date
+                                mViewDataBinding.reserveDt.text = data[0].reserve_dt
+                                mViewDataBinding.reserveTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.reserveTimeTerm.text = data[0].reserve_time_term
+                                if (data[0].reserve_contents != "") {
+                                    mViewDataBinding.reserveContents.text = data[0].reserve_contents
+                                }
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.reserveAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.reserveAddContents.text = data[0].reserve_add_contents
+                                }
+                                mViewDataBinding.reserveFinalPrice.text =
+                                    dec.format(data[0].reserve_price)
                             }
-                        }*/
-
-                        mViewDataBinding.progressStudioName.text = data[0].expert_name
-                        mViewDataBinding.progressStudioExpertUserName.text = data[0].expert_user_name
-                        mViewDataBinding.progressStudioRoom.text = data[0].room_name
-
-                        var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
-
-                        Glide.with(MyApplication.instance)
-                            .load(data[0].room_image)
-                            .apply(RequestOptions.bitmapTransform(multiTransformation))
-                            .into(mViewDataBinding.progressStudioRoomImage)
-
-                        taglist = ArrayList<String>()
-                        val tag = data[0].expert_category.split(",")
-                        for (i in tag) {
-                            taglist.add(i)
                         }
-                        tagAdapter = SendTagRecyclerViewAdapter(taglist)
-                        mViewDataBinding.progressStudioCategoryRecyclerview.layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL, false
-                        )
-                        mViewDataBinding.progressStudioCategoryRecyclerview.adapter = tagAdapter
+                    })
+            }
+            3 ->{
+                progressManager.instance.studioProgressOkPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                expert_idx = data[0].expert_idx
+                                /*if (data[0].refund_status == 1) {
+                                    mViewDataBinding.progressTopManu.visibility = View.GONE
+                                    mViewDataBinding.progressInfoTitle.text = "전문가에게 환불을 요청했습니다."
+                                    mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#8276f4"))
+                                    mViewDataBinding.progressInfo1.text = "전문가가 확인 후 환불이 진행됩니다.\n환불이 계속 진행되지 않는다면, 아래 [1:1 채팅하기] 버튼을 눌러 전문가에게 요청해 주세요."
+                                } else if (data[0].refund_status == 2) {
+                                    mViewDataBinding.progressTopManu.visibility = View.GONE
+                                    mViewDataBinding.progressInfoTitle.text = "환불 접수가 완료되었습니다."
+                                    mViewDataBinding.progressInfo1.text = "*신용카드로 결제한 경우, 실제 환불 일자는 신용카드사에 따라\n차이가 있을 수 있습니다. 보다 정확한 사항은 카드사로\n문의하시기 바랍니다."
+                                    mViewDataBinding.progressInfo2.visibility = View.VISIBLE
+                                    mViewDataBinding.progressInfo2.text = "*계좌이체로 구매한 겨우, 지불하신 출금계좌로 입금되며\n영업일 기준으로 1-3일 소요됩니다."
+                                    mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#8276f4"))
+                                } else {
+                                    if (reviewcheck == 1) {
+                                        mViewDataBinding.progressTopManu.visibility = View.GONE
+                                    } else {
+                                        mViewDataBinding.progressTopManu.visibility = View.VISIBLE
+                                        mViewDataBinding.progressInfo1.setTextColor(Color.parseColor("#f96565"))
+                                        mViewDataBinding.progressInfo2.visibility = View.GONE
+                                    }
+                                }*/
 
-                        mViewDataBinding.reserveTid.text = data[0].reserve_tid
-                        mViewDataBinding.billMethod.text = data[0].bill_method
-                        mViewDataBinding.billDate.text = data[0].bill_date
-                        mViewDataBinding.reserveDt.text = data[0].reserve_dt
-                        mViewDataBinding.reserveTime.text = data[0].reserve_time.toString()
-                        mViewDataBinding.reserveTimeTerm.text = data[0].reserve_time_term
-                        if (data[0].reserve_contents != "") {
-                            mViewDataBinding.reserveContents.text = data[0].reserve_contents
+                                mViewDataBinding.progressStudioName.text = data[0].expert_name
+                                mViewDataBinding.progressStudioExpertUserName.text = data[0].expert_user_name
+                                mViewDataBinding.progressStudioRoom.text = data[0].room_name
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].room_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressStudioRoomImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressStudioCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressStudioCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.reserveTid.text = data[0].reserve_tid
+                                mViewDataBinding.billMethod.text = data[0].bill_method
+                                mViewDataBinding.billDate.text = data[0].bill_date
+                                mViewDataBinding.reserveDt.text = data[0].reserve_dt
+                                mViewDataBinding.reserveTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.reserveTimeTerm.text = data[0].reserve_time_term
+                                if (data[0].reserve_contents != "") {
+                                    mViewDataBinding.reserveContents.text = data[0].reserve_contents
+                                }
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.reserveAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.reserveAddContents.text = data[0].reserve_add_contents
+                                }
+                                mViewDataBinding.reserveFinalPrice.text =
+                                    dec.format(data[0].reserve_price)
+                            }
                         }
-                        if (data[0].reserve_add_contents != "") {
-                            mViewDataBinding.reserveAddContentsLayout.visibility = View.VISIBLE
-                            mViewDataBinding.reserveAddContents.text = data[0].reserve_add_contents
+                    })
+            }
+            4 ->{
+                progressManager.instance.studioReviewPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                expert_idx = data[0].expert_idx
+
+                                mViewDataBinding.progressStudioName.text = data[0].expert_name
+                                mViewDataBinding.progressStudioExpertUserName.text = data[0].expert_user_name
+                                mViewDataBinding.progressStudioRoom.text = data[0].room_name
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].room_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressStudioRoomImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressStudioCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressStudioCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.reserveTid.text = data[0].reserve_tid
+                                mViewDataBinding.billMethod.text = data[0].bill_method
+                                mViewDataBinding.billDate.text = data[0].bill_date
+                                mViewDataBinding.reserveDt.text = data[0].reserve_dt
+                                mViewDataBinding.reserveTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.reserveTimeTerm.text = data[0].reserve_time_term
+                                if (data[0].reserve_contents != "") {
+                                    mViewDataBinding.reserveContents.text = data[0].reserve_contents
+                                }
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.reserveAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.reserveAddContents.text = data[0].reserve_add_contents
+                                }
+                                mViewDataBinding.reserveFinalPrice.text =
+                                    dec.format(data[0].reserve_price)
+                            }
                         }
-                        mViewDataBinding.reserveFinalPrice.text =
-                            dec.format(data[0].reserve_price)
-                    }
-                }
-            })
+                    })
+            }
+
+        }
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -187,8 +295,14 @@ class ProgressStudioActivity : BaseActivity<ActivityProgressStudioBinding>(
                                     completion = { responseStatus ->
                                         when (responseStatus) {
                                             ESTIMATE.OKAY -> {
+
                                                 dateemit()
-                                                try {
+
+                                                val intent = Intent()
+                                                setResult(2001, intent)
+                                                finish()
+
+                                                /*try {
                                                     //TODO 액티비티 화면 재갱신 시키는 코드
                                                     val intent = intent
                                                     finish() //현재 액티비티 종료 실시
@@ -203,7 +317,7 @@ class ProgressStudioActivity : BaseActivity<ActivityProgressStudioBinding>(
                                                     ) //인텐트 애니메이션 없애기
                                                 } catch (e: Exception) {
                                                     e.printStackTrace()
-                                                }
+                                                }*/
                                             }
                                         }
                                     })
@@ -215,11 +329,10 @@ class ProgressStudioActivity : BaseActivity<ActivityProgressStudioBinding>(
                 refundFragment.show(supportFragmentManager, refundFragment.tag)
             }
                 R.id.progress_chat -> {
-                    val newIntent = Intent(this, ChatActivity::class.java)
-                    newIntent.putExtra("type",0)
-                    newIntent.putExtra("Entrytype",0)
-                    newIntent.putExtra("reserve_idx",reserve_idx)
-                    startActivity(newIntent)
+                    var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(urll)
+                    startActivity(intent)
                 }
 
         }

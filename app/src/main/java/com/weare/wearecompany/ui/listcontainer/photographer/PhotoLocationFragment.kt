@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.BottomDialogAllLocationBinding
 import com.weare.wearecompany.ui.base.BaseFragment
-import com.weare.wearecompany.ui.listcontainer.model.ModelViewModel
 
 class PhotoLocationFragment : BaseFragment<BottomDialogAllLocationBinding>(
     R.layout.bottom_dialog_all_location

@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progress
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -44,7 +45,6 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
     private val dec = DecimalFormat("#,###")
 
     private lateinit var taglist: ArrayList<String>
-
     private lateinit var tagAdapter: SendTagRecyclerViewAdapter
 
     override fun onCreate() {
@@ -56,7 +56,7 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
         ActionBar.setDisplayShowTitleEnabled(false)
 
         reserve_idx = intent.getStringExtra("reserve_idx").toString()
-        //type = intent.getIntExtra("type", 0)
+        type = intent.getIntExtra("type", 0)
         chatcheck = intent.getIntExtra("chatbool", 0)
         reviewcheck = intent.getIntExtra("review_check", 0)
 
@@ -76,6 +76,161 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
             mViewDataBinding.progressPhotoTopMenu.visibility = View.GONE
         }
 
+        when(type) {
+            2 -> {
+                progressManager.instance.expertPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
+
+                                mViewDataBinding.progressPhotoExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressPhotoExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressPhotoExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressPhotoExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressPhotoTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressPhotoBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressPhotoBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressPhotoDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressPhotoTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressPhotoTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressPhotoHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressPhotoContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressPhotoAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressPhotoAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressPhotoFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
+                        }
+                    })
+            }
+            3 -> {
+                progressManager.instance.expertProgressOkPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
+
+                                mViewDataBinding.progressPhotoExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressPhotoExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressPhotoExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressPhotoExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressPhotoTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressPhotoBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressPhotoBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressPhotoDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressPhotoTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressPhotoTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressPhotoHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressPhotoContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressPhotoAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressPhotoAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressPhotoFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
+                        }
+                    })
+            }
+            4 -> {
+                progressManager.instance.expertProgressReviewPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
+
+                                mViewDataBinding.progressPhotoExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressPhotoExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressPhotoExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressPhotoExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressPhotoExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressPhotoTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressPhotoBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressPhotoBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressPhotoDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressPhotoTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressPhotoTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressPhotoHeadCount.text = data[0].reserve_headcount.toString()
+                                mViewDataBinding.progressPhotoContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressPhotoAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressPhotoAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressPhotoFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
+                        }
+                    })
+            }
+        }
         progressManager.instance.expertPage(
             reserve_idx,
             completion = { responseStatus, data ->
@@ -179,9 +334,14 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
 
                                                 dateemit()
 
-                                                try {
+                                                val intent = Intent()
+                                                setResult(2001, intent)
+                                                finish()
+
+                                               /* try {
                                                     //TODO 액티비티 화면 재갱신 시키는 코드
                                                     val intent = intent
+                                                    intent
                                                     finish() //현재 액티비티 종료 실시
                                                     overridePendingTransition(
                                                         0,
@@ -194,7 +354,7 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
                                                     ) //인텐트 애니메이션 없애기
                                                 } catch (e: Exception) {
                                                     e.printStackTrace()
-                                                }
+                                                }*/
                                             }
                                         }
                                     })
@@ -207,11 +367,10 @@ class ProgressPhotoActivity:BaseActivity<ActivityProgressPhotoBinding>(
             }
 
             R.id.progress_photo_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("type",0)
-                newIntent.putExtra("Entrytype",0)
-                newIntent.putExtra("reserve_idx",reserve_idx)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
         }
     }

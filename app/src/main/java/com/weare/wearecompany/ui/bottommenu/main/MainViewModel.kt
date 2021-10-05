@@ -8,10 +8,7 @@ import com.weare.wearecompany.utils.API
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(application: Application): BaseViewModel(application) {
+class MainViewModel {
 
-    fun datacall() {
-
-    }
 
 }

@@ -17,8 +17,5 @@ data class ReceiveExpertPage (
     val reserve_headcount: Int,
     val reserve_contents: String,
     val reserve_add_contents: String,
-    val reserve_price: Int,
-    val reserve_add_price: Int,
-    val reserve_add_price_contents: String,
-    val reserve_final_price: Int,
+    val reserve_price: Int
 ) : Serializable

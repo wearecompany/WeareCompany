@@ -9,9 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.weare.wearecompany.R
 import com.weare.wearecompany.ui.bottommenu.MainHomePageAdapter
-import com.weare.wearecompany.ui.listcontainer.AllLocationFragment
-import com.weare.wearecompany.ui.listcontainer.AllMoneyFragment
-import com.weare.wearecompany.ui.listcontainer.AllSortFragment
 import kotlinx.android.synthetic.main.bottom_dialog_all_model.view.*
 
 class TripAllDialog(

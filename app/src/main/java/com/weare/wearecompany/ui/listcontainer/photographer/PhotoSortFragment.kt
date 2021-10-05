@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.BottomDialogAllSortBinding
 import com.weare.wearecompany.ui.base.BaseFragment
-import com.weare.wearecompany.ui.listcontainer.model.ModelViewModel
 
 class PhotoSortFragment : BaseFragment<BottomDialogAllSortBinding>(
     R.layout.bottom_dialog_all_sort
@@ -32,7 +31,7 @@ class PhotoSortFragment : BaseFragment<BottomDialogAllSortBinding>(
     }
 
     fun dataSetup() {
-        when(setupSort) {
+        when (setupSort) {
             0 -> listOn(mViewDataBinding.btnAllModelSoText0, 0)
             1 -> listOn(mViewDataBinding.btnAllModelSoText1, 1)
             2 -> listOn(mViewDataBinding.btnAllModelSoText2, 2)

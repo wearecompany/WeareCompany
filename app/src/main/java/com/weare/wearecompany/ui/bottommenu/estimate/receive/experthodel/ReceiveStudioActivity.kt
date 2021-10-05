@@ -1,6 +1,7 @@
 package com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel
 
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -57,9 +58,9 @@ class ReceiveStudioActivity:BaseActivity<ActivityReceiveStudioBinding>(
     }
 
     private fun setup() {
-        mViewDataBinding.estimateStudioOk.setOnClickListener(this)
+        mViewDataBinding.receiveStudioPayment.setOnClickListener(this)
         mViewDataBinding.receiveStudioToolbarRefundMenu.setOnClickListener(this)
-        mViewDataBinding.estimateStudioChat.setOnClickListener(this)
+        mViewDataBinding.receiveStudioChat.setOnClickListener(this)
         mViewDataBinding.receiveStudioExpertInfoLayout.setOnClickListener(this)
 
                 receiveManager.instance.studioPage(
@@ -102,11 +103,9 @@ class ReceiveStudioActivity:BaseActivity<ActivityReceiveStudioBinding>(
                                 }
 
                                 mViewDataBinding.receiveStudioFinalPrice.text = dec.format(data[0].reserve_price)
-                                mViewDataBinding.buttonLayout.visibility = View.VISIBLE
                                 if(chatcheck == 1) {
-                                    mViewDataBinding.estimateStudioChat.visibility = View.GONE
+                                    mViewDataBinding.receiveStudioChat.visibility = View.GONE
                                 }
-                                mViewDataBinding.estimateStudioOk.visibility = View.VISIBLE
                             }
                             ESTIMATE.NOT_USER -> {
                                 Toast.makeText(this,"이미 지난 요청서 입니다.", Toast.LENGTH_SHORT).show()
@@ -126,7 +125,7 @@ class ReceiveStudioActivity:BaseActivity<ActivityReceiveStudioBinding>(
             5001 -> {
                 val intent = Intent()
                 intent.putExtra("payment", "ok")
-                setResult(5001, intent)
+                setResult(3001, intent)
                 finish()
             }
         }
@@ -152,18 +151,17 @@ class ReceiveStudioActivity:BaseActivity<ActivityReceiveStudioBinding>(
                 newIntent.putExtra("idx", expert_idx)
                 startActivity(newIntent)
             }
-            R.id.estimate_studio_ok -> {
+            R.id.receive_studio_payment -> {
                 val newIntent = Intent(this, paymentActivity::class.java)
                 newIntent.putExtra("reserve_idx", reserve_idx)
                 newIntent.putExtra("type", 0)
                 startActivityForResult(newIntent,5000)
             }
-            R.id.estimate_studio_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("reserve_idx", reserve_idx)
-                newIntent.putExtra("type", 0)
-                newIntent.putExtra("Entrytype",0)
-                startActivity(newIntent)
+            R.id.receive_studio_chat -> {
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
             R.id.receive_studio_toolbar_refund_menu -> {
                 val cancellationdialog: CancellationBottomDialog = CancellationBottomDialog() {
@@ -174,8 +172,7 @@ class ReceiveStudioActivity:BaseActivity<ActivityReceiveStudioBinding>(
                                     ESTIMATE.OKAY -> {
 
                                         val intent = Intent()
-                                        intent.putExtra("Cancellation", "ok")
-                                        setResult(6000, intent)
+                                        setResult(2003, intent)
                                         finish()
 
                                     }

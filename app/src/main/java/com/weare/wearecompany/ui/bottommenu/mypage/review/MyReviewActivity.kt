@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
+import com.weare.wearecompany.data.bottomnav.mypage.data.myreview
 import com.weare.wearecompany.data.retrofit.bottomnav.mypage.mypageManager
 import com.weare.wearecompany.databinding.ActivityMyReviewListBinding
 import com.weare.wearecompany.ui.base.BaseActivity
@@ -43,6 +44,12 @@ class MyReviewActivity:BaseActivity<ActivityMyReviewListBinding>(
                             LinearLayoutManager.VERTICAL, false
                         )
                         mViewDataBinding.myReviewRecyclerView.adapter = reviewAdapter
+
+                    reviewAdapter.setItemClickListener(object : MyReviewRecyclerViewAdapter.OnItemClickListener{
+                        override fun onClick(v: View, position: Int, reviewItem: myreview) {
+                        }
+
+                    })
                 }
                 RESPONSE_STATUS.NO_CONTENT -> {
                     mViewDataBinding.notMyReviewListLayout.visibility = View.VISIBLE

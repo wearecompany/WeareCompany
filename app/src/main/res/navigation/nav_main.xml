@@ -32,4 +32,18 @@
         tools:layout="@layout/fragment_mypage">
     </fragment>
 
+    <fragment
+        android:id="@+id/test_mypage"
+        android:name="com.weare.wearecompany.ui.bottommenu.mypage.TestMyPageFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_change_mypage">
+    </fragment>
+
+    <fragment
+        android:id="@+id/not_mypage"
+        android:name="com.weare.wearecompany.ui.bottommenu.mypage.NotMyPageFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_change_not_user_mypage">
+    </fragment>
+
 </navigation>

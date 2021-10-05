@@ -2,12 +2,14 @@ package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progr
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -57,7 +59,7 @@ class ProgressModelActivity:BaseActivity<ActivityProgressModelBinding>(
         ActionBar.setDisplayShowTitleEnabled(false)
 
         reserve_idx = intent.getStringExtra("reserve_idx").toString()
-        //type = intent.getIntExtra("type", 0)
+        type = intent.getIntExtra("type", 0)
         chatcheck = intent.getIntExtra("chatbool", 0)
         reviewcheck = intent.getIntExtra("review_check", 0)
 
@@ -77,54 +79,157 @@ class ProgressModelActivity:BaseActivity<ActivityProgressModelBinding>(
             mViewDataBinding.progressModelTopMenu.visibility = View.GONE
         }
 
-        progressManager.instance.expertPage(
-            reserve_idx,
-            completion = { responseStatus, data ->
-                when (responseStatus) {
-                    ESTIMATE.OKAY -> {
-                        type = data[0].expert_type
-                        expert_idx = data[0].expert_idx
+        when(type) {
+            2 -> {
+                progressManager.instance.expertPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressModelExpertName.text = data[0].expert_name
-                        mViewDataBinding.progressModelExpertPlace.text = data[0].expert_place
-                        mViewDataBinding.progressModelExpertPrice.text = data[0].expert_price
+                                mViewDataBinding.progressModelExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressModelExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressModelExpertPrice.text = data[0].expert_price
 
-                        var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
 
-                        Glide.with(MyApplication.instance)
-                            .load(data[0].expert_image)
-                            .apply(RequestOptions.bitmapTransform(multiTransformation))
-                            .into(mViewDataBinding.progressModelExpertImage)
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressModelExpertImage)
 
-                        taglist = ArrayList<String>()
-                        val tag = data[0].expert_category.split(",")
-                        for (i in tag) {
-                            taglist.add(i)
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.adapter = tagAdapter
+                                mViewDataBinding.progressModelTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressModelBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressModelBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressModelDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressModelTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressModelTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressModelContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressModelAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressModelAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressModelFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
-                        tagAdapter = SendTagRecyclerViewAdapter(taglist)
-                        mViewDataBinding.progressModelExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL, false
-                        )
-                        mViewDataBinding.progressModelExpertCategoryRecyclerview.adapter = tagAdapter
+                    })
+            }
+            3 -> {
+                progressManager.instance.expertProgressOkPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressModelTid.text = data[0].reserve_tid
-                        mViewDataBinding.progressModelBillMethod.text = data[0].bill_method
-                        mViewDataBinding.progressModelBillDate.text = data[0].bill_date
-                        mViewDataBinding.progressModelDt.text = data[0].reserve_dt
-                        mViewDataBinding.progressModelTime.text = data[0].reserve_time.toString()
-                        mViewDataBinding.progressModelTimeTerm.text = data[0].reserve_time_term
-                            mViewDataBinding.progressModelContents.text = data[0].reserve_contents
+                                mViewDataBinding.progressModelExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressModelExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressModelExpertPrice.text = data[0].expert_price
 
-                        if (data[0].reserve_add_contents != "") {
-                            mViewDataBinding.progressModelAddContentsLayout.visibility = View.VISIBLE
-                            mViewDataBinding.progressModelAddContents.text = data[0].reserve_add_contents
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressModelExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressModelTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressModelBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressModelBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressModelDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressModelTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressModelTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressModelContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressModelAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressModelAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressModelFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
                         }
+                    })
+            }
+            4 -> {
+                progressManager.instance.expertProgressReviewPage(
+                    reserve_idx,
+                    completion = { responseStatus, data ->
+                        when (responseStatus) {
+                            ESTIMATE.OKAY -> {
+                                type = data[0].expert_type
+                                expert_idx = data[0].expert_idx
 
-                        mViewDataBinding.progressModelFinalPrice.text = dec.format(data[0].reserve_price)
-                    }
-                }
-            })
+                                mViewDataBinding.progressModelExpertName.text = data[0].expert_name
+                                mViewDataBinding.progressModelExpertPlace.text = data[0].expert_place
+                                mViewDataBinding.progressModelExpertPrice.text = data[0].expert_price
+
+                                var multiTransformation = MultiTransformation(CenterCrop(),RoundedCorners(20))
+
+                                Glide.with(MyApplication.instance)
+                                    .load(data[0].expert_image)
+                                    .apply(RequestOptions.bitmapTransform(multiTransformation))
+                                    .into(mViewDataBinding.progressModelExpertImage)
+
+                                taglist = ArrayList<String>()
+                                val tag = data[0].expert_category.split(",")
+                                for (i in tag) {
+                                    taglist.add(i)
+                                }
+                                tagAdapter = SendTagRecyclerViewAdapter(taglist)
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.layoutManager = LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.HORIZONTAL, false
+                                )
+                                mViewDataBinding.progressModelExpertCategoryRecyclerview.adapter = tagAdapter
+
+                                mViewDataBinding.progressModelTid.text = data[0].reserve_tid
+                                mViewDataBinding.progressModelBillMethod.text = data[0].bill_method
+                                mViewDataBinding.progressModelBillDate.text = data[0].bill_date
+                                mViewDataBinding.progressModelDt.text = data[0].reserve_dt
+                                mViewDataBinding.progressModelTime.text = data[0].reserve_time.toString()
+                                mViewDataBinding.progressModelTimeTerm.text = data[0].reserve_time_term
+                                mViewDataBinding.progressModelContents.text = data[0].reserve_contents
+
+                                if (data[0].reserve_add_contents != "") {
+                                    mViewDataBinding.progressModelAddContentsLayout.visibility = View.VISIBLE
+                                    mViewDataBinding.progressModelAddContents.text = data[0].reserve_add_contents
+                                }
+
+                                mViewDataBinding.progressModelFinalPrice.text = dec.format(data[0].reserve_price)
+                            }
+                        }
+                    })
+            }
+        }
     }
 
     private fun dateemit() {
@@ -179,7 +284,11 @@ class ProgressModelActivity:BaseActivity<ActivityProgressModelBinding>(
 
                                                 dateemit()
 
-                                                try {
+                                                val intent = Intent()
+                                                setResult(2001, intent)
+                                                finish()
+
+                                                /*try {
                                                     //TODO 액티비티 화면 재갱신 시키는 코드
                                                     val intent = intent
                                                     finish() //현재 액티비티 종료 실시
@@ -194,7 +303,7 @@ class ProgressModelActivity:BaseActivity<ActivityProgressModelBinding>(
                                                     ) //인텐트 애니메이션 없애기
                                                 } catch (e: Exception) {
                                                     e.printStackTrace()
-                                                }
+                                                }*/
                                             }
                                         }
                                     })
@@ -207,11 +316,10 @@ class ProgressModelActivity:BaseActivity<ActivityProgressModelBinding>(
             }
 
             R.id.progress_model_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("type",0)
-                newIntent.putExtra("Entrytype",0)
-                newIntent.putExtra("reserve_idx",reserve_idx)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
         }
     }

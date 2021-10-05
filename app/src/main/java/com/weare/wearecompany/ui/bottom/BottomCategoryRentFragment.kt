@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.weare.wearecompany.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_dialog_rent.view.*
 
 class BottomCategoryRentFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
 
@@ -17,7 +16,7 @@ class BottomCategoryRentFragment(val itemClick: (Int) -> Unit) : BottomSheetDial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.bottom_rent_0.setOnClickListener {
+       /* view.bottom_rent_0.setOnClickListener {
             itemClick(0)
         }
         view.bottom_rent_1.setOnClickListener {
@@ -40,6 +39,6 @@ class BottomCategoryRentFragment(val itemClick: (Int) -> Unit) : BottomSheetDial
         }
         view.bottom_rent_7.setOnClickListener {
             itemClick(7)
-        }
+        } */
     }
 }

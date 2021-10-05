@@ -17,7 +17,7 @@ class StudioSortFragment : BaseFragment<BottomDialogAllSortBinding>(
     private val viewmodel: StudioViewModel by activityViewModels()
     private var clicknum = -1
     override fun onCreate() {
-        setupSort = viewmodel.getSort()
+       setupSort = viewmodel.getSort()
         bindingSetup()
         dataSetup()
     }
@@ -43,7 +43,7 @@ class StudioSortFragment : BaseFragment<BottomDialogAllSortBinding>(
     private fun listOn(text: TextView, num: Int) {
         posttext = text
         clicknum = num
-        viewmodel.clickSort(num)
+       viewmodel.clickSort(num)
         text.setTextColor(Color.parseColor("#6d34f3"))
         text.setBackgroundResource(R.drawable.all_ca_background_on)
     }

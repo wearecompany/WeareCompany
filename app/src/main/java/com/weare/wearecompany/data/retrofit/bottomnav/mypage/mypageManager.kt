@@ -58,10 +58,18 @@ class mypageManager {
                     var mypageArray = ArrayList<Mypage>()
 
                     val mypageItem = Mypage(
-                        profile_image = response.body()!!.profile_image,
-                        nickname = response.body()!!.nickname,
-                        like_num = response.body()!!.like_num,
-                        review_num = response.body()!!.review_num
+                        profile_image = it.profile_image,
+                        nickname = it.nickname,
+                        like_num = it.like_num,
+                        review_num = it.review_num,
+                        review_status = it.review_status,
+                        request = it.request,
+                        response = it.response,
+                        progress = it.progress,
+                        complete = it.complete,
+                        review = it.review,
+                        refund_request = it.refund_request,
+                        refund_complete = it.refund_complete
                     )
                     mypageArray.add(mypageItem)
                     completion(RESPONSE_STATUS.OKAY, mypageArray)

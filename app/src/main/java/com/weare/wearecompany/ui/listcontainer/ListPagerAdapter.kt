@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.weare.wearecompany.ui.listcontainer.model.ModelFragment
 import com.weare.wearecompany.ui.listcontainer.photographer.PhotographerFragment
-import com.weare.wearecompany.ui.listcontainer.rent.RentFragment
 import com.weare.wearecompany.ui.listcontainer.studio.StudioFragment
 import com.weare.wearecompany.ui.listcontainer.trip.TripFragment
 
@@ -24,10 +23,7 @@ class ListPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
             0       ->  StudioFragment()
             1       ->  PhotographerFragment()
             2       ->  ModelFragment()
-            3       ->  TripFragment()
-
-
-            else       ->  RentFragment()
+            else       ->  TripFragment()
 
         }
     }

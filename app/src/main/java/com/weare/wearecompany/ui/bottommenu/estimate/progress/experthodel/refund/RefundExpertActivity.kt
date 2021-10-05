@@ -122,13 +122,6 @@ class RefundExpertActivity : BaseActivity<ActivityRefundExpertBinding>(
                             mViewDataBinding.reserveAddContents.text = data[0].reserve_add_contents
                         }
                         mViewDataBinding.reservePrice.text = data[0].reserve_price.toString()
-                        mViewDataBinding.reserveAddPrice.text = data[0].reserve_add_price.toString()
-                        if (data[0].reserve_add_price != 0) {
-                            mViewDataBinding.reserveAddPriceLayout.visibility = View.VISIBLE
-                            mViewDataBinding.reserveAddPrice.text = data[0].reserve_add_price.toString()
-                            mViewDataBinding.reserveAddPriceContents.text = data[0].reserve_add_price_contents
-                        }
-                        mViewDataBinding.reserveFinalPrice.text = data[0].reserve_final_price.toString()
                     }
                 }
             })

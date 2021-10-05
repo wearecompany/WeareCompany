@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="132dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/mypage_request_top_bac">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/request_top_progress_bac"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/request_progress_6" />
+
+                        <ImageView
+                            android:id="@+id/request_top_progress_img"
+                            android:layout_width="23dp"
+                            android:layout_height="21dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/request_top_photo" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/request_top_expert_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="물콩님"
+                            android:textColor="#000"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/request_top_expert_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="결제완료"
+                            android:textColor="#787878"
+                            android:textSize="11dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/top_oneclik_ca_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:id="@+id/oneclik_ca_0"
+                            android:layout_width="27dp"
+                            android:visibility="invisible"
+                            android:layout_height="27dp"
+                            android:background="@drawable/mypage_request_list_ca_bac">
+
+                            <ImageView
+                                android:id="@+id/oneclik_ca_0_img"
+                                android:layout_width="14dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/oneclik_ca_1"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="6dp"
+                            android:background="@drawable/mypage_request_list_ca_bac"
+                            android:visibility="invisible">
+
+                            <ImageView
+                                android:id="@+id/oneclik_ca_1_img"
+                                android:layout_width="14dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/oneclik_ca_2"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="6dp"
+                            android:background="@drawable/mypage_request_list_ca_bac"
+                            android:visibility="invisible">
+
+                            <ImageView
+                                android:id="@+id/oneclik_ca_2_img"
+                                android:layout_width="14dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/oneclik_ca_3"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="6dp"
+                            android:background="@drawable/mypage_request_list_ca_bac"
+                            android:visibility="invisible">
+
+                            <ImageView
+                                android:id="@+id/oneclik_ca_3_img"
+                                android:layout_width="14dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center" />
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/request_top_room_name_layout"
+                        android:layout_width="150dp"
+                        android:layout_marginBottom="5dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="공간"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/request_top_room_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:textColor="#787878"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/request_top_expert_head_count_layout"
+                        android:layout_width="150dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="인원"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/request_top_expert_head_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:textColor="#787878"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="시간"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/request_top_expert_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:textColor="#787878"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="날짜"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/request_top_expert_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:textColor="#787878"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="금액"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/request_top_expert_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:textColor="#787878"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="원"
+                                android:textColor="#787878"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

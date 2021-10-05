@@ -10,21 +10,14 @@ import com.weare.wearecompany.R
 import com.weare.wearecompany.data.bottomnav.estimate.receive.ReceiveAllDate
 import com.weare.wearecompany.data.bottomnav.estimate.receive.ReceiveList
 import com.weare.wearecompany.data.bottomnav.estimate.receive.ReceiveResponse
-import com.weare.wearecompany.data.bottomnav.estimate.send.SendAllDate
-import com.weare.wearecompany.data.bottomnav.estimate.send.SendList
 import com.weare.wearecompany.data.retrofit.bottomnav.estimate.requestManager
 import com.weare.wearecompany.databinding.FragmentReceiveBinding
 import com.weare.wearecompany.ui.base.BaseFragment
-import com.weare.wearecompany.ui.bottommenu.estimate.expetrFragment
 import com.weare.wearecompany.ui.bottommenu.estimate.progress.ProgressFragment
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveModelActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceivePhotoActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.receive.experthodel.ReceiveTripActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendExpertActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendRequestActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendShopActivity
-import com.weare.wearecompany.ui.bottommenu.estimate.send.SendStudioActivity
 import com.weare.wearecompany.utils.ESTIMATE
 
 class ReceiveFragment : BaseFragment<FragmentReceiveBinding>(
@@ -128,6 +121,8 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding>(
             5001 -> {
                 setup()
                 Toast.makeText(context,"결제가 완료되었습니다. 진행현황에서 확인해보세요",Toast.LENGTH_SHORT).show()
+                mViewDataBinding.paymentLottie.bringToFront()
+                mViewDataBinding.paymentLottie.playAnimation()
             }
             6000 -> {
                 setup()

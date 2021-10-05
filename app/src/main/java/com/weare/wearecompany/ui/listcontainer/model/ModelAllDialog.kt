@@ -1,37 +1,27 @@
 package com.weare.wearecompany.ui.listcontainer.model
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.weare.wearecompany.R
 import com.weare.wearecompany.ui.bottommenu.MainHomePageAdapter
-import com.weare.wearecompany.ui.bottommenu.main.contents.ContentsFragment
-import com.weare.wearecompany.ui.bottommenu.main.event.EventFragment
-import com.weare.wearecompany.ui.bottommenu.main.home.HomeFragment
-import com.weare.wearecompany.ui.bottommenu.main.weekly.WeeklyFragment
 import com.weare.wearecompany.ui.listcontainer.AllLocationFragment
 import com.weare.wearecompany.ui.listcontainer.AllMoneyFragment
 import com.weare.wearecompany.ui.listcontainer.AllSortFragment
 import kotlinx.android.synthetic.main.bottom_dialog_all_model.view.*
-import kotlinx.android.synthetic.main.bottom_dialog_model.view.*
 
 class ModelAllDialog(
     var postion: Int,
     val category: Int,
-    val location:ArrayList<Int>,
+    val location: ArrayList<Int>,
     val min: String,
     val max: String,
     val sort: Int,
-    val itemClick: (Int, ArrayList<Int>, String, String,Int) -> Unit
+    val itemClick: (Int, ArrayList<Int>, String, String, Int) -> Unit
 ) : BottomSheetDialogFragment() {
 
     private val viewmodel: ModelViewModel by activityViewModels()
@@ -104,7 +94,7 @@ class ModelAllDialog(
             dialog!!.dismiss()
         }
 
-        view.model_all_reset.setOnClickListener{
+        view.model_all_reset.setOnClickListener {
         }
 
 

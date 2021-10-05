@@ -14,11 +14,12 @@ import com.weare.wearecompany.databinding.FragmentChatBinding
 import com.weare.wearecompany.ui.base.BaseFragment
 import com.weare.wearecompany.ui.chat.ChatActivity
 import com.weare.wearecompany.ui.container.ContainerActivity
+import com.weare.wearecompany.ui.listcontainer.ListContainerActivity
 import com.weare.wearecompany.utils.RESPONSE_STATUS
 
 class ChattingFragment : BaseFragment<FragmentChatBinding>(
     R.layout.fragment_chat
-), SwipeRefreshLayout.OnRefreshListener {
+), SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
 
     lateinit var mContext: Context
     lateinit var userIdx: String
@@ -44,6 +45,7 @@ class ChattingFragment : BaseFragment<FragmentChatBinding>(
 
     fun setup() {
         mViewDataBinding.swipe.setOnRefreshListener(this)
+        mViewDataBinding.notChatBtn.setOnClickListener(this)
         if (userIdx != "") {
             chattingManager.instance.list(userIdx, completion = { responseStatus, arrayList ->
                 when (responseStatus) {
@@ -145,5 +147,15 @@ class ChattingFragment : BaseFragment<FragmentChatBinding>(
     override fun onRefresh() {
         setup()
         mViewDataBinding.swipe.isRefreshing = false
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.not_chat_btn -> {
+                var studioIntent = Intent(context, ListContainerActivity::class.java)
+                studioIntent.putExtra("num", 0)
+                startActivity(studioIntent)
+            }
+        }
     }
 }

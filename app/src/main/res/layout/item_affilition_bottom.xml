@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="22dp"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/division_bottom_generation"
+                android:layout_width="46dp"
+                android:layout_height="14dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/affilition_text_bac"
+                android:gravity="center"
+                android:text="위픽 1기"
+                android:textColor="#fff"
+                android:textSize="10dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/affilition_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:clickable="true"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/division_bottom_image"
+                    android:layout_width="93dp"
+                    android:layout_height="93dp"
+                    android:layout_gravity="center" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="14dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/division_bottom_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="정선민"
+                            android:textStyle="bold"
+                            android:textColor="#484848"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:text="모델님"
+                            android:textColor="#484848"
+                            android:textSize="10dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/division_bottom_category"
+                        android:layout_width="125dp"
+                        android:layout_height="wrap_content"
+                        android:text="뷰티모델"
+                        android:textColor="#6a32eb"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/division_bottom_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="뷰티모델"
+                        android:textColor="#646464"
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="35dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="VIEW"
+                                    android:textColor="#8E8E8E"
+                                    android:textSize="10dp" />
+
+                                <TextView
+                                    android:id="@+id/division_bottom_view_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200"
+                                    android:textColor="#525252"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="LIKE"
+                                    android:textColor="#8E8E8E"
+                                    android:textSize="10dp" />
+
+                                <TextView
+                                    android:id="@+id/division_bottom_like_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200"
+                                    android:textColor="#525252"
+                                    android:textSize="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/division_bottom_stars_0"
+                                android:layout_width="12dp"
+                                android:layout_height="11dp"
+                                android:layout_marginEnd="2dp"
+                                android:src="@drawable/review_on"/>
+
+                            <ImageView
+                                android:id="@+id/division_bottom_stars_1"
+                                android:layout_width="12dp"
+                                android:layout_height="11dp"
+                                android:layout_marginEnd="2dp"
+                                android:src="@drawable/review_on"/>
+
+                            <ImageView
+                                android:id="@+id/division_bottom_stars_2"
+                                android:layout_width="12dp"
+                                android:layout_height="11dp"
+                                android:layout_marginEnd="2dp"
+                                android:src="@drawable/review_on"/>
+
+                            <ImageView
+                                android:id="@+id/division_bottom_stars_3"
+                                android:layout_width="12dp"
+                                android:layout_height="11dp"
+                                android:layout_marginEnd="2dp"
+                                android:src="@drawable/review_on"/>
+
+                            <ImageView
+                                android:id="@+id/division_bottom_stars_4"
+                                android:layout_width="12dp"
+                                android:layout_height="11dp"
+                                android:src="@drawable/review_off"/>
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

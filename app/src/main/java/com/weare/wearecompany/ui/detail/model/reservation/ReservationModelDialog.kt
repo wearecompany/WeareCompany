@@ -64,7 +64,6 @@ class ReservationModelDialog (val reserve_dt:ArrayList<String>, val reserve_time
         view.Re_expert_check_no.setOnClickListener {
             dialog?.dismiss()
         }
-
     }
 
     override fun onResume() {

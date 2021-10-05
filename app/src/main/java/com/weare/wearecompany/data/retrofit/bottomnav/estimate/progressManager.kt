@@ -1,6 +1,7 @@
 package com.weare.wearecompany.data.retrofit.bottomnav.estimate
 
 import android.util.Log
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.weare.wearecompany.data.bottomnav.estimate.progress.ProgressList
 import com.weare.wearecompany.data.bottomnav.estimate.progress.Review
@@ -88,13 +89,13 @@ class progressManager {
                         200 -> {
                             var shoppageItem = ProgressStudioPage(
                                 reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
                                 reserve_tid = it.reserve_tid,
                                 expert_idx = it.expert_idx,
                                 expert_user_name = it.expert_user_name,
                                 expert_name = it.expert_name,
                                 expert_category = it.expert_category,
                                 room_image = it.room_image,
-                                complete = it.complete,
                                 bill_method = it.bill_method,
                                 bill_date = it.bill_date,
                                 refund_money = it.refund_money,
@@ -106,10 +107,239 @@ class progressManager {
                                 reserve_headcount = it.reserve_headcount,
                                 reserve_contents = it.reserve_contents,
                                 reserve_add_contents = it.reserve_add_contents,
-                                reserve_price = it.reserve_price,
-                                reserve_add_price = it.reserve_add_price,
-                                reserve_add_price_contents = it.reserve_add_price_contents,
-                                reserve_final_price = it.reserve_final_price
+                                reserve_price = it.reserve_price
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressStudioPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun studioProgressOkPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressStudioPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.progressokstudiopage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressStudioPage> {
+            override fun onResponse(
+                call: Call<ProgressStudioPage>,
+                response: Response<ProgressStudioPage>
+            ) {
+                var shoppage = ArrayList<ProgressStudioPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressStudioPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_user_name = it.expert_user_name,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                room_image = it.room_image,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                room_name = it.room_name,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressStudioPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun studioReviewPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressStudioPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.reviewstudiopage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressStudioPage> {
+            override fun onResponse(
+                call: Call<ProgressStudioPage>,
+                response: Response<ProgressStudioPage>
+            ) {
+                var shoppage = ArrayList<ProgressStudioPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressStudioPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_user_name = it.expert_user_name,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                room_image = it.room_image,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                room_name = it.room_name,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressStudioPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun studioRefundPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressStudioPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.refundstudiopage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressStudioPage> {
+            override fun onResponse(
+                call: Call<ProgressStudioPage>,
+                response: Response<ProgressStudioPage>
+            ) {
+                var shoppage = ArrayList<ProgressStudioPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressStudioPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_user_name = it.expert_user_name,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                room_image = it.room_image,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                room_name = it.room_name,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressStudioPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun studioRefundOkPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressStudioPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.refundokstudiopage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressStudioPage> {
+            override fun onResponse(
+                call: Call<ProgressStudioPage>,
+                response: Response<ProgressStudioPage>
+            ) {
+                var shoppage = ArrayList<ProgressStudioPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressStudioPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_user_name = it.expert_user_name,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                room_image = it.room_image,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                room_name = it.room_name,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price
                             )
                             shoppage.add(shoppageItem)
                             completion(ESTIMATE.OKAY, shoppage)
@@ -149,6 +379,7 @@ class progressManager {
                         200 -> {
                             var shoppageItem = ProgressExpertPage(
                                 reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
                                 reserve_tid = it.reserve_tid,
                                 expert_idx = it.expert_idx,
                                 expert_name = it.expert_name,
@@ -156,7 +387,6 @@ class progressManager {
                                 expert_image = it.expert_image,
                                 expert_price = it.expert_price,
                                 expert_place = it.expert_place,
-                                complete = it.complete,
                                 bill_method = it.bill_method,
                                 bill_date = it.bill_date,
                                 refund_money = it.refund_money,
@@ -169,9 +399,242 @@ class progressManager {
                                 reserve_contents = it.reserve_contents,
                                 reserve_add_contents = it.reserve_add_contents,
                                 reserve_price = it.reserve_price,
-                                reserve_add_price = it.reserve_add_price,
-                                reserve_add_price_contents = it.reserve_add_price_contents,
-                                reserve_final_price = it.reserve_final_price
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressExpertPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun expertProgressOkPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressExpertPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.progressokexpertpage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressExpertPage> {
+            override fun onResponse(
+                call: Call<ProgressExpertPage>,
+                response: Response<ProgressExpertPage>
+            ) {
+                var shoppage = ArrayList<ProgressExpertPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressExpertPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                expert_image = it.expert_image,
+                                expert_price = it.expert_price,
+                                expert_place = it.expert_place,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                expert_type = it.expert_type,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price,
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressExpertPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun expertProgressReviewPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressExpertPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.reviewexpertpage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressExpertPage> {
+            override fun onResponse(
+                call: Call<ProgressExpertPage>,
+                response: Response<ProgressExpertPage>
+            ) {
+                var shoppage = ArrayList<ProgressExpertPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressExpertPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                expert_image = it.expert_image,
+                                expert_price = it.expert_price,
+                                expert_place = it.expert_place,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                expert_type = it.expert_type,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price,
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressExpertPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun expertRefundPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressExpertPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.refundexpertpage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressExpertPage> {
+            override fun onResponse(
+                call: Call<ProgressExpertPage>,
+                response: Response<ProgressExpertPage>
+            ) {
+                var shoppage = ArrayList<ProgressExpertPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressExpertPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                expert_image = it.expert_image,
+                                expert_price = it.expert_price,
+                                expert_place = it.expert_place,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                expert_type = it.expert_type,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price,
+                            )
+                            shoppage.add(shoppageItem)
+                            completion(ESTIMATE.OKAY, shoppage)
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ProgressExpertPage>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
+            }
+
+        })
+    }
+
+    fun expertRefundOkPage(
+        reserve_idx: String,
+        completion: (ESTIMATE, ArrayList<ProgressExpertPage>) -> Unit
+    ) {
+
+        val `object` = JsonObject()
+        `object`.addProperty("reserve_idx", reserve_idx)
+
+        val call = iRetrofit?.refundokexpertpage(jsonObject = `object`).let {
+            it
+        } ?: return
+
+        call.enqueue(object : retrofit2.Callback<ProgressExpertPage> {
+            override fun onResponse(
+                call: Call<ProgressExpertPage>,
+                response: Response<ProgressExpertPage>
+            ) {
+                var shoppage = ArrayList<ProgressExpertPage>()
+                response.body()?.let {
+                    when (response.code()) {
+                        200 -> {
+                            var shoppageItem = ProgressExpertPage(
+                                reserve_idx = it.reserve_idx,
+                                reserve_status = it.reserve_status,
+                                reserve_tid = it.reserve_tid,
+                                expert_idx = it.expert_idx,
+                                expert_name = it.expert_name,
+                                expert_category = it.expert_category,
+                                expert_image = it.expert_image,
+                                expert_price = it.expert_price,
+                                expert_place = it.expert_place,
+                                bill_method = it.bill_method,
+                                bill_date = it.bill_date,
+                                refund_money = it.refund_money,
+                                refund_status = it.refund_status,
+                                expert_type = it.expert_type,
+                                reserve_dt = it.reserve_dt,
+                                reserve_time = it.reserve_time,
+                                reserve_time_term = it.reserve_time_term,
+                                reserve_headcount = it.reserve_headcount,
+                                reserve_contents = it.reserve_contents,
+                                reserve_add_contents = it.reserve_add_contents,
+                                reserve_price = it.reserve_price,
                             )
                             shoppage.add(shoppageItem)
                             completion(ESTIMATE.OKAY, shoppage)
@@ -189,124 +652,6 @@ class progressManager {
     }
 
 
-    fun shopPage(
-        reserve_idx: String,
-        completion: (ESTIMATE, ArrayList<ProgressShopPage>) -> Unit
-    ) {
-
-        val `object` = JsonObject()
-        `object`.addProperty("reserve_idx", reserve_idx)
-
-        val call = iRetrofit?.progressshoppage(jsonObject = `object`).let {
-            it
-        } ?: return
-
-        call.enqueue(object : retrofit2.Callback<ProgressShopPage> {
-            override fun onResponse(
-                call: Call<ProgressShopPage>,
-                response: Response<ProgressShopPage>
-            ) {
-                var shoppage = ArrayList<ProgressShopPage>()
-                response.body()?.let {
-                    when (response.code()) {
-                        200 -> {
-                            var shoppageItem = ProgressShopPage(
-                                reserve_idx = it.reserve_idx,
-                                reserve_tid = it.reserve_tid,
-                                expert_idx = it.expert_idx,
-                                expert_user_name = it.expert_user_name,
-                                expert_name = it.expert_name,
-                                expert_category = it.expert_category,
-                                expert_image = it.expert_image,
-                                complete = it.complete,
-                                bill_method = it.bill_method,
-                                bill_date = it.bill_date,
-                                refund_money = it.refund_money,
-                                refund_status = it.refund_status,
-                                start_dt = it.start_dt,
-                                end_dt = it.end_dt,
-                                reserve_time_term = it.reserve_time_term,
-                                reserve_contents = it.reserve_contents,
-                                reserve_add_contents = it.reserve_add_contents,
-                                reserve_final_price = it.reserve_final_price
-                            )
-                            shoppage.add(shoppageItem)
-                            completion(ESTIMATE.OKAY, shoppage)
-                        }
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<ProgressShopPage>, t: Throwable) {
-                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
-            }
-
-        })
-    }
-
-    fun manyPage(
-        request_idx: String,
-        request_log_idx: String,
-        completion: (ESTIMATE, ArrayList<ProgressManyPage>) -> Unit
-    ) {
-
-        val `object` = JsonObject()
-        `object`.addProperty("request_idx", request_idx)
-        `object`.addProperty("request_log_idx", request_log_idx)
-
-        val call = iRetrofit?.progressmanypage(jsonObject = `object`).let {
-            it
-        } ?: return
-
-        call.enqueue(object : retrofit2.Callback<ProgressManyPage> {
-            override fun onResponse(
-                call: Call<ProgressManyPage>,
-                response: Response<ProgressManyPage>
-            ) {
-                var shoppage = ArrayList<ProgressManyPage>()
-                response.body()?.let {
-                    when (response.code()) {
-                        200 -> {
-                            var shoppageItem = ProgressManyPage(
-                                request_idx = it.request_idx,
-                                request_log_idx = it.request_log_idx,
-                                expert_idx = it.expert_idx,
-                                expert_name = it.expert_name,
-                                expert_image = it.expert_image,
-                                expert_type = it.expert_type,
-                                expert_category = it.expert_category,
-                                expert_price = it.expert_price,
-                                expert_place = it.expert_place,
-                                complete = it.complete,
-                                reserve_tid = it.reserve_tid,
-                                bill_method = it.bill_method,
-                                bill_date = it.bill_date,
-                                refund_money = it.refund_money,
-                                refund_status = it.refund_status,
-                                category = it.category,
-                                price = it.price,
-                                user_nickname = it.user_nickname,
-                                user_thumbnail = it.user_thumbnail,
-                                datetime = it.datetime,
-                                request_contents = it.request_contents,
-                                response_contents = it.response_contents,
-                                thumbnail = it.thumbnail
-                            )
-                            shoppage.add(shoppageItem)
-                            completion(ESTIMATE.OKAY, shoppage)
-                        }
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<ProgressManyPage>, t: Throwable) {
-                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
-            }
-
-        })
-    }
 
 
 
@@ -322,53 +667,19 @@ class progressManager {
             it
         } ?: return
 
-        call.enqueue(object : retrofit2.Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+        call.enqueue(object : retrofit2.Callback<JsonElement> {
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                response.body()?.let {
                     when(response.code()) {
                         201 -> {
                             completion(ESTIMATE.OKAY)
                         }
                     }
-                }
-            }
-
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 
             }
 
-        })
-    }
-
-    fun request_complete(
-        request_idx: String,
-        request_log_idx: String,
-        completion: (ESTIMATE) -> Unit
-    ) {
-
-        val `object` = JsonObject()
-        `object`.addProperty("request_idx", request_idx)
-        `object`.addProperty("request_log_idx", request_log_idx)
-
-        val call = iRetrofit?.progressrequestcomplete(jsonObject = `object`).let {
-            it
-        } ?: return
-
-        call.enqueue(object : retrofit2.Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-
-                response.body()?.let {
-                    when(response.code()) {
-                        201 -> {
-                            completion(ESTIMATE.OKAY)
-                        }
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Timber.d("receiveManager_shopPage - onFailure() called / t: $t")
             }
 
         })
@@ -376,11 +687,9 @@ class progressManager {
 
     fun review(type: Int,
                reserve_idx: String,
-               request_idx: String,
-               request_log_idx: String,
                completion: (ESTIMATE, ArrayList<Review>) -> Unit) {
 
-        iRetrofit?.reviewcall(type,reserve_idx,request_idx,request_log_idx)?.enqueue(object : retrofit2.Callback<Review> {
+        iRetrofit?.reviewcall(type,reserve_idx)?.enqueue(object : retrofit2.Callback<Review> {
             override fun onResponse(
                 call: Call<Review>,
                 response: Response<Review>

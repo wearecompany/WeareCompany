@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="123dp"
+            android:layout_height="173dp"
+            android:backgroundTint="@color/bluishPurple"
+            android:layout_marginEnd="11dp"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다음은\n당신이\n주인공 입니다"
+                    android:textColor="#fff"
+                    android:layout_gravity="start"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="위픽 전속모델\n오디션 알아보기"
+                    android:textColor="#fff"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="11dp"
+                    android:textSize="11dp"/>
+
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="9dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/affilition_top_line" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

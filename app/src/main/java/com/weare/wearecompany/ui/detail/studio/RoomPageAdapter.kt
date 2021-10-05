@@ -11,10 +11,12 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.weare.wearecompany.MyApplication
+
 import com.weare.wearecompany.R
 import com.weare.wearecompany.data.hotpick.data.room
 import com.weare.wearecompany.ui.detail.PinchActivity
 import kotlinx.android.synthetic.main.item_studio_image.view.*
+
 
 class RoomPageAdapter(var context:Context, private val data: room): PagerAdapter()  {
 

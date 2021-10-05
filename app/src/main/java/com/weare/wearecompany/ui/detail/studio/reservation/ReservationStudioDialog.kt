@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
-import kotlinx.android.synthetic.main.expert_reservation_check_dialog.view.*
 import kotlinx.android.synthetic.main.studio_reservation_check_dialog.view.*
 import java.text.DecimalFormat
 

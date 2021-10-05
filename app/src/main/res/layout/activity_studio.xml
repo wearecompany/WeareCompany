@@ -320,13 +320,16 @@
                     android:textColor="#a6a6a6"
                     android:textSize="12dp" />
 
-                <RelativeLayout
-                    android:id="@+id/map_view"
+                <fragment
+                    android:id="@+id/map"
                     android:layout_width="match_parent"
                     android:layout_height="197dp"
                     android:layout_marginStart="19dp"
                     android:layout_marginEnd="19dp"
-                    android:layout_marginBottom="45dp" />
+                    android:clickable="false"
+                    app:navermap_zoomControlEnabled="false"
+                    android:layout_marginBottom="45dp"
+                    android:name="com.naver.maps.map.MapFragment" />
 
                 <LinearLayout
                     android:id="@+id/review_layout"
@@ -429,12 +432,19 @@
             android:contentDescription="@string/app_name"
             android:visibility="gone"
             app:fabSize="normal"
-            app:srcCompat="@drawable/bottom_chat"
+            app:srcCompat="@drawable/datail_chat"
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="15dp"
             app:tint="#fff"
-            app:backgroundTint="#A6CBF0" />
+            app:backgroundTint="#9dabe6" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/book_lottie"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/payment_test_1"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -473,6 +483,21 @@
                     app:srcCompat="@drawable/sharing"
                     android:layout_gravity="center"/>
             </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/navi"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/navi"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
 
             <Button
                 android:id="@+id/studio_reservation"

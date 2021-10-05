@@ -4,17 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,16 +55,13 @@ class ModelFragment : Fragment(
     private var ca_click = -1
     private var min_money = ""
     private var max_money = ""
+    private var nick_name = ""
+    private var search_check = false
     private var la_click = ArrayList<Int>()
 
     lateinit var viewe: View
 
     var numdsa:Int = 0
-
-
-    lateinit var fadeInAnim: Animation
-    lateinit var fadeoutAnim: Animation
-
 
     var Mcabool = false
 
@@ -104,11 +103,57 @@ class ModelFragment : Fragment(
             model_datatime,
             min_money,
             max_money,
+            nick_name,
             MsortCheck,
             page_count
         )
         bindsetup()
 
+        viewe.model_list_search_edit.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (viewe.model_list_search_edit.isFocusable && !s.toString().equals("")) {
+                    viewe.model_list_search_image_1.visibility = View.VISIBLE
+                    viewe.model_list_search_image_2.visibility = View.GONE
+                } else if (viewe.model_list_search_edit.isFocusable && s.toString().equals("")) {
+                    viewe.model_list_search_image_1.visibility = View.GONE
+                    viewe.model_list_search_image_2.visibility = View.VISIBLE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
+        viewe.model_list_search_edit.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                when(actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        nick_name = viewe.model_list_search_edit.text.toString()
+                        datacall(
+                            model_array,
+                            model_location,
+                            model_datatime,
+                            min_money,
+                            max_money,
+                            nick_name,
+                            MsortCheck,
+                            page_count
+                        )
+                        return false
+                    }
+                    else -> {
+                        return false
+                    }
+                }
+                return true
+            }
+        })
 
         viewe.model_list_recycler.addOnScrollListener(object  : RecyclerView.OnScrollListener(){
 
@@ -123,6 +168,7 @@ class ModelFragment : Fragment(
                         model_datatime,
                         min_money,
                         max_money,
+                        nick_name,
                         MsortCheck,
                         page_count,
                         completion = { responseStatus, responsenewlist, responsestudiokList ->
@@ -147,11 +193,30 @@ class ModelFragment : Fragment(
         viewe.list_model_location.setOnClickListener(this)
         viewe.list_model_money.setOnClickListener(this)
         viewe.list_model_sort.setOnClickListener(this)
+        viewe.model_list_search_btn.setOnClickListener(this)
+        viewe.model_list_search_image_1.setOnClickListener(this)
 
     }
 
+
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.model_list_search_image_1 -> {
+                viewe.model_list_search_image_1.visibility = View.GONE
+                viewe.model_list_search_image_2.visibility = View.VISIBLE
+                viewe.model_list_search_edit.setText("")
+                nick_name = ""
+                datacall(
+                    model_array,
+                    model_location,
+                    model_datatime,
+                    min_money,
+                    max_money,
+                    nick_name,
+                    MsortCheck,
+                    page_count
+                )
+            }
             R.id.list_model_category -> {
                 val testiew: ModelAllDialog = ModelAllDialog(0,ca_click,locationList,min_money,max_money,MsortCheck) {ca:Int,location:ArrayList<Int>,min:String,max:String,sort:Int ->
 
@@ -210,8 +275,19 @@ class ModelFragment : Fragment(
                         model_location.add(i)
                         locationList.add(i)
                     }
-                    min_money = min
-                    max_money = max
+
+                    if (min == "0") {
+                        min_money = ""
+                    } else {
+                        min_money = min
+                    }
+
+                    if (max == "500000") {
+                        max_money = ""
+                    } else {
+                        max_money = max
+                    }
+
                     MsortCheck = sort
 
                     datacall(
@@ -220,6 +296,7 @@ class ModelFragment : Fragment(
                         model_datatime,
                         min_money,
                         max_money,
+                        nick_name,
                         MsortCheck,
                         1
                     )
@@ -293,6 +370,7 @@ class ModelFragment : Fragment(
                         model_datatime,
                         min_money,
                         max_money,
+                        nick_name,
                         MsortCheck,
                         1
                     )
@@ -365,6 +443,7 @@ class ModelFragment : Fragment(
                         model_datatime,
                         min_money,
                         max_money,
+                        nick_name,
                         MsortCheck,
                         1
                     )
@@ -438,6 +517,7 @@ class ModelFragment : Fragment(
                         model_datatime,
                         min_money,
                         max_money,
+                        nick_name,
                         MsortCheck,
                         1
                     )
@@ -453,6 +533,7 @@ class ModelFragment : Fragment(
         timeArray: JsonArray,
         min: String,
         max: String,
+        nickname: String,
         sort: Int,
         page: Int
     ) {
@@ -520,13 +601,13 @@ class ModelFragment : Fragment(
             timeArray,
             min,
             max,
+            nickname,
             sort,
             page,
             completion = { responseStatus, responsenewlist, responsestudiokList ->
 
                 when (responseStatus) {
                     RESPONSE_STATUS.OKAY -> {
-
                         newModelAdapter = ModelNewRecyclerViewAdapter(responsenewlist)
                         viewe.list_model_new_recuclerview.layoutManager =
                             LinearLayoutManager(
@@ -550,102 +631,109 @@ class ModelFragment : Fragment(
                             }
 
                         })
-                        modelDataList = responsestudiokList
-                        modelAdapter = ModelRecyclerViewAdapter(modelDataList)
+                        if (responsestudiokList.size != 0) {
+                            modelDataList = responsestudiokList
+                            modelAdapter = ModelRecyclerViewAdapter(modelDataList)
 
-                        layoutManager = GridLayoutManager(mContext, 2)
+                            layoutManager = GridLayoutManager(mContext, 2)
 
 
-                        viewe.model_list_recycler.layoutManager = layoutManager
+                            viewe.model_list_recycler.layoutManager = layoutManager
 
-                        viewe.model_list_recycler.adapter = modelAdapter
-                        viewe.model_list_recycler.setHasFixedSize(true)
+                            viewe.model_list_recycler.adapter = modelAdapter
+                            viewe.model_list_recycler.setHasFixedSize(true)
+                            viewe.model_list_recycler.visibility = View.GONE
 
-                        modelAdapter.setItemClickListener(object :
-                            ModelRecyclerViewAdapter.OnItemClickListener {
-                            override fun onClick(v: View, position: Int, Item: Dmodel) {
-                                if (!Mcabool) {
-                                    var newIntent = Intent(context, ModelActivity::class.java)
+                            modelAdapter.setItemClickListener(object :
+                                ModelRecyclerViewAdapter.OnItemClickListener {
+                                override fun onClick(v: View, position: Int, Item: Dmodel) {
+                                    if (!Mcabool) {
+                                        var newIntent = Intent(context, ModelActivity::class.java)
 
-                                    newIntent.putExtra("expert_idx", Item.idx)
-                                    newIntent.putExtra(
-                                        "user_idx", MyApplication.prefs.getString(
-                                            "user_idx",
-                                            ""
+                                        newIntent.putExtra("expert_idx", Item.idx)
+                                        newIntent.putExtra(
+                                            "user_idx", MyApplication.prefs.getString(
+                                                "user_idx",
+                                                ""
+                                            )
                                         )
-                                    )
-                                    startActivity(newIntent)
-                                }
-                            }
-                        })
-
-                        if (clipList.size != 0) {
-                            viewe.list_model_clip_recyclerview.visibility = View.VISIBLE
-                            clipAdapter = ModelClipRecyclerViewAdapter(clipList)
-                            viewe.list_model_clip_recyclerview.layoutManager =
-                                LinearLayoutManager(
-                                    MyApplication.instance,
-                                    LinearLayoutManager.HORIZONTAL, false
-                                )
-                            viewe.list_model_clip_recyclerview.adapter = clipAdapter
-
-                            clipAdapter.setItemClickListener(object : ModelClipRecyclerViewAdapter.OnItemClickListener{
-                                override fun onClick(v: View, position: Int, item: clip) {
-                                    when(item.main_type) {
-                                        0 -> {
-                                            ca_click = -1
-                                            model_array = JsonArray()
-                                            viewe.list_model_category.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.model_category_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.model_category_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
-                                        1 -> {
-                                            if (model_location.size() != 0) {
-                                                val i1 = 1
-                                                for (i in i1..model_location.size()) {
-                                                    if(item.sub_type == model_location[i-1].asInt) {
-                                                        model_location.remove(i-1)
-                                                        locationList.removeAt(i-1)
-                                                        break
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                        2 -> {
-                                            min_money = ""
-                                            max_money = ""
-                                            viewe.list_model_money.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.model_money_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.model_money_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
-                                        3 -> {
-                                            MsortCheck = 0
-                                            viewe.list_model_sort.setBackgroundResource(R.drawable.list_sub_background_off)
-                                            viewe.model_sory_image.setImageResource(R.drawable.list_category_down_gray)
-                                            viewe.model_sory_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                        }
+                                        startActivity(newIntent)
                                     }
-                                    if (model_location.size() == 0) {
-                                        viewe.list_model_location.setBackgroundResource(R.drawable.list_sub_background_off)
-                                        viewe.model_location_image.setImageResource(R.drawable.list_category_down_gray)
-                                        viewe.model_location_text.setTextColor(Color.parseColor("#7f7f7f"))
-                                    }
-                                    datacall(
-                                        model_array,
-                                        model_location,
-                                        model_datatime,
-                                        min_money,
-                                        max_money,
-                                        MsortCheck,
-                                        page_count
-                                    )
                                 }
                             })
 
+                            if (clipList.size != 0) {
+                                viewe.list_model_clip_recyclerview.visibility = View.VISIBLE
+                                clipAdapter = ModelClipRecyclerViewAdapter(clipList)
+                                viewe.list_model_clip_recyclerview.layoutManager =
+                                    LinearLayoutManager(
+                                        MyApplication.instance,
+                                        LinearLayoutManager.HORIZONTAL, false
+                                    )
+                                viewe.list_model_clip_recyclerview.adapter = clipAdapter
+
+                                clipAdapter.setItemClickListener(object : ModelClipRecyclerViewAdapter.OnItemClickListener{
+                                    override fun onClick(v: View, position: Int, item: clip) {
+                                        when(item.main_type) {
+                                            0 -> {
+                                                ca_click = -1
+                                                model_array = JsonArray()
+                                                viewe.list_model_category.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.model_category_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.model_category_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                            }
+                                            1 -> {
+                                                if (model_location.size() != 0) {
+                                                    val i1 = 1
+                                                    for (i in i1..model_location.size()) {
+                                                        if(item.sub_type == model_location[i-1].asInt) {
+                                                            model_location.remove(i-1)
+                                                            locationList.removeAt(i-1)
+                                                            break
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                            2 -> {
+                                                min_money = ""
+                                                max_money = ""
+                                                viewe.list_model_money.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.model_money_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.model_money_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                            }
+                                            3 -> {
+                                                MsortCheck = 0
+                                                viewe.list_model_sort.setBackgroundResource(R.drawable.list_sub_background_off)
+                                                viewe.model_sory_image.setImageResource(R.drawable.list_category_down_gray)
+                                                viewe.model_sory_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                            }
+                                        }
+                                        if (model_location.size() == 0) {
+                                            viewe.list_model_location.setBackgroundResource(R.drawable.list_sub_background_off)
+                                            viewe.model_location_image.setImageResource(R.drawable.list_category_down_gray)
+                                            viewe.model_location_text.setTextColor(Color.parseColor("#7f7f7f"))
+                                        }
+                                        datacall(
+                                            model_array,
+                                            model_location,
+                                            model_datatime,
+                                            min_money,
+                                            max_money,
+                                            nick_name,
+                                            MsortCheck,
+                                            page_count
+                                        )
+                                    }
+                                })
+
+                            } else {
+                                viewe.list_model_clip_recyclerview.visibility = View.GONE
+                            }
                         } else {
-                            viewe.list_model_clip_recyclerview.visibility = View.GONE
+                            Toast.makeText(mContext,"조건에 맞는 전문가가 없습니다.",Toast.LENGTH_SHORT).show()
                         }
+
                     }
                 }
             })
