@@ -17,8 +17,8 @@
 
     <item
         android:id="@+id/menu_estimate"
-        android:title="채팅"
-        android:icon="@drawable/bottom_chat" />
+        android:title="전문가 목록"
+        android:icon="@drawable/bottom_expetr" />
 
     <item
         android:id="@+id/menu_mypage"

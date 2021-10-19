@@ -32,9 +32,13 @@ class SplashActivity: BaseActivity<ActivitySplashBinding>(
     private lateinit var uid:String
     private lateinit var image:String
     private var user_idx:String = ""
+    private var move_data = ""
 
     override fun onCreate() {
 
+        if (intent.data != null) {
+            move_data = intent.data!!.getQueryParameter("data")!!
+        }
         user_idx = MyApplication.prefs.getString("user_idx", "")
 
         Glide.with(this)
@@ -128,17 +132,16 @@ class SplashActivity: BaseActivity<ActivitySplashBinding>(
     fun name() {
 
         UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                var newIntent = Intent(this@SplashActivity, login::class.java)
-                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(newIntent)
-            } else if (user != null) {
+            if (user != null ) {
                 uid = user.id.toString()
                 email = user.kakaoAccount?.email.toString()
                 image = user.kakaoAccount?.profile?.profileImageUrl.toString()
                 nickname = user.kakaoAccount?.profile?.nickname.toString()
-
+            } else if (error != null) {
+                var newIntent = Intent(this@SplashActivity, login::class.java)
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(newIntent)
             }
 
             MemberManager.instance.login(0,email, uid, completion = { responseStatus, arrayList ->
@@ -146,6 +149,7 @@ class SplashActivity: BaseActivity<ActivitySplashBinding>(
                     RESPONSE_STATUS.OKAY -> {
                         MyApplication.prefs.setString("user_idx",arrayList[0].user_idx)
                         var newIntent = Intent(this@SplashActivity, ContainerActivity::class.java)
+                        newIntent.putExtra("move",move_data)
                         startActivity(newIntent)
                     }
                     RESPONSE_STATUS.NO_CONTENT -> {

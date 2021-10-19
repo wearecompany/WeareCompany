@@ -50,7 +50,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
 
     var reservation:Int = -1
     var payment:Int = -1
-    var key = ""
+    var move_data = ""
     var type_1 = ""
     var type_2 = ""
     var tutorial = 0
@@ -92,6 +92,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
 
         reservation = intent.getIntExtra("reservation",0)
         payment = intent.getIntExtra("payment",0)
+        move_data = intent.getStringExtra("move").toString()
         mViewDataBinding.bottomNavigation.background = null
         mViewDataBinding.bottomNavigation.menu.getItem(2).isEnabled = false
         mViewDataBinding.mainRequest.setOnClickListener(this)
@@ -133,6 +134,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         checkForAppUpdate()
         kakaolink()
         dunamLink()
+        moveExpert()
 
         val bundlee = bundleOf("type_1" to type_1, "type_2" to type_2)
         NavigationUI.setupWithNavController(mViewDataBinding.bottomNavigation, host.navController)
@@ -154,7 +156,10 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     }*/
                 }
                 R.id.menu_estimate -> {
-                    Toast.makeText(this, "업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
+                    var studioIntent = Intent(this, ListContainerActivity::class.java)
+                    studioIntent.putExtra("num", 0)
+                    startActivity(studioIntent)
+                    //Toast.makeText(this, "업데이트 예정입니다.", Toast.LENGTH_SHORT).show()
                     //host.navController.navigate(R.id.chat)
                     //return@setOnNavigationItemSelectedListener true
                     /*var newIntent = Intent(this, ListContainerActivity::class.java)
@@ -182,8 +187,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         if (type_1 == "0") {
             host.navController.navigate(R.id.main,bundlee)
         } else if (type_1 == "1") {
-            mViewDataBinding.bottomNavigation.selectedItemId = R.id.menu_estimate
-            host.navController.navigate(R.id.chat,bundlee)
+            host.navController.navigate(R.id.main,bundlee)
         }
 
         if (reservation == 1) {
@@ -244,6 +248,15 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
             }
     }
 
+    private fun moveExpert() {
+        if (move_data != "" && move_data != "null") {
+            var studioIntent = Intent(this, ListContainerActivity::class.java)
+            studioIntent.putExtra("num", 0)
+            startActivity(studioIntent)
+            move_data = ""
+        }
+    }
+
     private fun checkForAppUpdate() {
         // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
@@ -274,13 +287,11 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
         }
     }
 
+
     private fun kakaolink() {
-
         if (intent.action === Intent.ACTION_VIEW) {
-            val data = intent.dataString
-
-            // setAndroidExecutionParams에서 전달했던 키값
-            val key1 = intent.data!!.getQueryParameter("user_idx")
+            val data = intent.data!!.getQueryParameter("data")
+              // setAndroidExecutionParams에서 전달했던 키값
             val key2 = intent.data!!.getQueryParameter("item_idx")
             val key3 = intent.data!!.getQueryParameter("item_type")
             when (key3) {
@@ -303,7 +314,10 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding>(
                     startActivity(newIntent)
                 }
             }
-        }
+
+            }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

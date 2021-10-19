@@ -2,6 +2,7 @@ package com.weare.wearecompany.ui.bottommenu.estimate.progress.experthodel.progr
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -230,11 +231,10 @@ class ProgressExpertActivity : BaseActivity<ActivityProgressExpertBinding>(
                 refundFragment.show(supportFragmentManager, refundFragment.tag)
             }
             R.id.progress_chat -> {
-                val newIntent = Intent(this, ChatActivity::class.java)
-                newIntent.putExtra("type",0)
-                newIntent.putExtra("Entrytype",0)
-                newIntent.putExtra("reserve_idx",reserve_idx)
-                startActivity(newIntent)
+                var urll = "https://pf.kakao.com/_xlQxdys/chat"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(urll)
+                startActivity(intent)
             }
         }
     }

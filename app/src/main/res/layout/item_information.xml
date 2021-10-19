@@ -28,7 +28,7 @@
             android:layout_marginTop="18dp"
             android:background="#d0d0d0"
             app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/notice_title"
+            app:layout_constraintStart_toStartOf="@+id/information_title"
             app:layout_constraintTop_toBottomOf="@+id/information_title" />
 
         <ImageView

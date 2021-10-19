@@ -41,6 +41,7 @@
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_container.xml" value="0.2103825136612022" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_estimate.xml" value="0.17171052631578948" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_estimate_expert.xml" value="0.17171052631578948" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_guide_detail.xml" value="0.11360698125404008" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_information.xml" value="0.20047814207650272" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_join.xml" value="0.17171052631578948" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_listcontainer.xml" value="0.23125" />
@@ -48,6 +49,7 @@
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_my_review_list.xml" value="0.21379781420765026" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_mypage_request.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_notice.xml" value="0.20047814207650272" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_notice_detail.xml" value="0.11360698125404008" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_one_click.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_photo.xml" value="0.20901639344262296" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_progress_many.xml" value="0.1796448087431694" />
@@ -82,13 +84,14 @@
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_studio_map_search.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_trip.xml" value="0.20901639344262296" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_user_many_send_request.xml" value="0.21379781420765026" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/activity_weekly.xml" value="0.33" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/bottom_dialog_all_model.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/bottom_dialog_cancellation.xml" value="0.20901639344262296" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/bottom_dialog_money.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/dialog_certified.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/dialog_last_alarm.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/dialog_refund.xml" value="0.33" />
-        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/fragment_change_mypage.xml" value="0.33" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/fragment_change_mypage.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/fragment_change_not_user_mypage.xml" value="0.2260928961748634" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/fragment_home_0.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/fragment_home_1.xml" value="0.23125" />
@@ -111,9 +114,12 @@
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_change_studio_list.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_change_trip_list.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_estimatephoto.xml" value="0.23125" />
-        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_list_clip.xml" value="0.23125" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_information.xml" value="0.11360698125404008" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_list_clip.xml" value="0.33" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_map_clip.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_my_review_list.xml" value="0.33" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_notice.xml" value="0.11360698125404008" />
+        <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_notification_individual.xml" value="0.1305921052631579" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_onclick_receive_list.xml" value="0.23125" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_oneclick_list.xml" value="0.25" />
         <entry key="..\:/Users/wearecompany/AndroidStudioProjects/WeareCompany/app/src/main/res/layout/item_receive_onclick_tag.xml" value="0.33" />

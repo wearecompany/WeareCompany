@@ -9,7 +9,6 @@ import android.os.Handler
 import android.view.MenuItem
 import android.webkit.*
 import androidx.appcompat.widget.Toolbar
-import com.weare.wearecompany.BuildConfig.PAYMENT_REQ_URL
 import com.weare.wearecompany.BuildConfig.PAYMENT_RES_URL
 import com.weare.wearecompany.R
 import com.weare.wearecompany.databinding.ActivityPaymentBinding
@@ -38,7 +37,7 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
     private var request_log_idx:String = ""
     private var type:Int = -1
 
-    private var testurl = "https://dev.wearecompany.co.kr/A00/reserve/bill/oneclick/start"
+    private var testurl = "https://wearecompany.co.kr/A00/reserve/bill/oneclick/start"
 
     lateinit var socket: Socket
 
@@ -228,7 +227,7 @@ class paymentActivity:BaseActivity<ActivityPaymentBinding>(
                     //.toString() + "&request_log_idx=" + URLEncoder.encode(request_log_idx, "UTF-8")
                 //mViewDataBinding.paymentWeb.loadUrl("https://dev.wearecompany.co.kr/A00/request/bill")
                 mViewDataBinding.paymentWeb.postUrl(
-                    testurl,
+                    API.PAYMENT_ONECLICK_URL,
                     str.toByteArray()
                 )
             }

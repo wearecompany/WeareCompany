@@ -31,7 +31,7 @@ class ModelClipRecyclerViewAdapter(private val data: ArrayList<clip>) : Recycler
     override fun onBindViewHolder(holder: ModelClipViewHodel, position: Int) {
         val item = data[position]
 
-        holder.clip.setOnClickListener {
+        holder.cliplayout.setOnClickListener {
             itemClickListener.onClick(it,position,item)
         }
         holder.clipimge.setOnClickListener{

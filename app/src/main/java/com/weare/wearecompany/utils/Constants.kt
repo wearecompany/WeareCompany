@@ -1,8 +1,7 @@
 
 package com.weare.wearecompany.utils
 
-import com.weare.wearecompany.BuildConfig.CHAT_URL
-import com.weare.wearecompany.BuildConfig.SERVER_URL
+import com.weare.wearecompany.BuildConfig.*
 
 object Constants {
     const val TAG: String = "로그"
@@ -38,6 +37,7 @@ object API {
     const val BASE_URL: String = SERVER_URL
     const val REFUND_URL = CHAT_URL
     const val PAYMENT_URL = CHAT_URL
+    const val PAYMENT_ONECLICK_URL = PAYMENT_REQ_URL
 
     const val JOIN: String = "/A00/join"
     const val LOGIN: String = "/A00/login"

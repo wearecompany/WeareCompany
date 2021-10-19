@@ -1754,31 +1754,23 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         }
                                         1 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressPhotoActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3001)
                                         }
                                         2 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressModelActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3001)
                                         }
                                         3 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressTripActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
-                                            startActivityForResult(newIntent, 3001)
-                                        }
-                                        5 -> {
-                                            val newIntent =
-                                                Intent(context, ProgressManyActivity::class.java)
-                                            newIntent.putExtra("request_idx", item.request_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            newIntent.putExtra("log_idx", item.request_log_idx)
                                             startActivityForResult(newIntent, 3001)
                                         }
                                     }
@@ -1868,7 +1860,7 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         }
                                         1 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressPhotoActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             newIntent.putExtra("review_check", 1)
@@ -1876,7 +1868,7 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         }
                                         2 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressModelActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             newIntent.putExtra("review_check", 1)
@@ -1884,18 +1876,9 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         }
                                         3 -> {
                                             val newIntent =
-                                                Intent(context, ProgressExpertActivity::class.java)
+                                                Intent(context, ProgressTripActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
-                                            newIntent.putExtra("review_check", 1)
-                                            startActivityForResult(newIntent, 3003)
-                                        }
-                                        5 -> {
-                                            val newIntent =
-                                                Intent(context, ProgressManyActivity::class.java)
-                                            newIntent.putExtra("request_idx", item.request_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            newIntent.putExtra("log_idx", item.request_log_idx)
                                             newIntent.putExtra("review_check", 1)
                                             startActivityForResult(newIntent, 3003)
                                         }
@@ -1983,31 +1966,23 @@ class ProgressFragment : BaseFragment<FragmentProgressBinding>(
                                         }
                                         1 -> {
                                             val newIntent =
-                                                Intent(context, RefundExpertActivity::class.java)
+                                                Intent(context, RefundPhotoActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3002)
                                         }
                                         2 -> {
                                             val newIntent =
-                                                Intent(context, RefundExpertActivity::class.java)
+                                                Intent(context, RefundModelActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
                                             startActivityForResult(newIntent, 3002)
                                         }
                                         3 -> {
                                             val newIntent =
-                                                Intent(context, RefundExpertActivity::class.java)
+                                                Intent(context, RefundTripActivity::class.java)
                                             newIntent.putExtra("reserve_idx", item.reserve_idx)
                                             newIntent.putExtra("chatbool", 0)
-                                            startActivityForResult(newIntent, 3002)
-                                        }
-                                        5 -> {
-                                            val newIntent =
-                                                Intent(context, RefundManyActivity::class.java)
-                                            newIntent.putExtra("request_idx", item.request_idx)
-                                            newIntent.putExtra("chatbool", 0)
-                                            newIntent.putExtra("log_idx", item.request_log_idx)
                                             startActivityForResult(newIntent, 3002)
                                         }
                                     }
