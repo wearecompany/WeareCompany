@@ -90,7 +90,6 @@ class HomeFragment : Fragment(
         viewe = inflater!!.inflate(R.layout.fragment_home_0,container,false)
         user_idx = MyApplication.prefs.getString("user_idx", "")
         setup()
-
             datacall()
         return viewe
     }
@@ -307,7 +306,7 @@ class HomeFragment : Fragment(
             }
 
             R.id.wepickstudio_btn -> {
-                val newIntent = Intent(Intent.ACTION_VIEW,Uri.parse("https://wearecompany.co.kr/studio"))
+                val newIntent = Intent(Intent.ACTION_VIEW,Uri.parse("https://weare2020.wixsite.com/my-site"))
                 context?.startActivity(newIntent)
             }
 
@@ -484,7 +483,7 @@ class HomeFragment : Fragment(
             }
 
             R.id.one_click_bottom_layout_1_frame -> {
-                val newIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wearecompany.co.kr/info"))
+                val newIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.xn--9q5b43x.kr/"))
                 context?.startActivity(newIntent)
             }
             R.id.one_click_bottom_layout_2_frame -> {

@@ -273,6 +273,16 @@ class OneClickActivity:BaseActivity<ActivityOneClickBinding>(
                 REQ_STORAGE_PERMISSION
             )
         } else {
+
+            storageDir = File(
+                this.getCacheDir(), "/Wearecompany/"
+            )
+            if (!storageDir.exists()) {
+                Log.v("알림", "storageDir 존재 x$storageDir")
+                storageDir.mkdirs()
+            }
+            Log.v("알림", "storageDir 존재함$storageDir")
+
             var intent = Intent(Intent.ACTION_PICK)
             intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)

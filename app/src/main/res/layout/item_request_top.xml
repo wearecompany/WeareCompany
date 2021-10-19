@@ -70,7 +70,7 @@
                             android:layout_height="wrap_content"
                             android:text="결제완료"
                             android:textColor="#787878"
-                            android:textSize="11dp" />
+                            android:textSize="12dp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:text="공간"
                             android:textColor="#000"
-                            android:textSize="12dp"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
 
 
@@ -180,7 +180,7 @@
                                 android:id="@+id/request_top_room_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textColor="#787878"/>
 
                         </LinearLayout>
@@ -199,7 +199,7 @@
                             android:layout_height="wrap_content"
                             android:text="인원"
                             android:textColor="#000"
-                            android:textSize="12dp"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
 
 
@@ -214,7 +214,7 @@
                                 android:id="@+id/request_top_expert_head_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textColor="#787878"/>
 
                         </LinearLayout>
@@ -231,7 +231,7 @@
                             android:layout_height="wrap_content"
                             android:text="시간"
                             android:textColor="#000"
-                            android:textSize="12dp"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
 
 
@@ -246,7 +246,7 @@
                                 android:id="@+id/request_top_expert_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textColor="#787878"/>
 
                         </LinearLayout>
@@ -263,7 +263,7 @@
                             android:layout_height="wrap_content"
                             android:text="날짜"
                             android:textColor="#000"
-                            android:textSize="12dp"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -273,7 +273,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
                             android:textColor="#787878"
-                            android:textSize="12dp" />
+                            android:textSize="13dp" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -287,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:text="금액"
                             android:textColor="#000"
-                            android:textSize="12dp"
+                            android:textSize="13dp"
                             android:textStyle="bold" />
 
 
@@ -302,7 +302,7 @@
                                 android:id="@+id/request_top_expert_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textColor="#787878"/>
 
                             <TextView
@@ -310,7 +310,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="원"
                                 android:textColor="#787878"
-                                android:textSize="12dp" />
+                                android:textSize="13dp" />
                         </LinearLayout>
                     </RelativeLayout>
 

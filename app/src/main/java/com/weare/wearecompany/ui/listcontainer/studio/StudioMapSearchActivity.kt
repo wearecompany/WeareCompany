@@ -71,8 +71,6 @@ class StudioMapSearchActivity : BaseActivity<ActivityStudioMapSearchBinding>(
     private lateinit var mapFragment: MapFragment
     private var clipList = ArrayList<clip>()
 
-    var arrlist = Array<DoubleArray>(10) { DoubleArray(2) }
-
     var postArrlist = Array<DoubleArray>(1) { DoubleArray(2) }
     private var min_money = ""
     private var max_money = ""
@@ -98,43 +96,10 @@ class StudioMapSearchActivity : BaseActivity<ActivityStudioMapSearchBinding>(
 
     override fun onCreate() {
 
-        testlocation()
         setUp()
 
     }
 
-    private fun testlocation() {
-
-        arrlist[0][0] = 37.5364
-        arrlist[0][1] = 126.9893
-
-        arrlist[1][0] = 37.5404
-        arrlist[1][1] = 127.0879
-
-        arrlist[2][0] = 37.3659
-        arrlist[2][1] = 127.1203
-
-        arrlist[3][0] = 37.3374
-        arrlist[3][1] = 126.7326
-
-        arrlist[4][0] = 36.9917
-        arrlist[4][1] = 127.0856
-
-        arrlist[5][0] = 35.1759
-        arrlist[5][1] = 126.8232
-
-        arrlist[6][0] = 33.5001
-        arrlist[6][1] = 126.5272
-
-        arrlist[7][0] = 35.1644
-        arrlist[7][1] = 129.0402
-
-        arrlist[8][0] = 35.5110
-        arrlist[8][1] = 129.4301
-
-        arrlist[9][0] = 37.5207
-        arrlist[9][1] = 126.9269
-    }
 
     private fun setUp() {
 
@@ -437,6 +402,7 @@ class StudioMapSearchActivity : BaseActivity<ActivityStudioMapSearchBinding>(
                             mViewDataBinding.mapSearchResult.visibility = View.VISIBLE
                             mViewDataBinding.mapSearchNum.text = searchlist.size.toString()
                             mViewDataBinding.mapFilterImage.setImageResource(R.drawable.map_filter_on)
+
                         } else {
                             mViewDataBinding.mapSearchResult.visibility = View.INVISIBLE
                             mViewDataBinding.mapFilterImage.setImageResource(R.drawable.map_filter)

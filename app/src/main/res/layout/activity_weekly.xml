@@ -52,13 +52,13 @@
                        android:id="@+id/event_title"
                        android:layout_width="wrap_content"
                        android:layout_marginTop="39dp"
-                       android:textSize="10dp"
+                       android:textSize="15dp"
                        android:textColor="#0f0f0f"
                        android:layout_height="wrap_content"/>
 
                    <TextView
                        android:id="@+id/event_sub_title"
-                       android:textSize="9dp"
+                       android:textSize="14dp"
                        android:textColor="#9dabe6"
                        android:layout_marginTop="6dp"
                        android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                            android:id="@+id/event_datetime"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:textSize="9dp"
+                           android:textSize="14dp"
                            android:textColor="#a6a6a6"
                            android:layout_marginStart="5dp"/>
                    </LinearLayout>
@@ -96,14 +96,15 @@
                        android:id="@+id/event_contents"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:textSize="10dp"
+                       android:textSize="15dp"
                        android:textColor="#0f0f0f"
                        android:layout_marginBottom="15dp"/>
 
                    <ImageView
                        android:id="@+id/event_image"
                        android:layout_width="match_parent"
-                       android:layout_height="200dp"/>
+                       android:scaleType="centerCrop"
+                       android:layout_height="350dp"/>
 
                </LinearLayout>
 

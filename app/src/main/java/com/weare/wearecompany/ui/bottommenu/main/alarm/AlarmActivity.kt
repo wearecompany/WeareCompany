@@ -24,6 +24,8 @@ import com.weare.wearecompany.ui.bottommenu.estimate.send.SendStudioActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendModelActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendPhotoActivity
 import com.weare.wearecompany.ui.bottommenu.estimate.send.experthodel.SendTripActivity
+import com.weare.wearecompany.ui.bottommenu.mypage.request.progress.RefundOneClickActivity
+import com.weare.wearecompany.ui.bottommenu.mypage.request.receive.ReceiveOneClickActivity
 import com.weare.wearecompany.utils.ALARM
 import com.weare.wearecompany.utils.RESPONSE_STATUS
 
@@ -37,8 +39,9 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
     lateinit var newIntent:Intent
 
     lateinit var dataAdapter:AlarmRecyclerViewAdapter
+
     override fun onCreate() {
-        val toobar = findViewById(R.id.toolbar) as Toolbar
+        val toobar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toobar)
         val ActionBar = supportActionBar!!
         ActionBar.setDisplayHomeAsUpEnabled(true)
@@ -244,57 +247,18 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                             }
                                                         }
                                                     }
-                                                    20 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, SendRequestActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
+
+                                                    21 -> {
+                                                        val newIntent = Intent(this@AlarmActivity, ReceiveOneClickActivity::class.java)
+                                                        newIntent.putExtra("reserve_idx", i.target_idx)
                                                         newIntent.putExtra("type", 0)
                                                         startActivityForResult(newIntent, 2000)
                                                         alarm_idx = ""
                                                     }
-                                                    21 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, ReceiveRequestActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
-                                                        newIntent.putExtra("type", 1)
-                                                        startActivityForResult(newIntent, 2000)
-                                                        alarm_idx = ""
-                                                    }
-                                                    22 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, ProgressManyActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
-                                                        newIntent.putExtra("chatbool", 0)
-                                                        startActivityForResult(newIntent, 2000)
-                                                        alarm_idx = ""
-                                                    }
-                                                    23 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, ProgressManyActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
-                                                        newIntent.putExtra("chatbool", 0)
-                                                        startActivityForResult(newIntent, 2000)
-                                                        alarm_idx = ""
-                                                    }
-                                                    24 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, RefundManyActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
-                                                        newIntent.putExtra("chatbool", 0)
-                                                        startActivityForResult(newIntent, 2000)
-                                                        alarm_idx = ""
-                                                    }
                                                     25 -> {
-                                                        val newIntent = Intent(this@AlarmActivity, RefundManyActivity::class.java)
-                                                        val tag = i.target_idx.split(",")
-                                                        newIntent.putExtra("request_idx", tag[0])
-                                                        newIntent.putExtra("log_idx", tag[1])
-                                                        newIntent.putExtra("chatbool", 0)
+                                                        val newIntent = Intent(this@AlarmActivity, RefundOneClickActivity::class.java)
+                                                        newIntent.putExtra("reserve_idx", i.target_idx)
+                                                        newIntent.putExtra("type", 0)
                                                         startActivityForResult(newIntent, 2000)
                                                         alarm_idx = ""
                                                     }
@@ -316,8 +280,6 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
 
                         dataAdapter.setItemClickListener(object : AlarmRecyclerViewAdapter.OnItemClickListener {
                             override fun onClick(v: View, position: Int, Item: alarm) {
-
-
 
                                 MainManager.instance.alarmview(Item.idx, complation = {responseStatus ->
                                     when(responseStatus) {
@@ -562,38 +524,20 @@ class AlarmActivity: BaseActivity<ActivityAlarmBinding>(
                                                         }
                                                     }
                                                 }
-                                                20 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, SendRequestActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
+                                                21 -> {
+                                                    val newIntent = Intent(this@AlarmActivity, ReceiveOneClickActivity::class.java)
+                                                    newIntent.putExtra("reserve_idx", Item.target_idx)
                                                     newIntent.putExtra("type", 0)
                                                     startActivityForResult(newIntent, 2000)
+                                                    alarm_idx = ""
                                                 }
 
-                                                22 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, ProgressManyActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
-                                                    newIntent.putExtra("chatbool", 0)
+                                                25 -> {
+                                                    val newIntent = Intent(this@AlarmActivity, RefundOneClickActivity::class.java)
+                                                    newIntent.putExtra("reserve_idx", Item.target_idx)
+                                                    newIntent.putExtra("type", 1)
                                                     startActivityForResult(newIntent, 2000)
-                                                }
-                                                23 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, ProgressManyActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
-                                                    newIntent.putExtra("chatbool", 0)
-                                                    startActivityForResult(newIntent, 2000)
-                                                }
-                                                24 -> {
-                                                    val newIntent = Intent(this@AlarmActivity, RefundManyActivity::class.java)
-                                                    val tag = Item.target_idx.split(",")
-                                                    newIntent.putExtra("request_idx", tag[0])
-                                                    newIntent.putExtra("log_idx", tag[1])
-                                                    newIntent.putExtra("chatbool", 0)
-                                                    startActivityForResult(newIntent, 2000)
+                                                    alarm_idx = ""
                                                 }
                                             }
                                         }

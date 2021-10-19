@@ -1,12 +1,10 @@
 package com.weare.wearecompany.ui.detail
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -15,7 +13,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,13 +26,13 @@ import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.link.LinkClient
 import com.kakao.sdk.navi.NaviClient
 import com.kakao.sdk.navi.model.CoordType
-import com.kakao.sdk.navi.model.KakaoNaviParams
 import com.kakao.sdk.navi.model.Location
 import com.kakao.sdk.navi.model.NaviOption
 import com.kakao.sdk.template.model.*
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.weare.wearecompany.BuildConfig
 import com.weare.wearecompany.MyApplication
 import com.weare.wearecompany.R
@@ -56,7 +53,6 @@ import com.weare.wearecompany.utils.BitmapUtils
 import com.weare.wearecompany.utils.Constants
 import com.weare.wearecompany.utils.LIKE
 import com.weare.wearecompany.utils.RESPONSE_STATUS
-import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import java.io.File
@@ -680,6 +676,19 @@ class DatailActivity : BaseActivity<ActivityStudioBinding>(
 
     override fun onMapReady(p0: NaverMap) {
         map = p0
+
+        val marker = Marker()
+        marker.position = LatLng(dataList[0].latitude.toDouble(), dataList[0].longitude.toDouble())
+        marker.icon = OverlayImage.fromResource(R.drawable.map_mark_on)
+        marker.isFlat = true
+        marker.map = map
+
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(
+            dataList[0].latitude.toDouble(),
+            dataList[0].longitude.toDouble()
+        )).animate(CameraAnimation.Fly, 2000)
+        map.moveCamera(cameraUpdate)
+
     }
 
 

@@ -130,7 +130,11 @@ class mainFangment : BaseFragment<FragmentMainBinding>(
                     alarm_type_2 = ""
                 }
                 "1" -> {
-
+                    var newIntent = Intent(context, AlarmActivity::class.java)
+                    newIntent.putExtra("alarm_idx",alarm_type_2)
+                    startActivityForResult(newIntent, 12)
+                    alarm_type_1 = ""
+                    alarm_type_2 = ""
                 }
             }
         }
